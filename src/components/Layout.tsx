@@ -174,11 +174,26 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               <p>Sunday: Closed</p>
             </div>
           </div>
-          <div className="border-t border-white/20 mt-8 pt-8 text-center">
-            <p>
+          <div className="border-t border-white/20 mt-8 pt-8 text-center flex flex-col items-center">
+            <p className="mb-4">
               &copy; {new Date().getFullYear()} Ogden Construction Inc. All
               rights reserved.
             </p>
+            <a
+              href="https://edcwebdesigns.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-accent transition-colors"
+            >
+              <div className="flex items-center space-x-4">
+                <img
+                  src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
+                  alt="EDC Web Design Logo"
+                  className="h-8 w-auto opacity-70 grayscale"
+                />
+                <p>Designed by EDC Web Design</p>
+              </div>
+            </a>
           </div>
         </div>
       </footer>
