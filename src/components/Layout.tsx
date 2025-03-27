@@ -180,7 +180,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               rights reserved.
             </p>
             <a
-              href="https://edcwebdesigns.com"
+              href="https://edcwebdesign.com"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-accent transition-colors"
