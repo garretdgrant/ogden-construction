@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Layout } from "@/components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,36 +15,38 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'https://ogden-construction.com'
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://ogden-construction.com",
   ),
-  title: 'Ogden Construction Inc - Premier Deck Builders & Home Additions in Placerville, CA',
+  title:
+    "Ogden Construction Inc - Premier Deck Builders & Home Additions in Placerville, CA",
   description:
-    'Expert deck construction, home additions, and remodeling services in Placerville, Folsom, Sacramento, and Tahoe. Serving El Dorado and Sacramento counties with top-rated craftsmanship.',
+    "Expert deck construction, home additions, and remodeling services in Placerville, Folsom, Sacramento, and Tahoe. Serving El Dorado and Sacramento counties with top-rated craftsmanship.",
   openGraph: {
-    title: 'Ogden Construction Inc - Expert Deck Builders & Home Remodelers',
+    title: "Ogden Construction Inc - Expert Deck Builders & Home Remodelers",
     description:
-      'Specializing in custom decks, home additions, and remodeling services across Placerville, Folsom, Sacramento, and Tahoe. Trusted construction company in El Dorado and Sacramento counties.',
-    url: 'https://ogden-construction.com',
-    siteName: 'Ogden Construction',
+      "Specializing in custom decks, home additions, and remodeling services across Placerville, Folsom, Sacramento, and Tahoe. Trusted construction company in El Dorado and Sacramento counties.",
+    url: "https://ogden-construction.com",
+    siteName: "Ogden Construction",
     images: [
       {
-        url: '/og-image.jpg',
+        url: "/og-image.jpg",
         width: 1000,
         height: 750,
-        alt: 'Ogden Construction Logo',
+        alt: "Ogden Construction Logo",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Ogden Construction Inc - Custom Decks & Home Additions in Placerville, CA',
+    card: "summary_large_image",
+    title:
+      "Ogden Construction Inc - Custom Decks & Home Additions in Placerville, CA",
     description:
-      'Providing top-quality deck construction, home additions, and remodeling services in Placerville, Folsom, Sacramento, and Tahoe. Your trusted local construction experts.',
-    images: ['/og-image.jpg'],
+      "Providing top-quality deck construction, home additions, and remodeling services in Placerville, Folsom, Sacramento, and Tahoe. Your trusted local construction experts.",
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -57,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
