@@ -4,21 +4,22 @@ import Image from "next/image";
 // TODO: Update to real projects
 const projects = [
   {
-    image: "https://images.unsplash.com/photo-1484154218962-a197022b5858",
-    title: "Modern Kitchen Remodel",
-    location: "Placerville, CA",
+    image: "/images/projects/trexTahoeSquoosh.jpg",
+    title: "Custom Trex Deck - Black Handrails",
+    location: "Tahoe, CA",
   },
   {
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
-    title: "Complete Home Renovation",
-    location: "El Dorado County",
+    image: "/images/projects/redwoodMainSquoosh.jpg",
+    title: "Redwood Deck - Hog Panel Railings",
+    location: "Tahoe, CA",
   },
   {
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a",
-    title: "Bathroom Transformation",
-    location: "Placerville, CA",
+    image: "/images/projects/newHomeMainSquoosh.jpg",
+    title: "New Home Construction",
+    location: "Grizzly Flats, CA",
   },
 ];
+
 
 export const Projects = () => {
   return (
@@ -27,7 +28,7 @@ export const Projects = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
           Featured Projects
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 cursor-pointer">
           {projects.map((project, index) => (
             <Card key={index} className="overflow-hidden group cursor-pointer">
               <CardContent className="p-0 relative">
