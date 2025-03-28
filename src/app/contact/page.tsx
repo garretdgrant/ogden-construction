@@ -10,6 +10,16 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { QuoteRequestForm } from "@/components/QuoteRequestForm";
 
+export const metadata = {
+  title:
+    "Contact Ogden Construction | Request a Free Quote in El Dorado County",
+  description:
+    "Get in touch with Ogden Construction Inc for expert home additions, remodeling, and deck building services. Serving Placerville, Folsom, El Dorado Hills, Cameron Park, Sacramento, and South Lake Tahoe. Request a free consultation today.",
+  alternates: {
+    canonical: "https://ogden-construction.com/contact",
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="py-20">
@@ -96,6 +106,7 @@ export default function ContactPage() {
                       href="https://www.facebook.com/ogden.construction.inc/"
                       className="text-accent hover:text-accent/80"
                       aria-label="Facebook"
+                      target="_blank"
                     >
                       <Facebook className="h-6 w-6" />
                     </a>
@@ -103,6 +114,7 @@ export default function ContactPage() {
                       href="https://www.instagram.com/levioakden77"
                       className="text-accent hover:text-accent/80"
                       aria-label="Instagram"
+                      target="_blank"
                     >
                       <Instagram className="h-6 w-6" />
                     </a>
