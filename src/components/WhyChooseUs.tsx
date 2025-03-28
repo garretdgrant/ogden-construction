@@ -2,10 +2,10 @@ import { Check } from "lucide-react";
 import { Card } from "./ui/card";
 
 const reasons = [
-  "From the first nail to the final creative touches, we transform your home",
-  "Top-rated construction service provider in Placerville and surrounding areas",
-  "Modern, unique, and comfortable living spaces tailored to your lifestyle",
-  "Professional crew dedicated to quality and customer satisfaction",
+  "Precision craftsmanship from foundation to finish — we build it right the first time", // updated
+  "Locally trusted across Placerville, Folsom, El Dorado Hills, Tahoe, and Sacramento", // updated
+  "Custom decks, additions, and new builds tailored to your vision and lifestyle", // updated
+  "Tight-knit, professional team committed to quality, communication, and timelines", // updated
 ];
 
 export const WhyChooseUs = () => {

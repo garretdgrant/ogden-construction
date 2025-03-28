@@ -156,16 +156,22 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 Ogden Construction Inc
               </h3>
               <p className="mb-2">
-                Serving Placerville, CA and surrounding communities
+                Serving Placerville, Folsom, El Dorado Hills, Cameron Park,
+                Sacramento, Tahoe, and surrounding communities
               </p>
-              <p className="mb-2">License #: CA-12345678</p>
+
+              <p className="mb-2">License #: CA-1042758</p>
               <p>Fully insured and bonded</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-              <p className="mb-2">555-123-4567</p>
-              <p className="mb-2">info@ogdenconstruction.com</p>
-              <p>123 Main Street, Placerville, CA 95667</p>
+              <p className="mb-2">(530) 919-7408</p>
+              <p className="mb-2">info@ogden-construction.com</p>
+              <p>
+                Available by call, text, or email
+                <br />
+                whenever you need us.
+              </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Hours</h3>
@@ -189,7 +195,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 <img
                   src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
                   alt="EDC Web Design Logo"
-                  className="h-8 w-auto opacity-70 grayscale"
+                  className="h-8 w-auto opacity-70"
                 />
                 <p>Designed by EDC Web Design</p>
               </div>
