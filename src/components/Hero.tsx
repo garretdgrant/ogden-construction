@@ -2,6 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Hero = () => {
   const scrollToContact = () => {
@@ -12,17 +13,15 @@ export const Hero = () => {
 
   return (
     <div className="relative min-h-[80vh] flex items-center">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+      {/* Optimized background image */}
+      <Image
+        src="/images/about/ogdentruck.jpg"
+        alt="Ogden Construction work truck"
+        fill
+        priority
+        className="object-cover z-0"
+      />
+      <div className="absolute inset-0 bg-black/50 z-0" />
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
