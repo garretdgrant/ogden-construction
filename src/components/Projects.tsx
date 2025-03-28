@@ -1,6 +1,7 @@
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 
+// TODO: Update to real projects
 const projects = [
   {
     image: "https://images.unsplash.com/photo-1484154218962-a197022b5858",
