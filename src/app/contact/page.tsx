@@ -1,12 +1,10 @@
 import {
   Phone,
   Mail,
-  MapPin,
   Facebook,
   Instagram,
   Hammer,
   CalendarDays,
-  CircleDollarSign,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -61,10 +59,10 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Phone</p>
                       <a
-                        href="tel:555-123-4567"
+                        href="tel:530-919-7408"
                         className="text-gray-600 hover:text-accent"
                       >
-                        555-123-4567
+                        530-919-7408
                       </a>
                     </div>
                   </div>
@@ -76,33 +74,17 @@ export default function ContactPage() {
                         href="mailto:info@ogdenconstruction.com"
                         className="text-gray-600 hover:text-accent"
                       >
-                        info@ogdenconstruction.com
+                        info@ogden-construction.com
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="h-5 w-5 text-accent mt-0.5" />
-                    <div>
-                      <p className="font-medium">Office</p>
-                      <p className="text-gray-600">123 Main Street</p>
-                      <p className="text-gray-600">Placerville, CA 95667</p>
-                    </div>
-                  </div>
+
                   <div className="flex items-start space-x-3">
                     <Hammer className="h-5 w-5 text-accent mt-0.5" />
                     <div>
                       <p className="font-medium">License</p>
-                      <p className="text-gray-600">CA #12345678</p>
+                      <p className="text-gray-600">CA #1042758</p>
                       <p className="text-gray-600">Fully Bonded & Insured</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <CircleDollarSign className="h-5 w-5 text-accent mt-0.5" />
-                    <div>
-                      <p className="font-medium">Financing</p>
-                      <p className="text-gray-600">
-                        Financing options available for qualified projects
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -111,14 +93,14 @@ export default function ContactPage() {
                   <h3 className="font-medium mb-3">Connect With Us</h3>
                   <div className="flex space-x-4">
                     <a
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/ogden.construction.inc/"
                       className="text-accent hover:text-accent/80"
                       aria-label="Facebook"
                     >
                       <Facebook className="h-6 w-6" />
                     </a>
                     <a
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/levioakden77"
                       className="text-accent hover:text-accent/80"
                       aria-label="Instagram"
                     >
@@ -155,15 +137,17 @@ export default function ContactPage() {
               <h3 className="font-bold text-primary mb-2">Service Area</h3>
               <p className="text-gray-600 mb-2">
                 We proudly serve Placerville and surrounding communities in El
-                Dorado County including:
+                Dorado County including, but not limited to:
               </p>
               <ul className="grid grid-cols-2 gap-1 text-gray-600">
-                <li>Cameron Park</li>
-                <li>El Dorado Hills</li>
-                <li>Shingle Springs</li>
-                <li>Diamond Springs</li>
+                <li>Placerville</li>
                 <li>Folsom</li>
+                <li>El Dorado Hills</li>
+                <li>Cameron Park</li>
                 <li>Pollock Pines</li>
+                <li>Sacramento</li>
+                <li>Camino</li>
+                <li>South Lake Tahoe</li>
               </ul>
             </div>
           </div>

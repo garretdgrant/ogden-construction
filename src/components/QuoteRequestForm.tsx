@@ -87,11 +87,10 @@ export const QuoteRequestForm = () => {
             <SelectValue placeholder="Select a service" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="kitchen">Kitchen Remodel</SelectItem>
-            <SelectItem value="bathroom">Bathroom Renovation</SelectItem>
-            <SelectItem value="addition">Home Addition</SelectItem>
-            <SelectItem value="new">New Construction</SelectItem>
             <SelectItem value="outdoor">Deck / Outdoor Living</SelectItem>
+            <SelectItem value="new">New Construction</SelectItem>
+            <SelectItem value="addition">Home Addition</SelectItem>
+            <SelectItem value="bathroom">Bathroom Renovation</SelectItem>
             <SelectItem value="other">Other</SelectItem>
           </SelectContent>
         </Select>
