@@ -49,6 +49,12 @@ export const metadata: Metadata = {
       "Providing top-quality deck construction, home additions, and remodeling services in Placerville, Folsom, Sacramento, and Tahoe. Your trusted local construction experts.",
     images: ["/og-image.jpg"],
   },
+  other: {
+    // preload LCP image
+    rel: "preload",
+    as: "image",
+    href: "/images/about/ogdenTruck.jpg",
+  },
 };
 
 export default function RootLayout({
