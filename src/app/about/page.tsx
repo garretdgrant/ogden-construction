@@ -1,6 +1,15 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CircleCheck, Building, CalendarDays, Users, Star } from "lucide-react";
+import {
+  CircleCheck,
+  Building,
+  CalendarDays,
+  Users,
+  Star,
+  ArrowRight,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const aboutStats = [
   { icon: Building, count: "250+", label: "Projects Completed" },
@@ -187,6 +196,14 @@ export default function AboutPage() {
                   back to the communities we help build.
                 </p>
               </div>
+            </div>
+            <div className="mt-4">
+              <Link href="/contact">
+                <Button className="bg-accent hover:bg-accent/90">
+                  Get a Free Consultation{" "}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

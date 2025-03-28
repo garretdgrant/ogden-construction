@@ -5,6 +5,7 @@ import {
   Construction,
   Image as ImageIcon,
   Wrench,
+  ArrowRight,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -13,6 +14,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = {
   title: "Construction & Remodeling Services | Ogden Construction",
@@ -248,6 +251,13 @@ export default function ServicesPage() {
               </div>
             </li>
           </ol>
+          <div className="mt-4">
+            <Link href="/contact">
+              <Button className="bg-accent hover:bg-accent/90">
+                Get a Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
