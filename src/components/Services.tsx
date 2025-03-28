@@ -1,46 +1,46 @@
 import {
   Home,
-  Hammer,
-  PaintBucket,
   Construction,
-  Wrench,
-  LayoutList,
+  HardHat,
+  HousePlus,
+  Warehouse,
+  Drill,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const services = [
   {
-    icon: Home,
+    icon: HardHat,
     title: "Deck Construction",
     description:
       "Build the perfect outdoor space with durable, stylish deck construction tailored to your home and lifestyle.",
   },
   {
-    icon: Construction,
+    icon: Drill,
     title: "Deck Replacement",
     description:
       "Replace aging or damaged decks with safe, modern solutions that boost curb appeal and outdoor enjoyment.",
   },
   {
-    icon: LayoutList,
+    icon: Warehouse,
     title: "New Structure Construction",
     description:
       "From garages to workshops, we bring your custom structure ideas to life with expert craftsmanship.",
   },
   {
-    icon: Hammer,
+    icon: Home,
     title: "Guest House & ADU Construction",
     description:
       "Expand your property’s value and function with custom-built guest houses and accessory dwelling units.",
   },
   {
-    icon: PaintBucket,
+    icon: Construction,
     title: "Building Additions",
     description:
       "Seamlessly expand your living space with room additions designed to match your home’s character.",
   },
   {
-    icon: Wrench,
+    icon: HousePlus,
     title: "Remodeling",
     description:
       "Upgrade your home inside and out with comprehensive remodeling services built for comfort and style.",

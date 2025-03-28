@@ -34,8 +34,8 @@ export const Hero = () => {
             style={{ animationDelay: "0.2s" }}
           >
             From stunning decks to new builds and additions, we deliver
-            craftsmanship you can trust—tailored to your
-            lifestyle and built to last.
+            craftsmanship you can trust—tailored to your lifestyle and built to
+            last.
           </p>
           <div
             className="space-x-4 animate-fade-up"
