@@ -20,7 +20,6 @@ const projects = [
   },
 ];
 
-
 export const Projects = () => {
   return (
     <section className="py-20 bg-white">

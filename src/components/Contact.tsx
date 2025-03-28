@@ -64,44 +64,45 @@ export const Contact = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-accent" />
-                <a href="tel:555-123-4567" className="hover:text-accent">
-                  555-123-4567
+                <a href="tel:530-919-7408" className="hover:text-accent">
+                  {" "}
+                  (530) 919-7408
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-accent" />
                 <a
-                  href="mailto:info@ogdenconstruction.com"
+                  href="mailto:info@ogden-construction.com"
                   className="hover:text-accent"
                 >
-                  info@ogdenconstruction.com
+                  info@ogden-construction.com
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Facebook className="h-5 w-5 text-accent" />
                 <a
-                  href="https://facebook.com/ogdenconstruction"
+                  href="https://www.facebook.com/ogden.construction.inc/" // UPDATED
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent"
                 >
-                  Ogden Construction Inc
+                  Ogden Construction
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Instagram className="h-5 w-5 text-accent" />
                 <a
-                  href="https://instagram.com/ogdenconstruction"
+                  href="https://www.instagram.com/levioakden77"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent"
                 >
-                  @ogdenconstruction
+                  @levioakden77
                 </a>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-start space-x-3">
                 <Hammer className="h-5 w-5 text-accent" />
-                <span>Serving Placerville, CA and surrounding communities</span>
+                <span>Serving El Dorado County - Greater Sacramento areas</span>
               </div>
             </div>
           </div>

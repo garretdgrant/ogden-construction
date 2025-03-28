@@ -11,39 +11,39 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 const services = [
   {
     icon: Home,
-    title: "Home Remodeling",
+    title: "Deck Construction",
     description:
-      "Transform your living space with our comprehensive home remodeling services, tailored to your lifestyle and preferences.",
+      "Build the perfect outdoor space with durable, stylish deck construction tailored to your home and lifestyle.",
   },
   {
     icon: Construction,
-    title: "Home Renovations",
+    title: "Deck Replacement",
     description:
-      "Revitalize your home with our expert renovation services that blend modern design with functional living spaces.",
+      "Replace aging or damaged decks with safe, modern solutions that boost curb appeal and outdoor enjoyment.",
   },
   {
     icon: LayoutList,
-    title: "Kitchen Remodeling",
+    title: "New Structure Construction",
     description:
-      "Create the kitchen of your dreams with custom designs, quality materials, and expert craftsmanship.",
+      "From garages to workshops, we bring your custom structure ideas to life with expert craftsmanship.",
   },
   {
     icon: Hammer,
-    title: "Bathroom Renovations",
+    title: "Guest House & ADU Construction",
     description:
-      "Update your bathrooms with modern fixtures, elegant finishes, and space-efficient designs.",
+      "Expand your property’s value and function with custom-built guest houses and accessory dwelling units.",
   },
   {
     icon: PaintBucket,
-    title: "Interior & Exterior Painting",
+    title: "Building Additions",
     description:
-      "Refresh your home's appearance with our professional painting services for both interior and exterior surfaces.",
+      "Seamlessly expand your living space with room additions designed to match your home’s character.",
   },
   {
     icon: Wrench,
-    title: "General Contracting",
+    title: "Remodeling",
     description:
-      "Comprehensive contracting services for all your residential construction and improvement needs.",
+      "Upgrade your home inside and out with comprehensive remodeling services built for comfort and style.",
   },
 ];
 

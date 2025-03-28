@@ -27,14 +27,15 @@ export const Hero = () => {
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-up">
-            Reliable Remodeling in Placerville, CA
+            Custom Decks & Home Construction in Placerville
           </h1>
           <p
             className="text-xl text-white/90 mb-8 animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            Craftsmanship you can count on. From kitchens to custom builds, we
-            bring your vision to life.
+            From stunning decks to new builds and additions, we deliver
+            craftsmanship you can trust—tailored to your
+            lifestyle and built to last.
           </p>
           <div
             className="space-x-4 animate-fade-up"
