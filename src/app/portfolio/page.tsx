@@ -5,9 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Portfolio | Custom Decks & Home Construction in El Dorado County",
+  title: "Our Work | Custom Decks, Remodels & More | Ogden Construction",
   description:
-    "Explore construction projects completed by Ogden Construction in Placerville, Folsom, El Dorado Hills, Cameron Park, South Lake Tahoe, Sacramento, and more. Custom decks, home remodels, and full rebuilds done with precision and care.",
+    "Explore completed construction projects including custom decks, home additions, and full builds across El Dorado County, Folsom, Tahoe, and beyond.",
+
+  openGraph: {
+    title: "Project Portfolio | Ogden Construction Inc",
+    description:
+      "See real projects completed by Ogden Construction—from South Lake Tahoe decks to El Dorado Hills home additions.",
+  },
+
+  twitter: {
+    title: "Ogden Construction Portfolio",
+    description:
+      "Browse our portfolio of custom decks, remodels, and full home builds across Northern California.",
+  },
 };
 
 const projects = [
