@@ -4,6 +4,12 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Portfolio | Custom Decks & Home Construction in El Dorado County",
+  description:
+    "Explore construction projects completed by Ogden Construction in Placerville, Folsom, El Dorado Hills, Cameron Park, South Lake Tahoe, Sacramento, and more. Custom decks, home remodels, and full rebuilds done with precision and care.",
+};
+
 const projects = [
   {
     title: "Redwood Deck Replacement",
@@ -71,7 +77,7 @@ const projects = [
   },
   {
     title: "Fencing & 2nd Story Deck Project",
-    location: "El Dorado County, CA",
+    location: "Placerville, CA",
     description:
       "Installed custom fencing with gates followed by a second-story deck and stairs. Modifications were handled seamlessly during construction.",
     image: "/images/portfolio/fence.webp",
@@ -83,7 +89,7 @@ const projects = [
     ],
     testimonial:
       "Ogden Construction installed fencing and a 2nd story deck with stairs for us. The crew was friendly, professional, and accommodated changes easily. We're very happy with the quality on both projects.",
-    clientName: "Private Homeowner",
+    clientName: "Lisa S.",
   },
 ];
 
@@ -96,9 +102,10 @@ export default function PortfolioPage() {
             Our Portfolio
           </h1>
           <p className="text-lg text-gray-600">
-            Browse through our completed projects across El Dorado County. Each
-            project represents our commitment to quality craftsmanship and
-            client satisfaction.
+            Explore our recent construction projects—from custom decks to full
+            home builds—completed throughout El Dorado County and surrounding
+            areas. Every project reflects our dedication to quality,
+            transparency, and long-lasting craftsmanship.
           </p>
         </div>
 
