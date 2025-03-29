@@ -172,7 +172,7 @@ export default function PortfolioPage() {
                       ))}
                     </div>
                     <p className="italic text-gray-600">
-                    &quot;{project.testimonial}&quot;
+                      &quot;{project.testimonial}&quot;
                     </p>
                     <p className="mt-3 font-medium text-primary">
                       {project.clientName}

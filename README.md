@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ogden Construction Website
 
-## Getting Started
+This is the official marketing website for **Ogden Construction Inc**, a premier deck building and home remodeling company serving El Dorado County and surrounding areas in California.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠 Tech Stack
+
+- **Next.js 15 (App Router)**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Lucide Icons**
+- **Shadcn UI**
+- **Vercel** (Hosting & Edge Functions)
+- **Optimized for SEO & Lighthouse scores**
+
+---
+
+## 📁 Directory Structure
+
+```
+/src
+  /app             # App router pages
+  /components      # Reusable UI + layout components
+  /public          # Static assets (images, OG images)
+  /styles          # Tailwind and globals
+  /hooks           # Custom hooks (e.g. use-toast)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ✅ **Responsive Design**
+- ✅ **Hero section with background image**
+- ✅ **Quote request form with toast notifications**
+- ✅ **Reusable layout with SSR optimization**
+- ✅ **Client/server component splitting for performance**
+- ✅ **Portfolio grid with testimonials and highlights**
+- ✅ **Custom metadata (SEO + OG tags) per page**
+- ✅ **Mobile-friendly navigation drawer**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧠 SEO & Metadata
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All pages are optimized for search engines with custom `<Metadata />`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Layout sets default site-wide OG metadata
+- Individual pages like `/contact` and `/portfolio` override `title`, `description`, and `openGraph` where needed
+- OG images are 1200x630 `.jpg` or `.webp` and live under `/public/og-images`
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📍 Target Service Areas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ogden Construction serves:
+
+- Placerville
+- El Dorado Hills
+- Cameron Park
+- Folsom
+- South Lake Tahoe
+- Shingle Springs
+- Camino
+- Pollock Pines
+- Sacramento (select services)
+
+These cities are reflected in metadata, portfolio copy, and service area sections.
+
+---
+
+## 🧪 Performance
+
+- Optimized images with `next/image` and responsive sizing
+- Largest Contentful Paint improved by using local images
+- Layout component split into `Header`, `Footer`, and `ToasterProvider` to preserve server-side rendering
+
+---
+
+## 🧾 Available Scripts
+
+```bash
+pnpm dev       # Local dev server
+pnpm build     # Production build
+pnpm start     # Run after build
+pnpm prettier  # Consistent Styling
+```
+
+---
+
+## ✅ Deployment
+
+This site is deployed to **Vercel** using CI from the production branch.
+
+---
+
+## 👤 Author
+
+**Garret Grant**
+
+- Live Site: [ogden-construction.com](https://ogden-construction.com)
+- Site designed in collaboration with [**EDC Web Design**](https://edcwebdesign.com)
