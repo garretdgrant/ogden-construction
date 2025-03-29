@@ -24,7 +24,6 @@ This is the official marketing website for **Ogden Construction Inc**, a premier
   /app             # App router pages
   /components      # Reusable UI + layout components
   /public          # Static assets (images, OG images)
-  /styles          # Tailwind and globals
   /hooks           # Custom hooks (e.g. use-toast)
 ```
 
