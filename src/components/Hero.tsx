@@ -16,9 +16,9 @@ export const Hero = () => {
         sizes="(max-width: 768px) 100vw, 100vw"
         className="w-full h-full object-cover absolute inset-0 z-0"
       />
-      {/* <div className="absolute inset-0 bg-black/50 z-0" />
+      <div className="absolute inset-0 bg-black/50 z-0" />
 
-      <div className="container relative z-10 mx-auto px-4">
+      {/* <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Custom Decks & Home Construction in Placerville
