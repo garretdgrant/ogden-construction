@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 // import { ScrollToContactButton } from "./ScrollToContactButton";
 
 export const Hero = () => {
