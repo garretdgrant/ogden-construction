@@ -3,9 +3,9 @@ import { type NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-const baseUrl = "https://ogden-construction.com"; // Update if needed
+const baseUrl = "https://www.ogden-construction.com"; // Update if needed
 
-const staticPages = ["/", "/services", "/portfolio", "/about", "/contact"];
+const staticPages = ["", "/services", "/portfolio", "/about", "/contact"];
 
 export async function GET(_req: NextRequest) {
   const urls = staticPages
