@@ -10,28 +10,30 @@ export const Hero = () => {
       <Image
         src="/images/projects/trexTahoeSquoosh.jpg"
         alt="Ogden Construction work truck"
-        fill
+        width={1280}
+        height={960}
         priority
-        className="object-cover z-0"
+        sizes="(max-width: 768px) 100vw, 100vw"
+        className="w-full h-full object-cover absolute inset-0 z-0"
       />
       <div className="absolute inset-0 bg-black/50 z-0" />
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-up">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Custom Decks & Home Construction in Placerville
           </h1>
           <p
-            className="text-xl text-white/90 mb-8 animate-fade-up"
-            style={{ animationDelay: "0.2s" }}
+            className="text-xl text-white/90 mb-8"
+            // style={{ animationDelay: "0.2s" }}
           >
             From stunning decks to new builds and additions, we deliver
             craftsmanship you can trust—tailored to your lifestyle and built to
             last.
           </p>
           <div
-            className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 animate-fade-up"
-            style={{ animationDelay: "0.4s" }}
+            className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0"
+            // style={{ animationDelay: "0.4s" }}
           >
             <ScrollToContactButton />
             <Link href="/contact" className="w-full sm:w-auto">
