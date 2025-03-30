@@ -1,7 +1,7 @@
-// import { Button } from "./ui/button";
-// import Link from "next/link";
+import { Button } from "./ui/button";
+import Link from "next/link";
 import Image from "next/image";
-// import { ScrollToContactButton } from "./ScrollToContactButton";
+import { ScrollToContactButton } from "./ScrollToContactButton";
 
 export const Hero = () => {
   return (
@@ -23,18 +23,12 @@ export const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Custom Decks & Home Construction in Placerville
           </h1>
-          {/* <p
-            className="text-xl text-white/90 mb-8"
-            // style={{ animationDelay: "0.2s" }}
-          >
+          <p className="text-xl text-white/90 mb-8">
             From stunning decks to new builds and additions, we deliver
             craftsmanship you can trust—tailored to your lifestyle and built to
             last.
-          </p> */}
-          {/* <div
-            className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0"
-            // style={{ animationDelay: "0.4s" }}
-          >
+          </p>
+          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
             <ScrollToContactButton />
             <Link href="/contact" className="w-full sm:w-auto">
               <Button
@@ -44,7 +38,7 @@ export const Hero = () => {
                 Request a Quote
               </Button>
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
