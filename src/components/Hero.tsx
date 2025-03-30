@@ -8,7 +8,7 @@ export const Hero = () => {
     <div className="relative min-h-[80vh] flex items-center">
       {/* Optimized background image */}
       <Image
-        src="/images/about/ogdenTruck.jpg"
+        src="/images/projects/trexTahoeSquoosh.jpg"
         alt="Ogden Construction work truck"
         fill
         priority
