@@ -34,7 +34,7 @@ const servicesData = [
       {
         question: "How much does a room addition cost per square foot?",
         answer:
-          "In California, room additions typically cost between $300 to $600 per square foot, depending on factors like materials and design complexity. :contentReference[oaicite:3]{index=3}",
+          "In California, room additions typically cost between $300 to $600 per square foot, depending on factors like materials and design complexity.",
       },
       {
         question: "Do I need a permit for a room addition?",
