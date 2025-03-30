@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { ScrollToContactButton } from "./ScrollToContactButton";
+// import { ScrollToContactButton } from "./ScrollToContactButton";
 
 export const Hero = () => {
   return (
@@ -35,7 +35,7 @@ export const Hero = () => {
             className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0"
             // style={{ animationDelay: "0.4s" }}
           >
-            <ScrollToContactButton />
+            {/* <ScrollToContactButton /> */}
             <Link href="/contact" className="w-full sm:w-auto">
               <Button
                 variant="outline"
