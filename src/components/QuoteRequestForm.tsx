@@ -16,13 +16,43 @@ import {
 export const QuoteRequestForm = () => {
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Quote request sent!",
-      description:
-        "We'll get back to you as soon as possible to discuss your project.",
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const formEntries = Object.fromEntries(formData.entries());
+    console.log(formData);
+    console.log(formEntries); // ✅ See all your form values clearly
+    const res = await fetch("/api/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message"),
+        company: formData.get("company"), // honeypot
+      }),
     });
+
+    if (res.ok) {
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      form.reset();
+    } else {
+      const data = await res.json();
+      const errorMessage =
+        data?.error || "There was a problem sending your message.";
+
+      toast({
+        title: "Oops!",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -37,6 +67,7 @@ export const QuoteRequestForm = () => {
           </label>
           <Input
             id="name"
+            name="name"
             placeholder="Your Name"
             className="w-full"
             required
@@ -51,6 +82,7 @@ export const QuoteRequestForm = () => {
           </label>
           <Input
             id="phone"
+            name="phone"
             type="tel"
             placeholder="(555) 123-4567"
             className="w-full"
@@ -68,6 +100,7 @@ export const QuoteRequestForm = () => {
         </label>
         <Input
           id="email"
+          name="email"
           type="email"
           placeholder="your@email.com"
           className="w-full"
@@ -75,6 +108,18 @@ export const QuoteRequestForm = () => {
         />
       </div>
 
+      {/* Honeypot field (hidden from users) */}
+      <div className="hidden">
+        <label htmlFor="company">Company</label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      {/*
       <div>
         <label
           htmlFor="service"
@@ -116,7 +161,7 @@ export const QuoteRequestForm = () => {
             <SelectItem value="unsure">Not Sure Yet</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
 
       <div>
         <label
@@ -127,6 +172,7 @@ export const QuoteRequestForm = () => {
         </label>
         <Textarea
           id="message"
+          name="message"
           placeholder="Please tell us about your project, timeline, and any specific requirements."
           className="w-full min-h-[150px]"
           required

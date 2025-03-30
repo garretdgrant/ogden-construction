@@ -14,8 +14,6 @@ export const Contact = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const formEntries = Object.fromEntries(formData.entries());
-    console.log(formData);
-    console.log(formEntries); // ✅ See all your form values clearly
     const res = await fetch("/api/email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -62,6 +60,17 @@ export const Contact = () => {
                   placeholder="Your Name"
                   className="w-full"
                   required
+                />
+              </div>
+              {/* Honeypot field (hidden from users) */}
+              <div className="hidden">
+                <label htmlFor="company">Company</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
                 />
               </div>
               <div>
