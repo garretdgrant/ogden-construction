@@ -8,12 +8,43 @@ import { Phone, Mail, Facebook, Instagram, Hammer } from "lucide-react";
 export const Contact = () => {
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const formEntries = Object.fromEntries(formData.entries());
+    console.log(formData);
+    console.log(formEntries); // ✅ See all your form values clearly
+    const res = await fetch("/api/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message"),
+        company: formData.get("company"), // honeypot
+      }),
     });
+
+    if (res.ok) {
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      form.reset();
+    } else {
+      const data = await res.json();
+      const errorMessage =
+        data?.error || "There was a problem sending your message.";
+
+      toast({
+        title: "Oops!",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -26,10 +57,16 @@ export const Contact = () => {
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Input placeholder="Your Name" className="w-full" required />
+                <Input
+                  name="name"
+                  placeholder="Your Name"
+                  className="w-full"
+                  required
+                />
               </div>
               <div>
                 <Input
+                  name="email"
                   type="email"
                   placeholder="Email Address"
                   className="w-full"
@@ -38,6 +75,7 @@ export const Contact = () => {
               </div>
               <div>
                 <Input
+                  name="phone"
                   type="tel"
                   placeholder="Phone Number"
                   className="w-full"
@@ -46,6 +84,7 @@ export const Contact = () => {
               </div>
               <div>
                 <Textarea
+                  name="message"
                   placeholder="Your Message"
                   className="w-full min-h-[150px]"
                   required

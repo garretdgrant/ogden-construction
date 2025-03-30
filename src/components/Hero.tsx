@@ -1,16 +1,9 @@
-"use client";
-import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { ScrollToContactButton } from "./ScrollToContactButton";
 
 export const Hero = () => {
-  const scrollToContact = () => {
-    document
-      .querySelector("#contact-section")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="relative min-h-[80vh] flex items-center">
       {/* Optimized background image */}
@@ -37,19 +30,14 @@ export const Hero = () => {
             last.
           </p>
           <div
-            className="space-x-4 animate-fade-up"
+            className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 animate-fade-up"
             style={{ animationDelay: "0.4s" }}
           >
-            <Button
-              onClick={scrollToContact}
-              className="bg-accent hover:bg-accent/90"
-            >
-              Get a Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Link href="/contact">
+            <ScrollToContactButton />
+            <Link href="/contact" className="w-full sm:w-auto">
               <Button
                 variant="outline"
-                className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                className="bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto"
               >
                 Request a Quote
               </Button>
