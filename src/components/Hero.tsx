@@ -7,7 +7,7 @@ export const Hero = () => {
   return (
     <div className="relative min-h-[80vh] flex items-center">
       {/* Optimized background image */}
-      <Image
+      {/* <Image
         src="/images/projects/trexTahoeSquoosh.jpg"
         alt="Ogden Construction work truck"
         width={1280}
@@ -15,7 +15,7 @@ export const Hero = () => {
         priority
         sizes="(max-width: 768px) 100vw, 100vw"
         className="w-full h-full object-cover absolute inset-0 z-0"
-      />
+      /> */}
       <div className="absolute inset-0 bg-black/50 z-0" />
 
       <div className="container relative z-10 mx-auto px-4">
