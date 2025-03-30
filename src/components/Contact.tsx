@@ -13,7 +13,6 @@ export const Contact = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const formEntries = Object.fromEntries(formData.entries());
     const res = await fetch("/api/email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

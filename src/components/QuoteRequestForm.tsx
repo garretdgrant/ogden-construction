@@ -5,13 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export const QuoteRequestForm = () => {
   const { toast } = useToast();
@@ -21,9 +14,6 @@ export const QuoteRequestForm = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const formEntries = Object.fromEntries(formData.entries());
-    console.log(formData);
-    console.log(formEntries); // ✅ See all your form values clearly
     const res = await fetch("/api/email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
