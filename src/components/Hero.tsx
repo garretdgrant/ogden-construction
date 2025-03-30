@@ -1,7 +1,7 @@
-import { Button } from "./ui/button";
-import Link from "next/link";
+// import { Button } from "./ui/button";
+// import Link from "next/link";
 import Image from "next/image";
-import { ScrollToContactButton } from "./ScrollToContactButton";
+// import { ScrollToContactButton } from "./ScrollToContactButton";
 
 export const Hero = () => {
   return (
@@ -16,7 +16,7 @@ export const Hero = () => {
         sizes="(max-width: 768px) 100vw, 100vw"
         className="w-full h-full object-cover absolute inset-0 z-0"
       />
-      <div className="absolute inset-0 bg-black/50 z-0" />
+      {/* <div className="absolute inset-0 bg-black/50 z-0" />
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
@@ -46,7 +46,7 @@ export const Hero = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
