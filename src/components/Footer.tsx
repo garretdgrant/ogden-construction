@@ -47,7 +47,7 @@ export const Footer = () => {
               <img
                 src="https://www.edcwebdesign.com/assets/logo.webp"
                 alt="EDC Web Design Logo"
-                className="h-8 w-auto opacity-70"
+                className="h-8 w-auto"
               />
               <p>Designed by EDC Web Design</p>
             </div>
