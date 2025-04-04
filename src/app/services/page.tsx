@@ -16,19 +16,184 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Construction & Remodeling Services | Ogden Construction",
-  description:
-    "Discover expert deck building, ADUs, home additions, and remodeling in Placerville, Folsom, El Dorado Hills, Cameron Park, and Sacramento. Trusted craftsmanship tailored to your lifestyle.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title:
+      "Our Services | Custom Decks, Remodels & Home Additions | Ogden Construction",
+    description:
+      "Explore our expert construction services in Placerville, El Dorado Hills, Tahoe, and beyond. We specialize in custom deck building, home remodeling, and additions.",
+    alternates: {
+      canonical: "https://www.ogden-construction.com/services",
+    },
+    openGraph: {
+      title: "Construction Services in Placerville | Ogden Construction Inc",
+      description:
+        "View our full range of services including decks, home additions, and remodeling projects across El Dorado County and surrounding areas.",
+      url: "https://www.ogden-construction.com/services",
+      siteName: "Ogden Construction",
+      type: "website",
+      images: ["/images/about/ogdenTruck.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title:
+        "Custom Decks & Remodel Services | Ogden Construction in Placerville, CA",
+      description:
+        "Get expert construction help from Ogden Construction. Serving Placerville, Folsom, El Dorado Hills, and Tahoe with top-rated craftsmanship.",
+      images: [
+        "https://www.ogden-construction.com/images/about/ogdenTruck.jpg",
+      ],
+    },
+    other: {
+      "script:ld+json": JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://www.ogden-construction.com/#services",
+        name: "Ogden Construction Services",
+        url: "https://www.ogden-construction.com/services",
+        mainEntityOfPage: {
+          "@type": "LocalBusiness",
+          "@id": "https://www.ogden-construction.com/#localbusiness",
+          name: "Ogden Construction",
+          url: "https://www.ogden-construction.com",
+          email: "info@ogden-construction.com",
+          telephone: "+1-530-919-7408",
+          serviceType: [
+            "Deck Building",
+            "Home Additions",
+            "General Contracting",
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+1-530-919-7408",
+            contactType: "Customer Support",
+            areaServed: ["US"],
+            availableLanguage: ["English"],
+          },
+          hasMap: "https://www.google.com/maps/place/Placerville,+CA",
+          founder: {
+            "@type": "Person",
+            name: "Levi Ogden",
+            url: "https://www.ogden-construction.com/about",
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Placerville",
+            addressRegion: "CA",
+            postalCode: "95667",
+            addressCountry: "US",
+          },
+          areaServed: [
+            { "@type": "Place", name: "Placerville" },
+            { "@type": "Place", name: "South Lake Tahoe" },
+            { "@type": "Place", name: "El Dorado Hills" },
+            { "@type": "Place", name: "Folsom" },
+            { "@type": "Place", name: "Sacramento" },
+          ],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "08:00",
+              closes: "17:00",
+            },
+          ],
+          description:
+            "Ogden Construction is a licensed and insured contractor based in Placerville, CA. We specialize in custom decks, remodels, and new home construction throughout El Dorado County and the surrounding areas.",
+          sameAs: [
+            "https://www.facebook.com/ogden.construction.inc/",
+            "https://www.instagram.com/levioakden77",
+            "https://www.yelp.com/biz/ogden-construction-placerville-2",
+          ],
+          image:
+            "https://www.ogden-construction.com/images/about/ogdenTruck.jpg",
+          priceRange: "$$",
+        },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Construction Services Offered by Ogden Construction",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Deck Building",
+                description:
+                  "Custom wood and composite decks built to match your home and lifestyle. Servicing Placerville, Tahoe, Folsom, and surrounding areas.",
+                areaServed: [
+                  { "@type": "Place", name: "Placerville" },
+                  { "@type": "Place", name: "South Lake Tahoe" },
+                  { "@type": "Place", name: "El Dorado Hills" },
+                  { "@type": "Place", name: "Folsom" },
+                  { "@type": "Place", name: "Sacramento" },
+                ],
+                provider: {
+                  "@type": "LocalBusiness",
+                  name: "Ogden Construction",
+                },
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Home Additions",
+                description:
+                  "Expand your home with seamless, code-compliant additions—crafted for long-term comfort and value.",
+                areaServed: [
+                  { "@type": "Place", name: "Placerville" },
+                  { "@type": "Place", name: "South Lake Tahoe" },
+                  { "@type": "Place", name: "El Dorado Hills" },
+                  { "@type": "Place", name: "Folsom" },
+                  { "@type": "Place", name: "Sacramento" },
+                ],
+                provider: {
+                  "@type": "LocalBusiness",
+                  name: "Ogden Construction",
+                },
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Remodeling Services",
+                description:
+                  "Interior and exterior remodeling for kitchens, bathrooms, and entire homes with premium craftsmanship.",
+                areaServed: [
+                  { "@type": "Place", name: "Placerville" },
+                  { "@type": "Place", name: "South Lake Tahoe" },
+                  { "@type": "Place", name: "El Dorado Hills" },
+                  { "@type": "Place", name: "Folsom" },
+                  { "@type": "Place", name: "Sacramento" },
+                ],
+                provider: {
+                  "@type": "LocalBusiness",
+                  name: "Ogden Construction",
+                },
+              },
+            },
+          ],
+        },
+      }),
+    },
+  };
+}
 
 const servicesData = [
   {
     icon: LayoutList,
     title: "Room Additions",
     description:
-      "Expand your home’s footprint with seamless additions that enhance comfort, space, and value.",
+      "Add extra living space with thoughtfully designed room additions that boost comfort, functionality, and home value.",
     priceRange: "$80,000 - $150,000+",
     faqs: [
       {
@@ -39,15 +204,15 @@ const servicesData = [
       {
         question: "Do I need a permit for a room addition?",
         answer:
-          "Yes, most cities require permits for room additions to ensure compliance with building codes. It's advisable to consult with your contractor about local regulations. :contentReference[oaicite:4]{index=4}",
+          "Yes, most cities require permits for room additions to ensure compliance with building codes. It's advisable to consult with your contractor about local regulations.",
       },
     ],
   },
   {
     icon: Bath,
-    title: "Guest House & ADU Builds",
+    title: "Guest House & ADU Construction",
     description:
-      "Create private, fully equipped guest houses or ADUs for family, income, or lifestyle flexibility.",
+      "Build custom guest homes or ADUs designed for rental income, multigenerational living, or added convenience.",
     priceRange: "$100,000 - $400,000+",
     faqs: [
       {
@@ -64,16 +229,16 @@ const servicesData = [
   },
   {
     icon: Home,
-    title: "New Structure Construction",
+    title: "New Construction Builds",
     description:
-      "From foundation to finish, we build custom structures tailored to your vision and lifestyle.",
+      "From blueprints to completion, we construct personalized homes and structures that reflect your lifestyle and long-term goals.",
     priceRange: "$300 - $500 per square foot",
     faqs: [
       {
         question:
           "What is the average cost per square foot to build a new home in Sacramento?",
         answer:
-          "The average cost ranges from $300 to $500 per square foot, influenced by factors like location, size, and design choices. :contentReference[oaicite:5]{index=5}",
+          "The average cost ranges from $300 to $500 per square foot, influenced by factors like location, size, and design choices.",
       },
       {
         question: "How long does it take to build a new home?",
@@ -86,7 +251,7 @@ const servicesData = [
     icon: Construction,
     title: "Remodeling Services",
     description:
-      "Transform existing spaces with thoughtful remodeling that aligns with your needs and taste.",
+      "Reimagine your space with custom remodeling solutions that blend aesthetics, practicality, and craftsmanship.",
     priceRange: "Varies based on project scope",
     faqs: [
       {
@@ -103,9 +268,9 @@ const servicesData = [
   },
   {
     icon: ImageIcon,
-    title: "Deck Construction & Design",
+    title: "Custom Deck Design & Build",
     description:
-      "Craft beautiful, durable outdoor living spaces with expert deck design and Trex-certified building.",
+      "Create durable, weather-resistant outdoor living spaces with custom deck construction using Trex and premium materials.",
     priceRange: "$15,000 - $50,000+",
     faqs: [
       {
@@ -124,7 +289,7 @@ const servicesData = [
     icon: Wrench,
     title: "General Contracting",
     description:
-      "End-to-end project management and construction services, delivered with integrity and expertise.",
+      "Comprehensive project management and construction services handled by licensed contractors with strong local expertise.",
     priceRange: "Varies based on project",
     faqs: [
       {
@@ -148,9 +313,16 @@ export default function ServicesPage() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl font-bold text-primary mb-4">Our Services</h1>
           <p className="text-lg text-gray-600">
-            From custom decks to full home builds, Ogden Construction delivers
-            trusted craftsmanship across El Dorado County—with a focus on
-            quality, reliability, and client satisfaction.
+            From{" "}
+            <Link href="/portfolio" className="text-accent hover:underline">
+              custom decks
+            </Link>{" "}
+            to full home builds, Ogden Construction delivers trusted
+            craftsmanship across{" "}
+            <Link href="/contact" className="text-accent hover:underline">
+              El Dorado County
+            </Link>
+            —with a focus on quality, reliability, and client satisfaction.
           </p>
         </div>
 
@@ -165,7 +337,23 @@ export default function ServicesPage() {
                 <CardTitle className="text-xl">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">{service.description}</p>
+                <p className="text-gray-600 mb-4">
+                  {service.title === "Deck Construction & Design" ? (
+                    <>
+                      Craft beautiful, durable outdoor living spaces with expert
+                      deck design and{" "}
+                      <Link
+                        href="/portfolio"
+                        className="text-accent hover:underline"
+                      >
+                        Trex-certified building
+                      </Link>
+                      .
+                    </>
+                  ) : (
+                    service.description
+                  )}
+                </p>
                 <p className="text-sm font-semibold text-primary">
                   Price Range:{" "}
                   <span className="text-accent">{service.priceRange}</span>
@@ -201,6 +389,7 @@ export default function ServicesPage() {
           <h2 className="text-2xl font-bold text-primary mb-6 text-center">
             Our Service Process
           </h2>
+          <h3 className="sr-only">How Our Construction Process Works</h3>
           <ol className="space-y-6">
             <li className="flex">
               <span className="bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
