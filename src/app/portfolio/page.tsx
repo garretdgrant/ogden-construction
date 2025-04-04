@@ -4,30 +4,209 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Our Work | Custom Decks, Remodels & More | Ogden Construction",
-  description:
-    "Explore completed construction projects including custom decks, home additions, and full builds across El Dorado County, Folsom, Tahoe, and beyond.",
+import { Metadata } from "next";
 
-  openGraph: {
-    title: "Project Portfolio | Ogden Construction Inc",
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Our Work | Custom Decks, Remodels & More | Ogden Construction",
     description:
-      "See real projects completed by Ogden Construction—from South Lake Tahoe decks to El Dorado Hills home additions.",
-  },
-
-  twitter: {
-    title: "Ogden Construction Portfolio",
-    description:
-      "Browse our portfolio of custom decks, remodels, and full home builds across Northern California.",
-  },
-};
+      "Explore completed construction projects including custom decks, home additions, and full builds across El Dorado County, Folsom, Tahoe, and beyond.",
+    alternates: {
+      canonical: "https://www.ogden-construction.com/portfolio",
+    },
+    openGraph: {
+      title: "Project Portfolio | Ogden Construction Inc",
+      description:
+        "See real projects completed by Ogden Construction—from South Lake Tahoe decks to El Dorado Hills home additions.",
+      url: "https://www.ogden-construction.com/portfolio",
+      siteName: "Ogden Construction",
+      type: "website",
+      images: ["/og-image.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Ogden Construction Portfolio",
+      description:
+        "Browse our portfolio of custom decks, remodels, and full home builds across Northern California.",
+      images: ["https://www.ogden-construction.com/og-image.jpg"],
+    },
+    other: {
+      "script:ld+json": JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://www.ogden-construction.com/#portfolio",
+        name: "Ogden Construction Portfolio",
+        url: "https://www.ogden-construction.com/portfolio",
+        hasPart: [
+          {
+            "@type": "Project",
+            name: "Redwood Deck Replacement",
+            description:
+              "Demolition and replacement of an aging deck with redwood boards. Completed in South Lake Tahoe, CA with excellent communication and timely execution.",
+            locationCreated: {
+              "@type": "Place",
+              name: "South Lake Tahoe, CA",
+            },
+            image:
+              "https://www.ogden-construction.com/images/portfolio/redwood-deck.webp",
+            dateCreated: "2023",
+            creator: {
+              "@type": "LocalBusiness",
+              name: "Ogden Construction",
+              url: "https://www.ogden-construction.com",
+            },
+          },
+          {
+            "@type": "Project",
+            name: "Twin Bridges Cabin Improvements",
+            description:
+              "Deck rebuild and driveway leveling project for improved winter access and extended structural support in Twin Bridges, CA.",
+            locationCreated: {
+              "@type": "Place",
+              name: "Twin Bridges, CA",
+            },
+            image:
+              "https://www.ogden-construction.com/images/portfolio/twin-bridges-cabin.webp",
+            dateCreated: "2023",
+            creator: {
+              "@type": "LocalBusiness",
+              name: "Ogden Construction",
+              url: "https://www.ogden-construction.com",
+            },
+          },
+          {
+            "@type": "Project",
+            name: "Full Home Rebuild & Deck Construction",
+            description:
+              "Ground-up rebuild of a home lost to the Caldor Fire, including inspections, coordination, and custom deck construction in Grizzly Flats, CA.",
+            locationCreated: {
+              "@type": "Place",
+              name: "Grizzly Flats, CA",
+            },
+            image:
+              "https://www.ogden-construction.com/images/portfolio/guestHouse.webp",
+            dateCreated: "2023",
+            creator: {
+              "@type": "LocalBusiness",
+              name: "Ogden Construction",
+              url: "https://www.ogden-construction.com",
+            },
+          },
+          {
+            "@type": "Project",
+            name: "Trex Deck & Retaining Wall Build",
+            description:
+              "Trex deck installation and retaining wall construction with drainage system in Rescue, CA. Completed efficiently despite challenging weather.",
+            locationCreated: {
+              "@type": "Place",
+              name: "Rescue, CA",
+            },
+            image:
+              "https://www.ogden-construction.com/images/portfolio/curtisRetainingWall.webp",
+            dateCreated: "2023",
+            creator: {
+              "@type": "LocalBusiness",
+              name: "Ogden Construction",
+              url: "https://www.ogden-construction.com",
+            },
+          },
+          {
+            "@type": "Project",
+            name: "Fencing & 2nd Story Deck Project",
+            description:
+              "Custom fencing with gates and a second-story deck with stairs installed in Placerville, CA. Responsive team adapted seamlessly to changes during construction.",
+            locationCreated: {
+              "@type": "Place",
+              name: "Placerville, CA",
+            },
+            image:
+              "https://www.ogden-construction.com/images/portfolio/fence.webp",
+            dateCreated: "2023",
+            creator: {
+              "@type": "LocalBusiness",
+              name: "Ogden Construction",
+              url: "https://www.ogden-construction.com",
+            },
+          },
+        ],
+        mainEntityOfPage: {
+          "@type": "LocalBusiness",
+          "@id": "https://www.ogden-construction.com/#localbusiness",
+          name: "Ogden Construction",
+          url: "https://www.ogden-construction.com",
+          email: "info@ogden-construction.com",
+          telephone: "+1-530-919-7408",
+          serviceType: [
+            "Deck Building",
+            "Home Additions",
+            "General Contracting",
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+1-530-919-7408",
+            contactType: "Customer Support",
+            areaServed: ["US"],
+            availableLanguage: ["English"],
+          },
+          hasMap: "https://www.google.com/maps/place/Placerville,+CA",
+          founder: {
+            "@type": "Person",
+            name: "Levi Ogden",
+            url: "https://www.ogden-construction.com/about",
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Placerville",
+            addressRegion: "CA",
+            postalCode: "95667",
+            addressCountry: "US",
+          },
+          areaServed: [
+            { "@type": "Place", name: "Placerville" },
+            { "@type": "Place", name: "El Dorado Hills" },
+            { "@type": "Place", name: "Folsom" },
+            { "@type": "Place", name: "Cameron Park" },
+            { "@type": "Place", name: "South Lake Tahoe" },
+            { "@type": "Place", name: "Pollock Pines" },
+            { "@type": "Place", name: "Sacramento" },
+            { "@type": "Place", name: "Camino" },
+          ],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "08:00",
+              closes: "17:00",
+            },
+          ],
+          description:
+            "Ogden Construction is a licensed and insured contractor based in Placerville, CA. We specialize in custom decks, remodels, and new home construction throughout El Dorado County and the surrounding areas.",
+          sameAs: [
+            "https://www.facebook.com/ogden.construction.inc/",
+            "https://www.instagram.com/levioakden77",
+            "https://www.yelp.com/biz/ogden-construction-placerville-2",
+          ],
+          image:
+            "https://www.ogden-construction.com/images/about/ogdenTruck.jpg",
+          priceRange: "$$",
+        },
+      }),
+    },
+  };
+}
 
 const projects = [
   {
     title: "Redwood Deck Replacement",
     location: "South Lake Tahoe, CA",
     description:
-      "Demolition and full replacement of an aging wood deck with high-quality redwood, completed on time with consistent communication throughout.",
+      "Removed and replaced an aging deck with durable, high-grade redwood. This custom deck build in South Lake Tahoe was completed on time with open communication from start to finish.",
     image: "/images/portfolio/redwood-deck.webp",
     highlights: [
       "Redwood deck installation",
@@ -59,7 +238,7 @@ const projects = [
     title: "Full Home Rebuild & Deck Construction",
     location: "Grizzly Flats, CA",
     description:
-      "Rebuilt a custom home from the ground up after the Caldor Fire, including full project coordination, local inspections, and a brand new deck—all completed with expert care and integrity.",
+      "Ground-up rebuild of a custom home after the Caldor Fire, including permitting, inspections, and construction of a new deck. This long-term project reflects our deep local roots and hands-on dedication.",
     image: "/images/portfolio/guestHouse.webp",
     highlights: [
       "Ground-up home rebuild",
@@ -75,7 +254,7 @@ const projects = [
     title: "Trex Deck & Retaining Wall Build",
     location: "Rescue, CA",
     description:
-      "Full removal and replacement of a failing wood front porch with Trex decking and joist reinforcement, plus construction of an interlocking block retaining wall with French drain system.",
+      "Replaced a deteriorating front porch with weather-resistant Trex composite decking and reinforced joists. Built an interlocking block retaining wall with French drain—completed quickly despite heavy storms.",
     image: "/images/portfolio/curtisRetainingWall.webp",
     highlights: [
       "Trex composite decking",
@@ -114,10 +293,10 @@ export default function PortfolioPage() {
             Our Portfolio
           </h1>
           <p className="text-lg text-gray-600">
-            Explore our recent construction projects—from custom decks to full
-            home builds—completed throughout El Dorado County and surrounding
-            areas. Every project reflects our dedication to quality,
-            transparency, and long-lasting craftsmanship.
+            Explore our recent work across Placerville, Tahoe, Folsom, and
+            surrounding areas. From custom decks to full-scale home builds,
+            every project showcases our craftsmanship, integrity, and commitment
+            to quality.
           </p>
         </div>
 
@@ -189,8 +368,9 @@ export default function PortfolioPage() {
             Ready to Start Your Project?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-            Contact us today to discuss your project ideas and schedule a free
-            consultation.
+            Let&apos;s bring your vision to life. Contact us for a free
+            consultation and get expert input on your deck, remodel, or home
+            addition.
           </p>
           <Link href="/contact">
             <Button size="lg" className="bg-accent hover:bg-accent/90">
