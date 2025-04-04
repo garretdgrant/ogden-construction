@@ -38,14 +38,14 @@ export const Footer = () => {
             reserved.
           </p>
           <a
-            href="https://edcwebdesign.com"
+            href="https://www.edcwebdesign.com"
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:text-accent transition-colors"
           >
             <div className="flex items-center space-x-4">
               <img
-                src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
+                src="https://www.edcwebdesign.com/assets/logo.webp"
                 alt="EDC Web Design Logo"
                 className="h-8 w-auto opacity-70"
               />
