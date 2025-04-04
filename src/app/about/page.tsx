@@ -17,6 +17,116 @@ const aboutStats = [
   { icon: Users, count: "175+", label: "Happy Clients" },
   { icon: Star, count: "4.9", label: "Average Rating" },
 ];
+import { Metadata } from "next";
+
+// app/about/metadata.ts (or in the same file if you're using file-based routes in App Router)
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title:
+      "About Ogden Construction | Placerville Deck Builders & Home Contractors",
+    description:
+      "Learn about Ogden Construction, a trusted Placerville-based deck builder and general contractor. We’ve been crafting custom decks, home additions, and remodels throughout El Dorado County since 2008.",
+    alternates: {
+      canonical: "https://www.ogden-construction.com/about",
+    },
+    openGraph: {
+      title:
+        "Meet Ogden Construction | Trusted Deck Builders in Placerville, CA",
+      description:
+        "With over 20 years of experience, Ogden Construction builds beautiful decks and homes across Placerville, El Dorado Hills, Folsom, and surrounding areas. Learn more about our story.",
+      url: "https://www.ogden-construction.com/about",
+      siteName: "Ogden Construction",
+      type: "website",
+      images: ["/images/about/ogdenTruck.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title:
+        "About Ogden Construction | Placerville Deck Builders & Contractors",
+      description:
+        "Get to know Ogden Construction, your local Placerville deck builder and home contractor. Over 250 projects completed since 2008.",
+      images: [
+        "https://www.ogden-construction.com/images/about/ogdenTruck.jpg",
+      ],
+    },
+    other: {
+      "script:ld+json": JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "@id": "https://www.ogden-construction.com/about",
+        name: "About Ogden Construction",
+        url: "https://www.ogden-construction.com/about",
+        mainEntity: {
+          "@type": "LocalBusiness",
+          "@id": "https://www.ogden-construction.com/#localbusiness",
+          name: "Ogden Construction",
+          url: "https://www.ogden-construction.com",
+          email: "info@ogden-construction.com",
+          telephone: "+1-530-919-7408",
+          serviceType: [
+            "Deck Building",
+            "Home Additions",
+            "General Contracting",
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+1-530-919-7408",
+            contactType: "Customer Support",
+            areaServed: ["US"],
+            availableLanguage: ["English"],
+          },
+          hasMap: "https://www.google.com/maps/place/Placerville,+CA",
+          founder: {
+            "@type": "Person",
+            name: "Levi Ogden",
+            url: "https://www.ogden-construction.com/about",
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Placerville",
+            addressRegion: "CA",
+            postalCode: "95667",
+            addressCountry: "US",
+          },
+          areaServed: [
+            { "@type": "Place", name: "Placerville" },
+            { "@type": "Place", name: "El Dorado Hills" },
+            { "@type": "Place", name: "Folsom" },
+            { "@type": "Place", name: "Cameron Park" },
+            { "@type": "Place", name: "South Lake Tahoe" },
+            { "@type": "Place", name: "Pollock Pines" },
+            { "@type": "Place", name: "Sacramento" },
+            { "@type": "Place", name: "Camino" },
+          ],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "08:00",
+              closes: "17:00",
+            },
+          ],
+          description:
+            "Ogden Construction is a licensed and insured contractor based in Placerville, CA. We specialize in custom decks, remodels, and new home construction throughout El Dorado County and the surrounding areas.",
+          sameAs: [
+            "https://www.facebook.com/ogden.construction.inc/",
+            "https://www.instagram.com/levioakden77",
+            "https://www.yelp.com/biz/ogden-construction-placerville-2",
+          ],
+          image:
+            "https://www.ogden-construction.com/images/about/ogdenTruck.jpg",
+          priceRange: "$$",
+        },
+      }),
+    },
+  };
+}
 
 export default function AboutPage() {
   return (
@@ -27,8 +137,8 @@ export default function AboutPage() {
             About Ogden Construction
           </h1>
           <p className="text-lg text-gray-600">
-            Building quality homes and relationships in El Dorado County since
-            2008.
+            Crafting custom decks and building trusted relationships in
+            Placerville and El Dorado County since 2008
           </p>
         </div>
 
@@ -39,15 +149,15 @@ export default function AboutPage() {
               Ogden Construction Inc. was built on a foundation of
               craftsmanship, integrity, and community commitment. Founded by
               Levi Ogden in 2008, the company began with a simple goal: to
-              provide dependable construction services that homeowners in
-              Placerville and the surrounding areas could trust.
+              provide dependable construction and deck building services that
+              homeowners in Placerville and nearby towns could trust.
             </p>
             <p className="text-gray-600 mb-4">
               From humble beginnings, Ogden Construction has grown into one of
-              the most respected names in El Dorado and Sacramento counties.
-              With a portfolio that spans custom deck builds, guest houses,
-              structural additions, and new home construction, our team brings
-              decades of hands-on experience to every job site.
+              the most respected names in El Dorado and Sacramento counties. Our
+              portfolio includes custom decks, home additions, guest houses, and
+              full new home construction, our team brings decades of hands-on
+              experience to every job site.
             </p>
             <p className="text-gray-600 mb-4">
               We don&apos;t believe in cutting corners or rushing work. Every
@@ -138,7 +248,7 @@ export default function AboutPage() {
               <p className="mt-4 text-gray-600">
                 When he&apos;s not building homes, Levi enjoys giving back to
                 the community and exploring the outdoors throughout El Dorado
-                County and beyond.{" "}
+                County and the Sierra foothills.{" "}
               </p>
             </div>
           </div>
@@ -180,8 +290,8 @@ export default function AboutPage() {
                   Quality Craftsmanship
                 </h3>
                 <p className="text-gray-600">
-                  Decks, additions, and custom builds completed with precision,
-                  pride, and materials that stand the test of time.
+                  Custom decks, home additions, and remodeling projects
+                  completed with precision, pride, and materials built to last.
                 </p>
               </div>
             </div>
