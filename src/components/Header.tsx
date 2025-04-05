@@ -35,9 +35,11 @@ export const Header = () => {
   const locations = [
     "Placerville",
     "El Dorado Hills",
-    "Cameron Park",
     "Folsom",
+    "Auburn",
     "Tahoe",
+    "Napa Valley",
+    "Sacramento",
   ];
 
   return (
