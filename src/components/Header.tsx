@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,6 +8,7 @@ import {
   Users,
   Phone,
   Menu,
+  MapPin,
 } from "lucide-react";
 import {
   Sheet,
@@ -16,6 +16,12 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,6 +31,14 @@ export const Header = () => {
 
   const isActive = (path: string) =>
     pathname === path ? "text-accent font-semibold" : "";
+
+  const locations = [
+    "Placerville",
+    "El Dorado Hills",
+    "Cameron Park",
+    "Folsom",
+    "Tahoe",
+  ];
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
@@ -68,11 +82,6 @@ export const Header = () => {
                         label: "About",
                         icon: <Users className="h-5 w-5" />,
                       },
-                      {
-                        href: "/contact",
-                        label: "Contact",
-                        icon: <Phone className="h-5 w-5" />,
-                      },
                     ].map(({ href, label, icon }) => (
                       <SheetClose asChild key={href}>
                         <Link
@@ -84,6 +93,35 @@ export const Header = () => {
                         </Link>
                       </SheetClose>
                     ))}
+
+                    {/* Mobile Locations Dropdown */}
+                    <div className="relative">
+                      <div className="flex items-center space-x-3 cursor-pointer">
+                        <MapPin className="h-5 w-5" />
+                        <span className="text-lg">Locations</span>
+                      </div>
+                      <div className="pl-8 mt-2 flex flex-col space-y-2">
+                        {locations.map((location) => (
+                          <Link
+                            key={location}
+                            href={`/locations/california/${location.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="text-primary/80 hover:text-accent transition-colors text-base py-1"
+                          >
+                            {location}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    <SheetClose asChild>
+                      <Link
+                        href="/contact"
+                        className={`flex items-center space-x-3 hover:text-accent ${isActive("/contact")}`}
+                      >
+                        <Phone className="h-5 w-5" />
+                        <span className="text-lg">Contact</span>
+                      </Link>
+                    </SheetClose>
                   </nav>
                 </SheetContent>
               </Sheet>
@@ -91,7 +129,11 @@ export const Header = () => {
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { href: "/", label: "Home", icon: <Home className="h-4 w-4" /> },
+              {
+                href: "/",
+                label: "Home",
+                icon: <Home className="h-4 w-4" />,
+              },
               {
                 href: "/services",
                 label: "Services",
@@ -107,11 +149,6 @@ export const Header = () => {
                 label: "About",
                 icon: <Users className="h-4 w-4" />,
               },
-              {
-                href: "/contact",
-                label: "Contact",
-                icon: <Phone className="h-4 w-4" />,
-              },
             ].map(({ href, label, icon }) => (
               <Link
                 key={href}
@@ -122,6 +159,34 @@ export const Header = () => {
                 <span>{label}</span>
               </Link>
             ))}
+
+            {/* Desktop Locations Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center space-x-1 hover:text-accent focus:outline-none">
+                <MapPin className="h-4 w-4" />
+                <span>Locations</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[#fafaf9] border border-gray-100 shadow-md rounded-md py-2 mt-1 min-w-[160px]">
+                {locations.map((location) => (
+                  <DropdownMenuItem key={location} asChild>
+                    <Link
+                      href={`/locations/california/${location.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="px-4 py-2 text-sm text-primary hover:bg-accent/10 hover:text-accent transition-colors"
+                    >
+                      {location}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link
+              href="/contact"
+              className={`flex items-center space-x-1 hover:text-accent ${isActive("/contact")}`}
+            >
+              <Phone className="h-4 w-4" />
+              <span>Contact</span>
+            </Link>
           </nav>
         </div>
       </div>
