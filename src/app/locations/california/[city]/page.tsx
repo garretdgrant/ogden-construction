@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 
 const formatCityName = (slug: string): string => {
   return slug
@@ -68,26 +69,57 @@ export async function generateMetadata(
       description,
       images: [`${baseUrl}/og-image.jpg`],
     },
-    other: {
-      "script:ld+json": JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "@id": pageUrl,
-        name: `Deck Builder in ${cityName} | Ogden Construction`,
-        url: pageUrl,
-        description: `Ogden Construction specializes in deck building and home additions for residents of ${cityName}, CA. Trusted local craftsmanship with clear pricing.`,
-        hasMap: `https://www.google.com/maps/search/${encodeURIComponent(cityName + ", CA")}`,
-        about: {
-          "@type": "Thing",
-          name: `${cityName} Deck Builder`,
-          description: `Custom-built decks and home improvements in ${cityName}, California.`,
-        },
-        mainEntityOfPage: {
-          "@type": "LocalBusiness",
-          "@id": "https://www.ogden-construction.com/#localbusiness",
-        },
-      }),
+    // other: {
+    //   "script:ld+json": JSON.stringify({
+    //     "@context": "https://schema.org",
+    //     "@type": "WebPage",
+    //     "@id": pageUrl,
+    //     name: `Deck Builder in ${cityName} | Ogden Construction`,
+    //     url: pageUrl,
+    //     description: `Ogden Construction specializes in deck building and home additions for residents of ${cityName}, CA. Trusted local craftsmanship with clear pricing.`,
+    //     hasMap: `https://www.google.com/maps/search/${encodeURIComponent(cityName + ", CA")}`,
+    //     about: {
+    //       "@type": "Thing",
+    //       name: `${cityName} Deck Builder`,
+    //       description: `Custom-built decks and home improvements in ${cityName}, California.`,
+    //     },
+    //     mainEntityOfPage: {
+    //       "@type": "LocalBusiness",
+    //       "@id": "https://www.ogden-construction.com/#localbusiness",
+    //     },
+    //   }),
+    // },
+  };
+}
+
+function getCityJsonLd(city: string, cityName: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `https://www.ogden-construction.com/locations/california/${city}#localbusiness`,
+    name: `Ogden Construction – ${cityName}`,
+    url: `https://www.ogden-construction.com/locations/california/${city}`,
+    description: `Ogden Construction builds high-quality custom decks and home additions in ${cityName}, CA. Trusted, licensed, and experienced craftsmanship.`,
+    telephone: "+1-530-919-7408",
+    image: "https://www.ogden-construction.com/og-image.jpg",
+    areaServed: {
+      "@type": "Place",
+      name: `${cityName}, CA`,
     },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: cityName,
+      addressRegion: "CA",
+      addressCountry: "US",
+      postalCode: "95667",
+    },
+    hasMap: `https://www.google.com/maps/search/${encodeURIComponent(cityName + ", CA")}`,
+    priceRange: "$$",
+    sameAs: [
+      "https://www.facebook.com/ogden.construction.inc/",
+      "https://www.instagram.com/levioakden77",
+      "https://www.yelp.com/biz/ogden-construction-placerville-2",
+    ],
   };
 }
 
@@ -95,9 +127,16 @@ export async function generateMetadata(
 export default async function LocationPage({ params }: Props) {
   const { city } = await params;
   const cityName = formatCityName(city);
+  const jsonLd = getCityJsonLd(city, cityName);
 
   return (
     <div>
+      <Script
+        id="city-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="pt-24 pb-16">
         <section className="max-w-7xl mx-auto px-6 py-16 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-10">
