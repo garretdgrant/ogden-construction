@@ -55,6 +55,7 @@ const AdminHome = () => {
 return (
 <DashboardLayout>
 {/_ Header _/}
+
 <div className="mb-8">
 <h1 className="text-3xl font-bold text-foreground mb-2">
 Admin Dashboard
@@ -641,6 +642,7 @@ description: `Edit page for ${invoiceId} coming soon.`,
 return (
 <DashboardLayout>
 {/_ Header _/}
+
 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 <div>
 <h1 className="text-3xl font-bold text-foreground mb-2">Invoices</h1>

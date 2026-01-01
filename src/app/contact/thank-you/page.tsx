@@ -20,7 +20,7 @@ export default function ThankYouPage() {
             Thank You
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            We&apos;ve Received Your Request
+            We've Received Your Request
           </h1>
           <p className="text-lg text-gray-600 mb-10">
             Thanks for contacting Ogden Construction. Our team will review your
@@ -32,7 +32,7 @@ export default function ThankYouPage() {
               {
                 title: "What happens next",
                 description:
-                  "We&apos;ll confirm your project goals, timeline, and budget so we can prepare recommendations.",
+                  "We'll confirm your project goals, timeline, and budget so we can prepare recommendations.",
               },
               {
                 title: "Be ready to share",
@@ -42,7 +42,7 @@ export default function ThankYouPage() {
               {
                 title: "Need something sooner?",
                 description:
-                  "Call us at (530) 919-7408 and we&apos;ll prioritize your request.",
+                  "Call us at (530) 919-7408 and we'll prioritize your request.",
               },
             ].map((item) => (
               <div

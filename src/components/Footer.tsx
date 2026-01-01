@@ -45,9 +45,9 @@ export const Footer = () => {
           >
             <div className="flex items-center space-x-4">
               <img
-                src="https://www.edcwebdesign.com/assets/logo.webp"
+                src="https://www.edcwebdesign.com/logo.png"
                 alt="EDC Web Design Logo"
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
               <p>Designed by EDC Web Design</p>
             </div>
