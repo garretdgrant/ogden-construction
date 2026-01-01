@@ -4,16 +4,18 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useToast } from "./ui/use-toast";
 import { Phone, Mail, Facebook, Instagram, Hammer } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const Contact = () => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const res = await fetch("/api/email", {
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -26,11 +28,8 @@ export const Contact = () => {
     });
 
     if (res.ok) {
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
-      });
       form.reset();
+      router.push("/contact/thank-you");
     } else {
       const data = await res.json();
       const errorMessage =

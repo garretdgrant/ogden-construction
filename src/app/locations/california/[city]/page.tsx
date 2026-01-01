@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
-
-const formatCityName = (slug: string): string => {
-  return slug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
+import { buildPageMetadata, getLocationJsonLd } from "@/lib/metadata";
+import {
+  getLocationById,
+  getOtherLocations,
+  LOCATIONS,
+} from "@/lib/locations-data";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -17,122 +16,51 @@ type Props = {
 
 // ✅ Static Params
 export async function generateStaticParams(): Promise<{ city: string }[]> {
-  return [
-    "placerville",
-    "el-dorado-hills",
-    "folsom",
-    "auburn",
-    "tahoe",
-    "napa-valley",
-    "sacramento",
-  ].map((city) => ({ city }));
+  return LOCATIONS.map((location) => ({ city: location.id }));
 }
 
 // ✅ Dynamic Metadata for Ogden Construction
-export async function generateMetadata(
-  { params }: Props,
-  _parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { city } = await params;
-  const cityName = formatCityName(city);
-  const baseUrl = "https://www.ogden-construction.com";
-  const pageUrl = `${baseUrl}/locations/california/${city}`;
-  const title = `Deck Builder in ${cityName} | Ogden Construction`;
-  const description = `Ogden Construction builds high-quality custom decks, additions, and home structures in ${cityName}. Get expert craftsmanship and honest pricing.`;
+  const location = getLocationById(city);
 
-  return {
-    metadataBase: new URL(baseUrl),
+  if (!location) {
+    notFound();
+  }
+
+  const cityName = location.name;
+  const title = `Deck Builder in ${cityName} | Ogden Construction`;
+  const description = location.seoDescription;
+
+  return buildPageMetadata({
     title,
     description,
-    alternates: {
-      canonical: pageUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      url: pageUrl,
-      siteName: "Ogden Construction",
-      images: [
-        {
-          url: `${baseUrl}/og-image.jpg`,
-          width: 1200,
-          height: 630,
-          alt: `Deck Builder in ${cityName}`,
-        },
-      ],
-      type: "website",
-      locale: "en_US",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`${baseUrl}/og-image.jpg`],
-    },
-    // other: {
-    //   "script:ld+json": JSON.stringify({
-    //     "@context": "https://schema.org",
-    //     "@type": "WebPage",
-    //     "@id": pageUrl,
-    //     name: `Deck Builder in ${cityName} | Ogden Construction`,
-    //     url: pageUrl,
-    //     description: `Ogden Construction specializes in deck building and home additions for residents of ${cityName}, CA. Trusted local craftsmanship with clear pricing.`,
-    //     hasMap: `https://www.google.com/maps/search/${encodeURIComponent(cityName + ", CA")}`,
-    //     about: {
-    //       "@type": "Thing",
-    //       name: `${cityName} Deck Builder`,
-    //       description: `Custom-built decks and home improvements in ${cityName}, California.`,
-    //     },
-    //     mainEntityOfPage: {
-    //       "@type": "LocalBusiness",
-    //       "@id": "https://www.ogden-construction.com/#localbusiness",
-    //     },
-    //   }),
-    // },
-  };
-}
-
-function getCityJsonLd(city: string, cityName: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `https://www.ogden-construction.com/locations/california/${city}#localbusiness`,
-    name: `Ogden Construction – ${cityName}`,
-    url: `https://www.ogden-construction.com/locations/california/${city}`,
-    description: `Ogden Construction builds high-quality custom decks and home additions in ${cityName}, CA. Trusted, licensed, and experienced craftsmanship.`,
-    telephone: "+1-530-919-7408",
-    image: "https://www.ogden-construction.com/og-image.jpg",
-    areaServed: {
-      "@type": "Place",
-      name: `${cityName}, CA`,
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: cityName,
-      addressRegion: "CA",
-      addressCountry: "US",
-      postalCode: "95667",
-    },
-    hasMap: `https://www.google.com/maps/search/${encodeURIComponent(cityName + ", CA")}`,
-    priceRange: "$$",
-    sameAs: [
-      "https://www.facebook.com/ogden.construction.inc/",
-      "https://www.instagram.com/levioakden77",
-      "https://www.yelp.com/biz/ogden-construction-placerville-2",
-    ],
-  };
+    path: `/locations/california/${city}`,
+  });
 }
 
 // ✅ Page Component
 export default async function LocationPage({ params }: Props) {
   const { city } = await params;
-  const cityName = formatCityName(city);
-  const jsonLd = getCityJsonLd(city, cityName);
+  const location = getLocationById(city);
+
+  if (!location) {
+    notFound();
+  }
+
+  const cityName = location.name;
+  const jsonLd = getLocationJsonLd({
+    citySlug: city,
+    cityName,
+    description: location.seoDescription,
+    postalCode: location.postalCode,
+  });
+  const otherLocations = getOtherLocations(city);
 
   return (
     <div>
       <Script
-        id="city-jsonld"
+        id={`location-jsonld-${city}`}
         type="application/ld+json"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -146,8 +74,7 @@ export default async function LocationPage({ params }: Props) {
             <span className="text-gold-gradient">{cityName}</span>
           </h1>
           <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
-            Ogden Construction builds custom decks, additions, and new
-            structures for {cityName} homeowners with quality you can trust.
+            {location.description}
           </p>
           <Link href="/contact">
             <Button
@@ -176,20 +103,11 @@ export default async function LocationPage({ params }: Props) {
             <h2 className="text-3xl font-semibold mb-6 text-primary border-b border-accent pb-2">
               Expert Construction Services in {cityName}
             </h2>
-            <p className="mb-4">
-              Searching for reliable <strong>contractors in {cityName}</strong>?
-              Ogden Construction specializes in decks, remodels, and additions
-              for residential clients across the area.
-            </p>
-            <p className="mb-4">
-              As a trusted name in <strong>{cityName} construction</strong>, we
-              take pride in honest work, clear communication, and durable
-              results.
-            </p>
-            <p className="mb-8">
-              Whether it’s a new deck or a full rebuild, we bring experience,
-              integrity, and craftsmanship to every project.
-            </p>
+            {location.seoCopy.map((paragraph) => (
+              <p key={paragraph} className="mb-4">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </section>
 
@@ -199,17 +117,13 @@ export default async function LocationPage({ params }: Props) {
               Why {cityName} Homeowners Choose Ogden Construction
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                "Trex-Certified Builders",
-                "Licensed & Insured",
-                "Custom Deck & Home Additions",
-                "Trusted Local Crew",
-                "Clear Timelines & Estimates",
-                "High-Quality Workmanship",
-              ].map((title, i) => (
-                <div key={i} className="bg-white p-8 rounded-lg shadow-sm">
+              {location.highlights.map((highlight) => (
+                <div
+                  key={highlight}
+                  className="bg-white p-8 rounded-lg shadow-sm"
+                >
                   <h3 className="text-xl font-semibold mb-4 text-primary">
-                    {title}
+                    {highlight}
                   </h3>
                   <p>
                     We help {cityName} residents turn ideas into reality — on
@@ -217,6 +131,40 @@ export default async function LocationPage({ params }: Props) {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="max-w-5xl mx-auto px-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-semibold text-primary mb-4">
+                Local Details
+              </h2>
+              <p className="text-secondary mb-2">
+                Service area: {cityName}, {location.region}
+              </p>
+              {location.postalCode ? (
+                <p className="text-secondary">
+                  Primary postal code: {location.postalCode}
+                </p>
+              ) : null}
+            </div>
+            <div className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-semibold text-primary mb-4">
+                See More Locations
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {otherLocations.map((locationItem) => (
+                  <Link
+                    key={locationItem.id}
+                    href={`/locations/california/${locationItem.id}`}
+                    className="rounded-full border border-accent/40 px-4 py-2 text-sm font-medium text-primary transition-colors hover:border-accent hover:text-accent"
+                  >
+                    {locationItem.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>

@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "info@ogden-construction.com",
-      // to: "leviogden777@gmail.com",
-      to: "garret.grant.swe@gmail.com",
+      from: "leads@edcwebdesign.com",
+      to: "leviogden777@gmail.com",
+      // to: "garret.grant.swe@gmail.com",
       subject: `New Message from ${name} via Website Contact Form`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
