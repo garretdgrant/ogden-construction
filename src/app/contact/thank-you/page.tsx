@@ -20,7 +20,7 @@ export default function ThankYouPage() {
             Thank You
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            We've Received Your Request
+            {"We've Received Your Request"}
           </h1>
           <p className="text-lg text-gray-600 mb-10">
             Thanks for contacting Ogden Construction. Our team will review your

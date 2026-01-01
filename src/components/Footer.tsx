@@ -1,4 +1,5 @@
 // src/components/Footer.tsx
+import Image from "next/image";
 export const Footer = () => {
   return (
     <footer className="bg-primary text-white py-10">
@@ -44,9 +45,11 @@ export const Footer = () => {
             className="underline hover:text-accent transition-colors"
           >
             <div className="flex items-center space-x-4">
-              <img
+              <Image
                 src="https://www.edcwebdesign.com/logo.png"
                 alt="EDC Web Design Logo"
+                width={160}
+                height={48}
                 className="h-12 w-auto"
               />
               <p>Designed by EDC Web Design</p>
