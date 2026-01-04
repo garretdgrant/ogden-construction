@@ -9,6 +9,8 @@ import {
   Phone,
   Menu,
   MapPin,
+  ChevronDown,
+  BookOpen,
 } from "lucide-react";
 import {
   Sheet,
@@ -32,14 +34,17 @@ export const Header = () => {
   const isActive = (path: string) =>
     pathname === path ? "text-accent font-semibold" : "";
 
-  const locations = [
-    "Placerville",
-    "El Dorado Hills",
-    "Folsom",
-    "Auburn",
-    "Tahoe",
-    "Napa Valley",
-    "Sacramento",
+  const moreLinks = [
+    {
+      href: "/locations",
+      label: "Locations",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+    {
+      href: "/guides",
+      label: "Guides",
+      icon: <BookOpen className="h-4 w-4" />,
+    },
   ];
 
   return (
@@ -96,21 +101,22 @@ export const Header = () => {
                       </SheetClose>
                     ))}
 
-                    {/* Mobile Locations Dropdown */}
-                    <div className="relative">
-                      <div className="flex items-center space-x-3 cursor-pointer">
-                        <MapPin className="h-5 w-5" />
-                        <span className="text-lg">Locations</span>
+                    <div>
+                      <div className="flex items-center space-x-3">
+                        <ChevronDown className="h-4 w-4" />
+                        <span className="text-lg">More</span>
                       </div>
                       <div className="pl-8 mt-2 flex flex-col space-y-2">
-                        {locations.map((location) => (
-                          <Link
-                            key={location}
-                            href={`/locations/california/${location.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="text-primary/80 hover:text-accent transition-colors text-base py-1"
-                          >
-                            {location}
-                          </Link>
+                        {moreLinks.map(({ href, label, icon }) => (
+                          <SheetClose asChild key={href}>
+                            <Link
+                              href={href}
+                              className={`flex items-center space-x-3 hover:text-accent ${isActive(href)}`}
+                            >
+                              {icon}
+                              <span className="text-base">{label}</span>
+                            </Link>
+                          </SheetClose>
                         ))}
                       </div>
                     </div>
@@ -162,20 +168,21 @@ export const Header = () => {
               </Link>
             ))}
 
-            {/* Desktop Locations Dropdown */}
+            {/* Desktop More Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center space-x-1 hover:text-accent focus:outline-none">
-                <MapPin className="h-4 w-4" />
-                <span>Locations</span>
+                <span>More</span>
+                <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-[#fafaf9] border border-gray-100 shadow-md rounded-md py-2 mt-1 min-w-[160px]">
-                {locations.map((location) => (
-                  <DropdownMenuItem key={location} asChild>
+                {moreLinks.map(({ href, label, icon }) => (
+                  <DropdownMenuItem key={href} asChild>
                     <Link
-                      href={`/locations/california/${location.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="px-4 py-2 text-sm text-primary hover:bg-accent/10 hover:text-accent transition-colors"
+                      href={href}
+                      className={`flex items-center gap-2 px-4 py-2 text-sm text-primary hover:bg-accent/10 hover:text-accent transition-colors ${isActive(href)}`}
                     >
-                      {location}
+                      {icon}
+                      <span>{label}</span>
                     </Link>
                   </DropdownMenuItem>
                 ))}

@@ -5,7 +5,18 @@ import { LOCATIONS } from "@/lib/locations-data";
 
 export const runtime = "edge";
 
-const staticPaths = ["/", "/services", "/portfolio", "/about", "/contact"];
+const staticPaths = [
+  "/",
+  "/services",
+  "/portfolio",
+  "/about",
+  "/contact",
+  "/locations",
+  "/guides",
+  "/how-much-does-a-deck-add-to-home-value",
+  "/how-much-does-it-cost-to-build-a-deck",
+  "/deck-repair-vs-replacement",
+];
 const lastModDate = new Date().toISOString().split("T")[0];
 
 const buildEntry = (loc: string, priority = "0.7") => `

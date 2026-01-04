@@ -450,6 +450,32 @@ export function getContactJsonLd() {
   };
 }
 
+export function getWebPageJsonLd({
+  title,
+  description,
+  path,
+  imagePath = DEFAULT_OG_IMAGE,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  imagePath?: string;
+}) {
+  const metadataBase = getMetadataBase();
+  const url = buildCanonicalUrl(path, metadataBase);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": url,
+    name: title,
+    url,
+    description,
+    image: buildOgImageUrl(imagePath, metadataBase),
+    mainEntityOfPage: buildLocalBusiness({}, metadataBase),
+  };
+}
+
 export function getLocationJsonLd({
   citySlug,
   cityName,
