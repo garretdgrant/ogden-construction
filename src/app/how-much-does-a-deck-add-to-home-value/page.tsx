@@ -278,8 +278,8 @@ export default function DeckValuePage() {
               Want a Deck That Adds Real Value?
             </h2>
             <p className="text-lg text-white/80 mb-8">
-              If you're planning a deck in Placerville or anywhere in El Dorado
-              County, we're happy to share options that fit your goals and your
+              If you&apos;re planning a deck in Placerville or anywhere in El Dorado
+              County, we&apos;re happy to share options that fit your goals and your
               budget with no pressure, just honest guidance.
             </p>
             <Link href="/contact">
