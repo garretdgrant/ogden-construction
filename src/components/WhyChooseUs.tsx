@@ -15,6 +15,10 @@ export const WhyChooseUs = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
           Why Choose Us
         </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          A local, hands-on team focused on craftsmanship, communication, and a
+          finished product that lasts.
+        </p>
         <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-6">
           {reasons.map((reason, index) => (
             <Card

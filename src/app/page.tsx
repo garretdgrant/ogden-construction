@@ -3,8 +3,13 @@ import { Services } from "@/components/Services";
 import { Projects } from "@/components/Projects";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Contact } from "@/components/Contact";
+import { ServiceArea } from "@/components/ServiceArea";
+import { Process } from "@/components/Process";
+import { Reviews } from "@/components/Reviews";
+import { HomeFaq } from "@/components/HomeFaq";
 import Script from "next/script";
 import { buildPageMetadata, getLocalBusinessJsonLd } from "@/lib/metadata";
+import { getHomeFaqJsonLd } from "@/lib/homeFaq";
 
 export async function generateMetadata() {
   return buildPageMetadata({
@@ -18,6 +23,7 @@ export async function generateMetadata() {
 
 export default function HomePage() {
   const jsonLd = getLocalBusinessJsonLd();
+  const faqJsonLd = getHomeFaqJsonLd();
   return (
     <>
       <Script
@@ -26,11 +32,21 @@ export default function HomePage() {
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <main>
         <Hero />
         <Services />
+        <ServiceArea />
         <Projects />
         <WhyChooseUs />
+        <Process />
+        <Reviews />
+        <HomeFaq />
         <Contact />
       </main>
     </>

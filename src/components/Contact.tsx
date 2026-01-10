@@ -49,6 +49,10 @@ export const Contact = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
           Let&apos;s Transform Your Home
         </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          Share your goals and we will follow up with a clear scope, timeline,
+          and estimate.
+        </p>
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">

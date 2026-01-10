@@ -28,6 +28,10 @@ export const Projects = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
           Featured Projects
         </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          Explore recent builds across the Sierra Foothills and greater
+          Sacramento area.
+        </p>
         <div className="grid md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <Link
@@ -53,6 +57,14 @@ export const Projects = () => {
               </Card>
             </Link>
           ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center justify-center rounded-md border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            View the full portfolio
+          </Link>
         </div>
       </div>
     </section>

@@ -7,6 +7,7 @@ import {
   Drill,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import Link from "next/link";
 
 const services = [
   {
@@ -54,21 +55,36 @@ export const Services = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
           Our Services
         </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          From custom decks to full additions, we deliver durable builds that
+          match your home and how you live.
+        </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card
+            <Link
               key={index}
-              className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300"
+              href="/services"
+              className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50"
             >
-              <CardHeader>
-                <service.icon className="h-12 w-12 text-accent mb-4" />
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">{service.description}</p>
-              </CardContent>
-            </Card>
+              <Card className="border-none shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
+                <CardHeader>
+                  <service.icon className="h-12 w-12 text-accent mb-4" />
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{service.description}</p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center justify-center rounded-md border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            View all services
+          </Link>
         </div>
       </div>
     </section>
