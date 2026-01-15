@@ -20,7 +20,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Custom decks, additions, and remodels built with mountain-town durability and local know-how.",
     seoDescription:
-      "Ogden Construction builds custom decks and home additions in Placerville, CA. Trusted craftsmanship for foothill homes and hillside lots.",
+      "Placerville deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Placerville homeowners need construction that stands up to changing seasons and hillside terrain. Our team designs decks and additions that fit the contours of your property and the style of your home.",
       "From historic neighborhoods to newer builds on the edge of town, we handle the details that keep projects smooth: permitting, inspections, and reliable scheduling. You get a clear scope, consistent communication, and clean job sites.",
@@ -41,7 +41,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Modern decks and home additions tailored for upscale neighborhoods and scenic views.",
     seoDescription:
-      "Ogden Construction serves El Dorado Hills with custom decks, remodels, and additions designed for view lots and modern homes.",
+      "El Dorado Hills deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "El Dorado Hills projects often demand clean lines, premium materials, and smart outdoor layouts. We build custom decks and additions that elevate the view and complement contemporary architecture.",
       "Our process keeps the project organized from design through completion. We coordinate inspections, manage jobsite logistics, and deliver the finishes you expect in a high standard neighborhood.",
@@ -62,7 +62,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Family-friendly decks, additions, and remodels built for long-term durability.",
     seoDescription:
-      "Ogden Construction builds decks, additions, and remodels in Folsom, CA. Trusted construction for growing households and active lifestyles.",
+      "Folsom deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Folsom homeowners often want outdoor spaces that feel like an extension of the home. We build decks and additions that support entertaining, family time, and everyday use.",
       "Our team focuses on structural integrity, clean finishes, and straightforward communication. You get a detailed plan, dependable progress updates, and a jobsite that stays tidy.",
@@ -83,7 +83,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Outdoor living upgrades and additions built for foothill terrain and weather.",
     seoDescription:
-      "Ogden Construction serves Auburn with custom decks and additions that handle foothill conditions and complex lots.",
+      "Auburn deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Auburn properties range from wooded lots to ridge-top homes with unique terrain. We design decks and additions that match the site conditions and withstand foothill weather.",
       "We bring experience navigating site access, drainage concerns, and permit requirements while keeping the build organized and on track.",
@@ -104,7 +104,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "High-elevation deck builds and remodels designed for snow loads and scenic settings.",
     seoDescription:
-      "Ogden Construction builds decks and additions in South Lake Tahoe with materials and framing designed for mountain conditions.",
+      "South Lake Tahoe deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Tahoe homes face heavy snow loads, moisture, and freeze-thaw cycles. We build decks and additions with framing, fasteners, and surfaces suited to the mountain climate.",
       "Our team understands access challenges and seasonal scheduling, keeping projects realistic and communication clear throughout the build.",
@@ -125,7 +125,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Refined outdoor structures and additions built with a focus on craftsmanship and detail.",
     seoDescription:
-      "Ogden Construction brings custom decks and home additions to Napa Valley with refined craftsmanship and thoughtful design.",
+      "Napa Valley deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Napa Valley homeowners value clean finishes and long-lasting materials. We build decks and additions that feel intentional and blend with the surrounding landscape.",
       "We manage the full process from planning to inspections so you get a smooth build with consistent communication.",
@@ -146,7 +146,7 @@ export const LOCATIONS: LocationData[] = [
     description:
       "Decks, additions, and remodels built for busy households and hot summers.",
     seoDescription:
-      "Ogden Construction builds decks and additions in Sacramento, CA. Durable construction with clear communication and dependable crews.",
+      "Sacramento deck builder for composite, Trex, and redwood decks plus outdoor construction. Licensed & insured. Free estimates.",
     seoCopy: [
       "Sacramento homeowners want projects that are efficient and built to last. We design decks and additions with shade, airflow, and durable materials that handle the heat.",
       "Our team keeps projects on schedule and maintains clear expectations around scope, timing, and jobsite cleanup.",

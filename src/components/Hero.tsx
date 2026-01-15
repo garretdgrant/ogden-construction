@@ -54,7 +54,7 @@ export const Hero = () => {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-[1.1] opacity-0 animate-fade-up">
             <span className="block">Deck Builder &</span>
             <span className="block text-white/90">Home Additions</span>
-            <span className="block text-accent text-4xl md:text-5xl lg:text-6xl mt-2 font-playfair italic">
+            <span className="block text-accent text-4xl md:text-5xl lg:text-6xl mt-2 font-playfair italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] [text-shadow:0_0_2px_black]">
               Placerville & South Lake Tahoe
             </span>
           </h1>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Script from "next/script";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
+import { buildBreadcrumbJsonLd, buildLocationsCrumbs } from "@/lib/breadcrumbs";
 import { buildPageMetadata, getWebPageJsonLd } from "@/lib/metadata";
 import { LOCATIONS } from "@/lib/locations-data";
 
@@ -18,6 +20,8 @@ export async function generateMetadata() {
 }
 
 export default function LocationsWeServePage() {
+  const breadcrumbs = buildLocationsCrumbs();
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(breadcrumbs, PAGE_PATH);
   const jsonLd = getWebPageJsonLd({
     title: `${PAGE_TITLE} | Ogden Construction`,
     description: PAGE_DESCRIPTION,
@@ -32,12 +36,21 @@ export default function LocationsWeServePage() {
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <Script
+        id="locations-we-serve-breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="pb-20">
         <section className="pt-24 pb-16">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">
               Locations We Serve
             </p>
+            <div className="mb-6 flex justify-center">
+              <Breadcrumbs items={breadcrumbs} />
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {PAGE_TITLE}
             </h1>

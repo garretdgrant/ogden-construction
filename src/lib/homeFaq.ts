@@ -1,7 +1,4 @@
-export type FaqItem = {
-  question: string;
-  answer: string;
-};
+import { buildFaqJsonLd, type FaqItem } from "@/lib/faq";
 
 export const homeFaqItems: FaqItem[] = [
   {
@@ -32,16 +29,5 @@ export const homeFaqItems: FaqItem[] = [
 ];
 
 export function getHomeFaqJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: homeFaqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
+  return buildFaqJsonLd(homeFaqItems);
 }
