@@ -3,23 +3,27 @@ import Link from "next/link";
 const areas = [
   {
     name: "Placerville",
-    href: "/locations/california/placerville",
+    href: "/locations-we-serve/placerville-deck-builder-construction",
     featured: true,
   },
   {
     name: "South Lake Tahoe",
-    href: "/locations/california/tahoe",
+    href: "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
     featured: true,
   },
   {
     name: "El Dorado Hills",
-    href: "/locations/california/el-dorado-hills",
+    href: "/locations-we-serve/el-dorado-hills-deck-builder-construction",
     featured: true,
   },
-  { name: "Folsom", href: "/locations/california/folsom", featured: true },
+  {
+    name: "Folsom",
+    href: "/locations-we-serve/folsom-deck-builder-construction",
+    featured: true,
+  },
   {
     name: "Sacramento",
-    href: "/locations/california/sacramento",
+    href: "/locations-we-serve/sacramento-deck-builder-construction",
     featured: true,
   },
   { name: "Cameron Park", href: null, featured: false },
@@ -148,7 +152,7 @@ export const ServiceArea = () => {
 
           {/* CTA button */}
           <Link
-            href="/locations"
+            href="/locations-we-serve"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-10 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] group"
           >
             View all service areas

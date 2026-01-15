@@ -1,5 +1,6 @@
 export type LocationData = {
   id: string;
+  pageSlug: string;
   name: string;
   region: string;
   postalCode?: string;
@@ -12,6 +13,7 @@ export type LocationData = {
 export const LOCATIONS: LocationData[] = [
   {
     id: "placerville",
+    pageSlug: "placerville-deck-builder-construction",
     name: "Placerville",
     region: "California",
     postalCode: "95667",
@@ -33,6 +35,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "el-dorado-hills",
+    pageSlug: "el-dorado-hills-deck-builder-construction",
     name: "El Dorado Hills",
     region: "California",
     description:
@@ -53,6 +56,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "folsom",
+    pageSlug: "folsom-deck-builder-construction",
     name: "Folsom",
     region: "California",
     description:
@@ -73,6 +77,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "auburn",
+    pageSlug: "auburn-deck-builder-construction",
     name: "Auburn",
     region: "California",
     description:
@@ -93,6 +98,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "tahoe",
+    pageSlug: "south-lake-tahoe-deck-builder-construction",
     name: "South Lake Tahoe",
     region: "California",
     description:
@@ -113,6 +119,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "napa-valley",
+    pageSlug: "napa-valley-deck-builder-construction",
     name: "Napa Valley",
     region: "California",
     description:
@@ -133,6 +140,7 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     id: "sacramento",
+    pageSlug: "sacramento-deck-builder-construction",
     name: "Sacramento",
     region: "California",
     description:

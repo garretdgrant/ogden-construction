@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { buildPageMetadata, getWebPageJsonLd } from "@/lib/metadata";
 import { LOCATIONS } from "@/lib/locations-data";
 
-const PAGE_TITLE = "Service Areas Across Northern California";
+const PAGE_TITLE = "Locations We Serve in Northern California";
 const PAGE_DESCRIPTION =
-  "Explore the Northern California communities we serve for custom decks, home additions, and remodels. Browse Ogden Construction locations and learn what to expect locally.";
-const PAGE_PATH = "/locations";
+  "Explore the Northern California communities we serve for custom decks, home additions, and remodels. Browse Ogden Construction service areas and learn what to expect locally.";
+const PAGE_PATH = "/locations-we-serve";
 
 export async function generateMetadata() {
   return buildPageMetadata({
@@ -17,7 +17,7 @@ export async function generateMetadata() {
   });
 }
 
-export default function LocationsIndexPage() {
+export default function LocationsWeServePage() {
   const jsonLd = getWebPageJsonLd({
     title: `${PAGE_TITLE} | Ogden Construction`,
     description: PAGE_DESCRIPTION,
@@ -27,7 +27,7 @@ export default function LocationsIndexPage() {
   return (
     <>
       <Script
-        id="locations-index-jsonld"
+        id="locations-we-serve-jsonld"
         type="application/ld+json"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -36,7 +36,7 @@ export default function LocationsIndexPage() {
         <section className="pt-24 pb-16">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-              Locations
+              Locations We Serve
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {PAGE_TITLE}
@@ -74,7 +74,7 @@ export default function LocationsIndexPage() {
                   </ul>
                 </div>
                 <div className="mt-6">
-                  <Link href={`/locations/california/${location.id}`}>
+                  <Link href={`/locations-we-serve/${location.pageSlug}`}>
                     <Button className="w-full" size="lg">
                       View {location.name}
                     </Button>

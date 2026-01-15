@@ -3,26 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { buildPageMetadata, getLocationJsonLd } from "@/lib/metadata";
-import {
-  getLocationById,
-  getOtherLocations,
-  LOCATIONS,
-} from "@/lib/locations-data";
+import { getLocationById, getOtherLocations } from "@/lib/locations-data";
 import { notFound } from "next/navigation";
 
-type Props = {
-  params: Promise<{ city: string }>;
-};
+const LOCATION_ID = "napa-valley";
+const PAGE_PATH = "/locations-we-serve/napa-valley-deck-builder-construction";
 
-// ✅ Static Params
-export async function generateStaticParams(): Promise<{ city: string }[]> {
-  return LOCATIONS.map((location) => ({ city: location.id }));
-}
-
-// ✅ Dynamic Metadata for Ogden Construction
-export async function generateMetadata({ params }: Props) {
-  const { city } = await params;
-  const location = getLocationById(city);
+export async function generateMetadata() {
+  const location = getLocationById(LOCATION_ID);
 
   if (!location) {
     notFound();
@@ -35,14 +23,12 @@ export async function generateMetadata({ params }: Props) {
   return buildPageMetadata({
     title,
     description,
-    path: `/locations/california/${city}`,
+    path: PAGE_PATH,
   });
 }
 
-// ✅ Page Component
-export default async function LocationPage({ params }: Props) {
-  const { city } = await params;
-  const location = getLocationById(city);
+export default async function LocationPage() {
+  const location = getLocationById(LOCATION_ID);
 
   if (!location) {
     notFound();
@@ -50,17 +36,18 @@ export default async function LocationPage({ params }: Props) {
 
   const cityName = location.name;
   const jsonLd = getLocationJsonLd({
-    citySlug: city,
+    citySlug: LOCATION_ID,
     cityName,
     description: location.seoDescription,
     postalCode: location.postalCode,
+    path: PAGE_PATH,
   });
-  const otherLocations = getOtherLocations(city);
+  const otherLocations = getOtherLocations(LOCATION_ID);
 
   return (
     <div>
       <Script
-        id={`location-jsonld-${city}`}
+        id={`location-jsonld-${LOCATION_ID}`}
         type="application/ld+json"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -158,7 +145,7 @@ export default async function LocationPage({ params }: Props) {
                 {otherLocations.map((locationItem) => (
                   <Link
                     key={locationItem.id}
-                    href={`/locations/california/${locationItem.id}`}
+                    href={`/locations-we-serve/${locationItem.pageSlug}`}
                     className="rounded-full border border-accent/40 px-4 py-2 text-sm font-medium text-primary transition-colors hover:border-accent hover:text-accent"
                   >
                     {locationItem.name}

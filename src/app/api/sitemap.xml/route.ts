@@ -11,7 +11,7 @@ const staticPaths = [
   "/portfolio",
   "/about",
   "/contact",
-  "/locations",
+  "/locations-we-serve",
   "/guides",
   "/how-much-does-a-deck-add-to-home-value",
   "/how-much-does-it-cost-to-build-a-deck",
@@ -38,7 +38,7 @@ export async function GET(_req: NextRequest) {
     .join("");
 
   const locationEntries = LOCATIONS.map((location) =>
-    buildEntry(`${baseUrl}/locations/california/${location.id}`, "0.8"),
+    buildEntry(`${baseUrl}/locations-we-serve/${location.pageSlug}`, "0.8"),
   ).join("");
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

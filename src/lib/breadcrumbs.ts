@@ -29,7 +29,7 @@ export function buildHomeCrumbs(): Crumb[] {
 }
 
 export function buildLocationsCrumbs(): Crumb[] {
-  return [{ label: "Home", href: "/" }, { label: "Locations" }];
+  return [{ label: "Home", href: "/" }, { label: "Locations We Serve" }];
 }
 
 export function buildLocationDetailCrumbs(
@@ -40,15 +40,11 @@ export function buildLocationDetailCrumbs(
 ): Crumb[] {
   const crumbs: Crumb[] = [
     { label: "Home", href: "/" },
-    { label: "Locations", href: "/locations" },
-    { label: stateLabel, href: `/locations/${stateSlug}` },
+    { label: "Locations We Serve", href: "/locations-we-serve" },
   ];
 
   if (citySlug && cityLabel) {
-    crumbs.push({
-      label: cityLabel,
-      href: `/locations/${stateSlug}/${citySlug}`,
-    });
+    crumbs.push({ label: cityLabel, href: `/locations-we-serve/${citySlug}` });
     return crumbs.map((crumb, index) =>
       index === crumbs.length - 1 ? { label: crumb.label } : crumb,
     );

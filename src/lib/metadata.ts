@@ -516,15 +516,17 @@ export function getLocationJsonLd({
   cityName,
   description,
   postalCode,
+  path,
 }: {
   citySlug: string;
   cityName: string;
   description?: string;
   postalCode?: string;
+  path: string;
 }) {
   const metadataBase = getMetadataBase();
   const baseUrl = getBaseUrl(metadataBase);
-  const url = `${baseUrl}/locations/california/${citySlug}`;
+  const url = `${baseUrl}${path}`;
 
   return {
     "@context": "https://schema.org",
