@@ -10,8 +10,8 @@ export const Footer = () => {
               Ogden Construction Inc
             </h3>
             <p className="mb-2">
-              Serving Placerville, Folsom, El Dorado Hills, Cameron Park,
-              Sacramento, Tahoe, and surrounding communities
+              Serving Placerville, Tahoe, El Dorado Hills, Folsom, Cameron Park,
+              Sacramento, and surrounding communities
             </p>
             <p className="mb-2">License #: CA-1042758</p>
             <p>Fully insured and bonded</p>

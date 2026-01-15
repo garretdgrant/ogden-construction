@@ -3,7 +3,15 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
-export const ScrollToContactButton = () => {
+type ScrollToContactButtonProps = {
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+};
+
+export const ScrollToContactButton = ({
+  size = "default",
+  className,
+}: ScrollToContactButtonProps) => {
   const scrollToContact = () => {
     document
       .querySelector("#contact-section")
@@ -13,9 +21,10 @@ export const ScrollToContactButton = () => {
   return (
     <Button
       onClick={scrollToContact}
-      className="bg-accent hover:bg-accent/90 w-full sm:w-auto"
+      size={size}
+      className={`bg-accent hover:bg-accent/90 w-full sm:w-auto ${className ?? ""}`}
     >
-      Get a Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+      Schedule Consultation <ArrowRight className="ml-2 h-4 w-4" />
     </Button>
   );
 };

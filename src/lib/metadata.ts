@@ -455,24 +455,59 @@ export function getWebPageJsonLd({
   description,
   path,
   imagePath = DEFAULT_OG_IMAGE,
+  type = "WebPage",
 }: {
   title: string;
   description: string;
   path: string;
   imagePath?: string;
+  type?: "WebPage" | "HomePage";
 }) {
   const metadataBase = getMetadataBase();
   const url = buildCanonicalUrl(path, metadataBase);
 
   return {
     "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": type,
     "@id": url,
     name: title,
     url,
     description,
     image: buildOgImageUrl(imagePath, metadataBase),
     mainEntityOfPage: buildLocalBusiness({}, metadataBase),
+  };
+}
+
+export function getHomePageJsonLd({
+  title,
+  description,
+  path,
+  imagePath,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  imagePath?: string;
+}) {
+  return getWebPageJsonLd({
+    title,
+    description,
+    path,
+    imagePath,
+    type: "HomePage",
+  });
+}
+
+export function getWebSiteJsonLd() {
+  const metadataBase = getMetadataBase();
+  const baseUrl = getBaseUrl(metadataBase);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${baseUrl}/#website`,
+    name: SITE_NAME,
+    url: baseUrl,
   };
 }
 

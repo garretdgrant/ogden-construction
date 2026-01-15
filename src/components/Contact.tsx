@@ -51,7 +51,8 @@ export const Contact = () => {
         </h2>
         <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
           Share your goals and we will follow up with a clear scope, timeline,
-          and estimate.
+          and estimate for your home in Placerville, South Lake Tahoe, or the
+          greater Sacramento area.
         </p>
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div>
@@ -105,12 +106,15 @@ export const Contact = () => {
                 type="submit"
                 className="w-full bg-accent hover:bg-accent/90"
               >
-                Contact Us Today For Your Free Consultation
+                Start Your Free Consultation
               </Button>
             </form>
           </div>
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+            <Button asChild className="w-full bg-primary hover:bg-primary/90">
+              <a href="tel:530-919-7408">Tap to Call (530) 919-7408</a>
+            </Button>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-accent" />

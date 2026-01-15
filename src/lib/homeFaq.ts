@@ -17,7 +17,7 @@ export const homeFaqItems: FaqItem[] = [
   {
     question: "What areas do you serve?",
     answer:
-      "We serve Placerville, El Dorado Hills, Folsom, Sacramento, South Lake Tahoe, and nearby communities in El Dorado and Sacramento counties.",
+      "We serve Placerville, South Lake Tahoe, El Dorado Hills, Folsom, Sacramento, and nearby communities in El Dorado and Sacramento counties.",
   },
   {
     question: "How long does a typical project take?",

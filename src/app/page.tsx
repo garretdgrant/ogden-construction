@@ -8,22 +8,37 @@ import { Process } from "@/components/Process";
 import { Reviews } from "@/components/Reviews";
 import { HomeFaq } from "@/components/HomeFaq";
 import Script from "next/script";
-import { buildPageMetadata, getLocalBusinessJsonLd } from "@/lib/metadata";
+import {
+  buildPageMetadata,
+  getLocalBusinessJsonLd,
+  getHomePageJsonLd,
+  getWebSiteJsonLd,
+} from "@/lib/metadata";
 import { getHomeFaqJsonLd } from "@/lib/homeFaq";
+
+const HOME_TITLE =
+  "Deck Builder in Placerville & South Lake Tahoe | Ogden Construction";
+const HOME_DESCRIPTION =
+  "Custom decks, home additions, and remodeling in Placerville, South Lake Tahoe, El Dorado Hills, Folsom, and Sacramento. Licensed, insured, and built to last. Get a free consultation.";
+const HOME_PATH = "/";
 
 export async function generateMetadata() {
   return buildPageMetadata({
-    title:
-      "Ogden Construction | Deck Builders & Home Additions in Placerville, Folsom & Sacramento",
-    description:
-      "Expert deck construction, home additions, and remodeling services in Placerville, Folsom, El Dorado Hills, Sacramento, and Tahoe. Built to last. Trusted by homeowners across El Dorado and Sacramento counties.",
-    path: "/",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    path: HOME_PATH,
   });
 }
 
 export default function HomePage() {
   const jsonLd = getLocalBusinessJsonLd();
   const faqJsonLd = getHomeFaqJsonLd();
+  const webPageJsonLd = getHomePageJsonLd({
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    path: HOME_PATH,
+  });
+  const webSiteJsonLd = getWebSiteJsonLd();
   return (
     <>
       <Script
@@ -31,6 +46,18 @@ export default function HomePage() {
         type="application/ld+json"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="website-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
+      />
+      <Script
+        id="webpage-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
       />
       <Script
         id="faq-jsonld"

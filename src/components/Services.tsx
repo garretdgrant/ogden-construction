@@ -50,40 +50,110 @@ const services = [
 
 export const Services = () => {
   return (
-    <section className="py-20 bg-stone-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-primary">
-          Our Services
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          From custom decks to full additions, we deliver durable builds that
-          match your home and how you live.
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section
+      id="services"
+      className="py-24 bg-stone-50 texture-wood diagonal-divider relative overflow-hidden"
+    >
+      {/* Wood plank decorative elements */}
+      <div className="absolute top-10 left-0 w-1.5 h-48 bg-gradient-to-b from-transparent via-accent/8 to-transparent rotate-2 blur-sm"></div>
+      <div className="absolute bottom-20 right-0 w-1.5 h-56 bg-gradient-to-t from-transparent via-accent/8 to-transparent -rotate-1 blur-sm"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section header with refined typography */}
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-primary tracking-tight">
+            Our Services
+          </h2>
+          <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            From custom decks to full additions, we deliver durable builds that
+            match your home and how you live. Choose composite, Trex, or redwood
+            with clear scope and budget expectations before we build. Browse{" "}
+            <Link
+              href="/services"
+              className="font-semibold text-accent hover:text-accent/80 transition-colors underline underline-offset-4 decoration-2 decoration-accent/30 hover:decoration-accent/60"
+            >
+              full service details
+            </Link>{" "}
+            or explore{" "}
+            <Link
+              href="/guides"
+              className="font-semibold text-accent hover:text-accent/80 transition-colors underline underline-offset-4 decoration-2 decoration-accent/30 hover:decoration-accent/60"
+            >
+              material and pricing guides
+            </Link>
+            .
+          </p>
+        </div>
+        {/* Service cards with staggered animations */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {services.map((service, index) => (
             <Link
               key={index}
               href="/services"
-              className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50"
+              className={`group block opacity-0 animate-scale-in stagger-${index + 1}`}
             >
-              <Card className="border-none shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-                <CardHeader>
-                  <service.icon className="h-12 w-12 text-accent mb-4" />
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
+              <Card className="h-full border-none shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 bg-white relative overflow-hidden">
+                {/* Decorative accent line */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent/60 via-accent to-accent/60 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+
+                <CardHeader className="pb-4">
+                  {/* Icon with background circle */}
+                  <div className="mb-6 relative">
+                    <div className="absolute inset-0 bg-accent/10 rounded-full blur-xl group-hover:bg-accent/20 transition-all duration-500"></div>
+                    <service.icon className="h-14 w-14 text-accent relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <CardTitle className="text-2xl font-playfair tracking-tight group-hover:text-accent transition-colors duration-300">
+                    {service.title}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{service.description}</p>
+                  <p className="text-gray-600 leading-relaxed text-base">
+                    {service.description}
+                  </p>
+                  {/* Subtle hover indicator */}
+                  <div className="mt-4 flex items-center text-accent text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span>Learn more</span>
+                    <svg
+                      className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
                 </CardContent>
               </Card>
             </Link>
           ))}
         </div>
-        <div className="mt-10 text-center">
+
+        {/* CTA button with enhanced styling */}
+        <div className="mt-16 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center justify-center rounded-md border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-10 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] group"
           >
-            View all services
+            View services & timelines
+            <svg
+              className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
           </Link>
         </div>
       </div>

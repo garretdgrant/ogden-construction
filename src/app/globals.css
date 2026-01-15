@@ -97,5 +97,190 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-inter), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-playfair), serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Enhanced wood grain texture overlay */
+  .texture-wood {
+    position: relative;
+  }
+
+  .texture-wood::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      /* Vertical wood grain lines */
+      repeating-linear-gradient(
+        90deg,
+        rgba(139, 69, 19, 0.015) 0px,
+        transparent 1px,
+        transparent 4px,
+        rgba(139, 69, 19, 0.02) 5px,
+        transparent 6px,
+        transparent 12px
+      ),
+      /* Horizontal subtle lines */
+        repeating-linear-gradient(
+          0deg,
+          rgba(120, 113, 108, 0.01) 0px,
+          transparent 2px,
+          transparent 8px
+        ),
+      /* Random grain variation */
+        repeating-linear-gradient(
+          87deg,
+          rgba(101, 67, 33, 0.008) 0px,
+          transparent 3px,
+          transparent 15px,
+          rgba(101, 67, 33, 0.012) 16px,
+          transparent 18px,
+          transparent 30px
+        );
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* Deck board pattern with spacing */
+  .texture-deck-boards {
+    position: relative;
+    background-color: #fafaf9;
+  }
+
+  .texture-deck-boards::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      /* Deck board separations */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(120, 113, 108, 0.08) 80px,
+        rgba(120, 113, 108, 0.08) 84px,
+        transparent 84px,
+        transparent 164px
+      ),
+      /* Wood grain on boards */
+        repeating-linear-gradient(
+          90deg,
+          rgba(139, 69, 19, 0.02) 0px,
+          transparent 1px,
+          transparent 3px,
+          rgba(139, 69, 19, 0.015) 4px,
+          transparent 5px,
+          transparent 10px
+        );
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Diagonal wood planks pattern */
+  .texture-wood-planks {
+    position: relative;
+  }
+
+  .texture-wood-planks::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 120px,
+        rgba(133, 77, 14, 0.03) 120px,
+        rgba(133, 77, 14, 0.03) 122px,
+        transparent 122px,
+        transparent 242px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(139, 69, 19, 0.01) 0px,
+        transparent 2px,
+        transparent 8px
+      );
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  /* Diagonal section divider */
+  .diagonal-divider {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4rem), 0 100%);
+  }
+
+  .diagonal-divider-reverse {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4rem));
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus states */
+  *:focus-visible {
+    outline: 2px solid #854d0e;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Parallax effect utilities */
+  .parallax-slow {
+    transform: translateY(calc(var(--scroll) * 0.5px));
+  }
+
+  .parallax-medium {
+    transform: translateY(calc(var(--scroll) * 0.3px));
+  }
+
+  /* Custom gradient overlays */
+  .gradient-overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
+  .gradient-overlay-radial {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
+  .stagger-6 {
+    animation-delay: 0.6s;
   }
 }
