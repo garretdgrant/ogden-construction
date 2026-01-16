@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -56,10 +57,16 @@ export const Header = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex items-center justify-between mb-4 md:mb-0">
             <div className="flex items-center group">
-              {/* Enhanced hammer icon with glow effect */}
+              {/* Logo with glow effect */}
               <div className="relative">
                 <div className="absolute inset-0 bg-accent/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Hammer className="h-8 w-8 text-accent mr-3 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                <Image
+                  src="/images/ogden-logo.png"
+                  alt="Ogden Construction logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 mr-3 relative z-10 group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
               <Link
                 href="/"

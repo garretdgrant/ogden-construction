@@ -71,7 +71,7 @@ export const Hero = () => {
 
           {/* CTA buttons with staggered animations */}
           <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-10 opacity-0 animate-fade-up stagger-2">
-            <ScrollToContactButton className="text-base py-6 font-semibold" />
+            <ScrollToContactButton className="h-10 px-4 py-6 text-base font-semibold" />
             <Link href="/contact" className="w-full sm:w-auto group">
               <Button
                 variant="outline"

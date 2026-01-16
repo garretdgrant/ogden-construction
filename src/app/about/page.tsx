@@ -69,7 +69,7 @@ export default function AboutPage() {
         <section className="relative min-h-[70vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/about/ogdenTruck.jpg"
+              src="/images/about/about-hero.webp"
               alt="Ogden Construction work truck"
               width={1920}
               height={1080}
@@ -226,7 +226,7 @@ export default function AboutPage() {
               <div className="md:col-span-2">
                 <div className="rounded-2xl overflow-hidden shadow-2xl border border-stone-200 bg-white">
                   <Image
-                    src="/images/about/levi.jpg"
+                    src="/images/about/levi-deck.webp"
                     alt="Levi Ogden, owner and general contractor"
                     width={956}
                     height={960}

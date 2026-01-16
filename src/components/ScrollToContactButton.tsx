@@ -9,7 +9,7 @@ type ScrollToContactButtonProps = {
 };
 
 export const ScrollToContactButton = ({
-  size = "default",
+  size = "lg",
   className,
 }: ScrollToContactButtonProps) => {
   const scrollToContact = () => {
@@ -22,7 +22,7 @@ export const ScrollToContactButton = ({
     <Button
       onClick={scrollToContact}
       size={size}
-      className={`bg-accent hover:bg-accent/90 w-full sm:w-auto ${className ?? ""}`}
+      className={`h-auto bg-accent hover:bg-accent/90 w-full sm:w-auto px-10 py-4 text-base font-semibold ${className ?? ""}`}
     >
       Schedule Consultation <ArrowRight className="ml-2 h-4 w-4" />
     </Button>
