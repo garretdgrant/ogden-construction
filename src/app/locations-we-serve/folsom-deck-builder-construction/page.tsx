@@ -102,7 +102,7 @@ export default async function LocationPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/og-image.jpg"
-            alt={`Deck construction in ${cityName}`}
+            alt={`${cityName} deck builder – custom deck construction in ${cityName}`}
             fill
             sizes="100vw"
             className="object-cover"
@@ -138,16 +138,23 @@ export default async function LocationPage() {
           <div className="max-w-4xl mx-auto text-center">
             {/* Headline */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] opacity-0 animate-fade-up stagger-1">
-              <span className="block font-playfair">Deck Builder &</span>
-              <span className="block font-playfair">Outdoor Construction</span>
+              <span className="block font-playfair">
+                {cityName} Deck Builder
+              </span>
+              <span className="block font-playfair">
+                Outdoor Construction & Custom Decks
+              </span>
               <span className="block text-accent text-3xl md:text-4xl lg:text-5xl mt-3 font-playfair italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] [text-shadow:0_0_2px_black]">
-                {cityName}
+                {cityName} Area
               </span>
             </h1>
 
             {/* Description */}
             <p className="text-xl md:text-2xl text-white/95 mb-10 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-up stagger-2 font-light">
-              {location.description}
+              Ogden Construction is a {cityName} deck builder serving {cityName}{" "}
+              and nearby communities, specializing in composite, Trex, and
+              redwood decks built for Northern California weather, sun exposure,
+              and outdoor living. {location.description}
             </p>
 
             {/* CTA Buttons */}
@@ -392,13 +399,20 @@ export default async function LocationPage() {
             {/* Main services heading */}
             <div className="mb-12 opacity-0 animate-fade-up stagger-1">
               <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary tracking-tight">
-                Expert Construction Services in {cityName}
+                {cityName} Deck Builder & Outdoor Construction Services
               </h2>
               <div className="w-24 h-1 bg-accent mb-8"></div>
             </div>
 
             {/* SEO copy */}
             <div className="prose prose-lg max-w-none opacity-0 animate-fade-up stagger-2">
+              <p className="mb-6 text-gray-700 leading-relaxed">
+                As a dedicated {cityName} deck builder, we design and build
+                decks that handle Northern California heat, seasonal rain, and
+                intense sun. From engineered framing to composite decking and
+                railings, every detail is chosen for the way local homes live
+                and weather.
+              </p>
               {location.seoCopy.map((paragraph, index) => (
                 <p key={index} className="mb-6 text-gray-700 leading-relaxed">
                   {paragraph}
@@ -419,7 +433,7 @@ export default async function LocationPage() {
           <div className="max-w-5xl mx-auto">
             <div className="rounded-2xl border-2 border-accent/20 bg-white p-10 md:p-12 shadow-xl">
               <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6 text-primary tracking-tight">
-                Deck Pricing Expectations in {cityName}
+                Deck Pricing Expectations with a Local {cityName} Deck Builder
               </h2>
               <div className="w-24 h-1 bg-accent mb-8"></div>
 
@@ -516,7 +530,8 @@ export default async function LocationPage() {
             {/* Section header */}
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6 text-primary tracking-tight">
-                Why {cityName} Homeowners Choose Ogden Construction
+                Why {cityName} Homeowners Choose Ogden Construction as Their
+                Deck Builder
               </h2>
               <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
             </div>
@@ -568,7 +583,7 @@ export default async function LocationPage() {
           <div className="max-w-5xl mx-auto">
             <div className="rounded-2xl border-2 border-stone-200 bg-white p-10 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500">
               <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6 text-primary tracking-tight">
-                Recent Deck Projects Near {cityName}
+                Recent Deck Projects Near {cityName} & Surrounding Areas
               </h2>
               <div className="w-24 h-1 bg-accent mb-8"></div>
 
