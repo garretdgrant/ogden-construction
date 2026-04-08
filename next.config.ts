@@ -23,51 +23,54 @@ const withAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-const legacyLocationRedirects = [
+const legacyLocationMappings = [
   {
-    source: "/locations/california/placerville",
+    legacySlugs: ["placerville"],
     destination: "/locations-we-serve/placerville-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/el-dorado-hills",
+    legacySlugs: ["el-dorado-hills"],
     destination:
       "/locations-we-serve/el-dorado-hills-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/folsom",
+    legacySlugs: ["folsom"],
     destination: "/locations-we-serve/folsom-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/auburn",
+    legacySlugs: ["auburn"],
     destination: "/locations-we-serve/auburn-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/tahoe",
+    legacySlugs: ["tahoe", "south-lake-tahoe"],
     destination:
       "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/south-lake-tahoe",
-    destination:
-      "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
-    permanent: true,
-  },
-  {
-    source: "/locations/california/napa-valley",
+    legacySlugs: ["napa-valley"],
     destination: "/locations-we-serve/napa-valley-deck-builder-construction",
-    permanent: true,
   },
   {
-    source: "/locations/california/sacramento",
+    legacySlugs: ["sacramento"],
     destination: "/locations-we-serve/sacramento-deck-builder-construction",
-    permanent: true,
   },
 ];
+
+const legacyLocationRedirects = legacyLocationMappings.flatMap(
+  ({ legacySlugs, destination }) =>
+    legacySlugs.flatMap((slug) => [
+      {
+        source: `/locations/${slug}`,
+        destination,
+        permanent: true,
+      },
+      {
+        source: `/locations/california/${slug}`,
+        destination,
+        permanent: true,
+      },
+    ]),
+);
 
 const nextConfig: NextConfig = {
   images: {
