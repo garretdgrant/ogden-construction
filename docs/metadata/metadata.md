@@ -10,18 +10,18 @@ Authoritative metadata pattern for the App Router build.
   - `getMetadataBase()` — env-aware base URL (localhost vs production).
   - `buildPageMetadata({ title, description, path, imagePath?, type? })` — returns canonical, OG, and Twitter data.
   - `buildCanonicalUrl(path, metadataBase)` / `buildOgImageUrl(path, metadataBase)` — compose URLs safely.
-  - JSON-LD builders: `getLocalBusinessJsonLd`, `getAboutJsonLd`, `getServicesJsonLd`, `getPricingJsonLd`, `getPortfolioJsonLd`, `getContactJsonLd`, `getBlogIndexJsonLd`, `getArticleJsonLd`, `getLocationsJsonLd`.
-- OG/Twitter image: use real assets (default `/logo.png` lives in `public/`).
-- Single injection rule: one JSON-LD per page via `<Script strategy="beforeInteractive">`, no `metadata.other` and no duplicates.
+  - Canonical entity builders: `buildCanonicalLocalBusinessNode`, `buildCanonicalWebsiteNode`, and `buildLeviOgdenPersonNode`.
+  - Stable references: `getLocalBusinessReferenceJsonLd`, `getWebsiteReferenceJsonLd`, `getLeviOgdenReferenceJsonLd`, and `getSchemaEntityIds`.
+  - Page JSON-LD builders: `getAboutJsonLd`, `getServicesJsonLd`, `getPortfolioJsonLd`, `getContactJsonLd`, `getWebPageJsonLd`, and `getLocationJsonLd`.
+- OG/Twitter image: use real assets; the default is `/images/ogden-construction-og.webp`.
+- Entity rule: emit the full canonical LocalBusiness, WebSite, and Person nodes only on the homepage and About page. All other schemas reference their stable `@id` values.
 
 ## Current implementations (reference)
 
-- Root layout (`src/app/layout.tsx`): `generateMetadata` sets base title/description, canonical `/`, OG/Twitter, and injects `getLocalBusinessJsonLd()`.
-- Static pages using `buildPageMetadata`: home, about, services, pricing, portfolio, contact, checkout, checkout/thank-you, privacy, terms, locations index.
-- JSON-LD pages: layout (LocalBusiness), about, services, pricing, portfolio, contact, blog index, locations index, location detail, blog articles.
-- Dynamic pages:
-  - Blog detail (`src/app/blog/[id]/page.tsx`): `generateStaticParams`, `generateMetadata` from params, `getArticleJsonLd`.
-  - Location detail (`src/app/locations/california/[city]/page.tsx`): `generateStaticParams`, `generateMetadata` from params, LocalBusiness JSON-LD with city context.
+- Homepage: `OgdenPageStructuredData` emits one canonical LocalBusiness/GeneralContractor node, one WebSite node, Levi Ogden's Person node, the HomePage, its primary image, and matching FAQs.
+- About: `getAboutJsonLd` emits the same canonical entity nodes plus the AboutPage.
+- Service, portfolio, contact, guide, and location schemas reference `https://www.ogden-construction.com/#localbusiness` instead of nesting additional LocalBusiness objects.
+- Location detail pages use `Service` plus `areaServed`; they do not claim that each service city is a separate Ogden Construction office.
 
 ## How to add metadata
 
@@ -121,5 +121,11 @@ export default async function Page({
 - Canonical must match the route path exactly; use `buildPageMetadata`.
 - Reuse `getMetadataBase()` for any absolute URL; never hard-code production URLs.
 - Ensure OG/Twitter images exist and use absolute URLs (helpers handle this).
-- JSON-LD matches the page type and is injected once via `<Script strategy="beforeInteractive">`.
+- JSON-LD matches visible page content, and multiple scripts on one page do not emit duplicate entities with competing `@id` values.
 - Dynamic routes: derive metadata from params; keep `generateStaticParams` in sync.
+
+## Schema validation status
+
+- 2026-08-01: source-level audit confirms one full LocalBusiness node on the homepage and About page, zero duplicate LocalBusiness nodes in service, portfolio, contact, guide, and location helpers, one connected Levi Ogden Person node on the canonical entity pages, and exactly one FAQPage node on the homepage.
+- Google Rich Results Test: pending deployment of the schema changes. Validate the homepage, About page, one service detail page, and one location detail page after deployment.
+- The public LocalBusiness address intentionally contains only `Placerville, CA 95667`; no private street address or exact geo coordinates are published.

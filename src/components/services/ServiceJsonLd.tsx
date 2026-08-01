@@ -3,8 +3,8 @@ import { buildBreadcrumbJsonLd } from "@/lib/breadcrumbs";
 import {
   buildCanonicalUrl,
   buildOgImageUrl,
-  getLocalBusinessJsonLd,
   getMetadataBase,
+  getSchemaEntityIds,
 } from "@/lib/metadata";
 import { buildFaqJsonLd } from "@/lib/faq";
 import { getServiceMetaDescription, stripHtml } from "@/lib/service-pages";
@@ -22,8 +22,10 @@ export const ServiceJsonLd = ({
   path,
 }: ServiceJsonLdProps) => {
   const metadataBase = getMetadataBase();
-  const baseUrl = metadataBase.toString().replace(/\/$/, "");
+  const { businessId, websiteId } = getSchemaEntityIds(metadataBase);
   const pageUrl = buildCanonicalUrl(path, metadataBase);
+  const webpageId = `${pageUrl}#webpage`;
+  const serviceId = `${pageUrl}#service`;
   const imageUrl = buildOgImageUrl(
     service.ogImage ?? service.heroImage,
     metadataBase,
@@ -32,11 +34,11 @@ export const ServiceJsonLd = ({
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": serviceId,
     name: service.title,
     description: getServiceMetaDescription(service),
     provider: {
-      "@type": "LocalBusiness",
-      "@id": `${baseUrl}/#localbusiness`,
+      "@id": businessId,
     },
     areaServed: [
       { "@type": "City", name: "Placerville" },
@@ -46,17 +48,32 @@ export const ServiceJsonLd = ({
       { "@type": "City", name: "Sacramento" },
     ],
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
+      "@id": webpageId,
     },
     image: imageUrl,
     url: pageUrl,
     ...(service.jsonLd ?? {}),
   };
 
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": webpageId,
+    name: service.metaTitle,
+    description: getServiceMetaDescription(service),
+    url: pageUrl,
+    isPartOf: { "@id": websiteId },
+    about: { "@id": businessId },
+    mainEntity: { "@id": serviceId },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: imageUrl,
+    },
+  };
+
   const combinedJsonLd = [
     serviceJsonLd,
-    getLocalBusinessJsonLd(),
+    webPageJsonLd,
     buildBreadcrumbJsonLd(breadcrumbs, path),
     ...(service.faqs.length
       ? [

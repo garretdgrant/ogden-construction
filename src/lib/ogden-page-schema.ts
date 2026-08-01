@@ -1,17 +1,17 @@
 import type { OgdenPageData } from "@/lib/ogden-page.types";
 import {
+  buildCanonicalLocalBusinessNode,
+  buildCanonicalWebsiteNode,
   buildCanonicalUrl,
+  buildLeviOgdenPersonNode,
   buildOgImageUrl,
+  getLocalBusinessReferenceJsonLd,
   getMetadataBase,
-  siteMetadata,
+  getSchemaEntityIds,
+  getWebsiteReferenceJsonLd,
 } from "@/lib/metadata";
 
 const schemaContext = "https://schema.org";
-
-const getBaseUrl = () => getMetadataBase().toString().replace(/\/$/, "");
-
-const getBusinessId = (baseUrl: string) => `${baseUrl}/#localbusiness`;
-const getWebsiteId = (baseUrl: string) => `${baseUrl}/#website`;
 
 const webPageTypes = {
   home: "HomePage",
@@ -23,136 +23,19 @@ const webPageTypes = {
   contact: "ContactPage",
 } as const;
 
-const getSchemaDays = (days: string) => {
-  if (days === "Monday–Friday") {
-    return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  }
-
-  return [days];
-};
-
-const to24HourTime = (value: string) => {
-  const match = value.trim().match(/^(\d{1,2}):(\d{2})\s(AM|PM)$/);
-
-  if (!match) {
-    return undefined;
-  }
-
-  const [, rawHour, minutes, meridiem] = match;
-  let hour = Number(rawHour);
-
-  if (meridiem === "AM" && hour === 12) {
-    hour = 0;
-  } else if (meridiem === "PM" && hour !== 12) {
-    hour += 12;
-  }
-
-  return `${hour.toString().padStart(2, "0")}:${minutes}`;
-};
-
-const buildOpeningHours = (data: OgdenPageData) =>
-  data.business.hours.flatMap((entry) => {
-    const [opensLabel, closesLabel] = entry.hours.split("–");
-    const opens = opensLabel ? to24HourTime(opensLabel) : undefined;
-    const closes = closesLabel ? to24HourTime(closesLabel) : undefined;
-
-    if (!opens || !closes) {
-      return [];
-    }
-
-    return [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: getSchemaDays(entry.days),
-        opens,
-        closes,
-      },
-    ];
-  });
-
 export function buildOgdenPageSchema(data: OgdenPageData) {
-  const baseUrl = getBaseUrl();
-  const pageUrl = buildCanonicalUrl(data.pageHref);
-  const businessId = getBusinessId(baseUrl);
-  const websiteId = getWebsiteId(baseUrl);
+  const metadataBase = getMetadataBase();
+  const { businessId, websiteId } = getSchemaEntityIds(metadataBase);
+  const pageUrl = buildCanonicalUrl(data.pageHref, metadataBase);
   const webpageId = `${pageUrl}#webpage`;
   const faqId = `${pageUrl}#faq`;
-  const heroImageUrl = buildOgImageUrl(data.hero.image.src);
   const primaryImageId = `${pageUrl}#primaryimage`;
-  const serviceCards = data.sections
-    .find((section) => section.id === "deck-services")
-    ?.blocks.flatMap((block) =>
-      block.type === "card-grid" ? block.cards : [],
-    );
-
-  const business = {
-    "@type": ["LocalBusiness", "GeneralContractor"],
-    "@id": businessId,
-    name: data.business.displayName,
-    legalName: data.business.legalName,
-    url: baseUrl,
-    description: data.metadata.description,
-    foundingDate: data.business.foundedYear.toString(),
-    email: data.business.email,
-    telephone: data.business.phoneHref.replace(/^tel:/, ""),
-    image: {
-      "@id": primaryImageId,
-    },
-    logo: {
-      "@type": "ImageObject",
-      "@id": `${baseUrl}/#logo`,
-      url: buildOgImageUrl("/images/ogden-construction-nav-logo.webp"),
-    },
-    identifier: {
-      "@type": "PropertyValue",
-      name: data.business.licenseLabel,
-      value: data.business.licenseNumber,
-    },
-    areaServed: data.business.serviceAreas.map((name) => ({
-      "@type": "Place",
-      name,
-    })),
-    openingHoursSpecification: buildOpeningHours(data),
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      telephone: data.business.phoneHref.replace(/^tel:/, ""),
-      email: data.business.email,
-      availableLanguage: "English",
-      areaServed: "US-CA",
-    },
-    ...(serviceCards?.length
-      ? {
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: "Construction Services",
-            itemListElement: serviceCards.map((service) => ({
-              "@type": "Offer",
-              itemOffered: {
-                "@type": "Service",
-                name: service.title,
-                description: service.text,
-                url: service.href ? buildCanonicalUrl(service.href) : undefined,
-                provider: {
-                  "@id": businessId,
-                },
-              },
-            })),
-          },
-        }
-      : {}),
-  };
-
-  const website = {
-    "@type": "WebSite",
-    "@id": websiteId,
-    name: data.business.displayName,
-    url: baseUrl,
-    description: siteMetadata.defaultDescription,
-    publisher: {
-      "@id": businessId,
-    },
-  };
+  const heroImageUrl = buildOgImageUrl(data.hero.image.src, metadataBase);
+  const emitsCanonicalEntities = data.kind === "home" || data.kind === "about";
+  const mainEntityReferences = [
+    ...(data.kind === "home" ? [{ "@id": businessId }] : []),
+    ...(data.faqs?.length ? [{ "@id": faqId }] : []),
+  ];
 
   const webpage = {
     "@type": webPageTypes[data.kind],
@@ -162,21 +45,14 @@ export function buildOgdenPageSchema(data: OgdenPageData) {
     description: data.metadata.description,
     inLanguage: "en-US",
     dateModified: `${data.dateModified}T00:00:00Z`,
-    isPartOf: {
-      "@id": websiteId,
-    },
-    about: {
-      "@id": businessId,
-    },
+    isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+    about: getLocalBusinessReferenceJsonLd(metadataBase),
+    publisher: getLocalBusinessReferenceJsonLd(metadataBase),
     primaryImageOfPage: {
       "@id": primaryImageId,
     },
-    ...(data.faqs?.length
-      ? {
-          mainEntity: {
-            "@id": faqId,
-          },
-        }
+    ...(mainEntityReferences.length
+      ? { mainEntity: mainEntityReferences }
       : {}),
   };
 
@@ -197,9 +73,8 @@ export function buildOgdenPageSchema(data: OgdenPageData) {
         "@type": "FAQPage",
         "@id": faqId,
         url: `${pageUrl}#frequently-asked-questions`,
-        isPartOf: {
-          "@id": websiteId,
-        },
+        isPartOf: { "@id": websiteId },
+        mainEntityOfPage: { "@id": webpageId },
         mainEntity: data.faqs.map((item) => ({
           "@type": "Question",
           name: item.question,
@@ -213,6 +88,17 @@ export function buildOgdenPageSchema(data: OgdenPageData) {
 
   return {
     "@context": schemaContext,
-    "@graph": [business, website, webpage, primaryImage, ...(faq ? [faq] : [])],
+    "@graph": [
+      ...(emitsCanonicalEntities
+        ? [
+            buildCanonicalLocalBusinessNode(metadataBase),
+            buildCanonicalWebsiteNode(metadataBase),
+            buildLeviOgdenPersonNode(metadataBase),
+          ]
+        : []),
+      webpage,
+      primaryImage,
+      ...(faq ? [faq] : []),
+    ],
   };
 }

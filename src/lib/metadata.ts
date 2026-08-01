@@ -22,23 +22,13 @@ type PostalAddress = {
   addressCountry: string;
 };
 
-type LocalBusinessOverrides = {
-  address?: PostalAddress;
-  areaServed?: Place[];
-  description?: string;
-  id?: string;
-  imagePath?: string;
-  name?: string;
-  url?: string;
-};
-
 const PRODUCTION_URL = "https://www.ogden-construction.com";
 const SITE_NAME = "Ogden Construction";
 const BUSINESS_NAME = "Ogden Construction";
 const DEFAULT_OG_IMAGE = "/images/ogden-construction-og.webp";
 const ABOUT_OG_IMAGE = "/images/about/ogdenTruck.jpg";
 const EMAIL = SITE_CONTACT_EMAIL;
-const PHONE = "+1-530-919-7408";
+const PHONE = "+15309197408";
 
 const SERVICE_TYPES = [
   "Deck Building",
@@ -47,6 +37,9 @@ const SERVICE_TYPES = [
 ];
 
 const AREA_SERVED: Place[] = [
+  { "@type": "Place", name: "El Dorado County" },
+  { "@type": "Place", name: "Lake Tahoe" },
+  { "@type": "Place", name: "Greater Sacramento" },
   { "@type": "Place", name: "Placerville" },
   { "@type": "Place", name: "El Dorado Hills" },
   { "@type": "Place", name: "Folsom" },
@@ -55,6 +48,8 @@ const AREA_SERVED: Place[] = [
   { "@type": "Place", name: "Pollock Pines" },
   { "@type": "Place", name: "Sacramento" },
   { "@type": "Place", name: "Camino" },
+  { "@type": "Place", name: "Auburn" },
+  { "@type": "Place", name: "Napa Valley" },
 ];
 
 const OPENING_HOURS = [
@@ -69,11 +64,14 @@ const OPENING_HOURS = [
 const CONTACT_POINT = {
   "@type": "ContactPoint",
   telephone: PHONE,
-  contactType: "Customer Support",
-  areaServed: ["US"],
-  availableLanguage: ["English"],
+  email: EMAIL,
+  contactType: "customer service",
+  areaServed: "US-CA",
+  availableLanguage: "English",
 };
 
+// Ogden Construction is a service-area business. The public schema identifies
+// its home locality without exposing or inventing a private street address.
 const ADDRESS: PostalAddress = {
   "@type": "PostalAddress",
   addressLocality: "Placerville",
@@ -228,286 +226,306 @@ function getBaseUrl(metadataBase = getMetadataBase()): string {
   return metadataBase.toString().replace(/\/$/, "");
 }
 
-function buildLocalBusiness(
-  overrides: LocalBusinessOverrides = {},
+export function getSchemaEntityIds(
   metadataBase = getMetadataBase(),
 ) {
   const baseUrl = getBaseUrl(metadataBase);
-  const url = overrides.url ?? baseUrl;
-  const id = overrides.id ?? `${url}/#localbusiness`;
 
   return {
-    "@type": "LocalBusiness",
-    "@id": id,
-    name: overrides.name ?? BUSINESS_NAME,
-    url,
-    email: EMAIL,
-    telephone: PHONE,
-    serviceType: SERVICE_TYPES,
-    contactPoint: CONTACT_POINT,
-    hasMap: "https://www.google.com/maps/place/Placerville,+CA",
-    founder: {
-      "@type": "Person",
-      name: "Levi Ogden",
-      url: `${baseUrl}/about`,
-    },
-    address: overrides.address ?? ADDRESS,
-    areaServed: overrides.areaServed ?? AREA_SERVED,
-    openingHoursSpecification: OPENING_HOURS,
-    description: overrides.description ?? BASE_DESCRIPTION,
-    sameAs: SAME_AS,
-    image: buildOgImageUrl(
-      overrides.imagePath ?? DEFAULT_OG_IMAGE,
-      metadataBase,
-    ),
-    priceRange: "$$",
+    baseUrl,
+    businessId: `${baseUrl}/#localbusiness`,
+    websiteId: `${baseUrl}/#website`,
+    personId: `${baseUrl}/about#levi-ogden`,
+    logoId: `${baseUrl}/#logo`,
   };
 }
 
-export function getLocalBusinessJsonLd() {
+export function getLocalBusinessReferenceJsonLd(
+  metadataBase = getMetadataBase(),
+) {
+  return { "@id": getSchemaEntityIds(metadataBase).businessId };
+}
+
+export function getWebsiteReferenceJsonLd(
+  metadataBase = getMetadataBase(),
+) {
+  return { "@id": getSchemaEntityIds(metadataBase).websiteId };
+}
+
+export function getLeviOgdenReferenceJsonLd(
+  metadataBase = getMetadataBase(),
+) {
+  return { "@id": getSchemaEntityIds(metadataBase).personId };
+}
+
+export function buildCanonicalLocalBusinessNode(
+  metadataBase = getMetadataBase(),
+) {
+  const { baseUrl, businessId, logoId } = getSchemaEntityIds(metadataBase);
+
   return {
-    "@context": "https://schema.org",
-    ...buildLocalBusiness(),
+    "@type": ["LocalBusiness", "GeneralContractor"],
+    "@id": businessId,
+    name: BUSINESS_NAME,
+    legalName: "Ogden Construction Inc.",
+    url: baseUrl,
+    description: BASE_DESCRIPTION,
+    foundingDate: "2008",
+    email: EMAIL,
+    telephone: PHONE,
+    priceRange: "$$",
+    address: ADDRESS,
+    areaServed: AREA_SERVED,
+    openingHoursSpecification: OPENING_HOURS,
+    contactPoint: CONTACT_POINT,
+    founder: getLeviOgdenReferenceJsonLd(metadataBase),
+    identifier: {
+      "@type": "PropertyValue",
+      name: "California contractor license",
+      value: "1042758",
+    },
+    sameAs: SAME_AS,
+    logo: {
+      "@type": "ImageObject",
+      "@id": logoId,
+      url: buildOgImageUrl(
+        "/images/ogden-construction-nav-logo.webp",
+        metadataBase,
+      ),
+      contentUrl: buildOgImageUrl(
+        "/images/ogden-construction-nav-logo.webp",
+        metadataBase,
+      ),
+      width: 1536,
+      height: 1024,
+      caption: "Ogden Construction logo",
+    },
+    image: [
+      buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase),
+      buildOgImageUrl(ABOUT_OG_IMAGE, metadataBase),
+      buildOgImageUrl("/images/about/levi-deck.webp", metadataBase),
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Ogden Construction Services",
+      itemListElement: SERVICE_TYPES.map((serviceType) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: serviceType,
+          provider: getLocalBusinessReferenceJsonLd(metadataBase),
+          areaServed: AREA_SERVED,
+        },
+      })),
+    },
+  };
+}
+
+export function buildCanonicalWebsiteNode(metadataBase = getMetadataBase()) {
+  const { baseUrl, websiteId } = getSchemaEntityIds(metadataBase);
+
+  return {
+    "@type": "WebSite",
+    "@id": websiteId,
+    name: SITE_NAME,
+    url: baseUrl,
+    description: BASE_DESCRIPTION,
+    publisher: getLocalBusinessReferenceJsonLd(metadataBase),
+  };
+}
+
+export function buildLeviOgdenPersonNode(metadataBase = getMetadataBase()) {
+  const { baseUrl, personId } = getSchemaEntityIds(metadataBase);
+  const imageUrl = buildOgImageUrl("/images/about/levi.jpg", metadataBase);
+
+  return {
+    "@type": "Person",
+    "@id": personId,
+    name: "Levi Ogden",
+    url: `${baseUrl}/about`,
+    jobTitle: "Owner & General Contractor",
+    description:
+      "Levi Ogden founded Ogden Construction Inc. in 2008 and leads its residential deck and construction work across Northern California.",
+    image: {
+      "@type": "ImageObject",
+      "@id": `${personId}-image`,
+      url: imageUrl,
+      contentUrl: imageUrl,
+      width: 956,
+      height: 960,
+      caption: "Levi Ogden, owner and general contractor",
+    },
+    mainEntityOfPage: { "@id": `${baseUrl}/about#webpage` },
+    worksFor: getLocalBusinessReferenceJsonLd(metadataBase),
+    knowsAbout: [
+      "Custom deck construction",
+      "Deck replacement and repair",
+      "Home additions",
+      "Residential remodeling",
+      "General contracting",
+    ],
   };
 }
 
 export function getAboutJsonLd() {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
+  const { baseUrl } = getSchemaEntityIds(metadataBase);
   const url = `${baseUrl}/about`;
 
   return {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "@id": url,
-    name: "About Ogden Construction",
-    url,
-    mainEntity: buildLocalBusiness(
+    "@graph": [
+      buildCanonicalLocalBusinessNode(metadataBase),
+      buildCanonicalWebsiteNode(metadataBase),
+      buildLeviOgdenPersonNode(metadataBase),
       {
-        imagePath: ABOUT_OG_IMAGE,
+        "@type": "AboutPage",
+        "@id": `${url}#webpage`,
+        name: "About Ogden Construction",
+        url,
+        description:
+          "Learn about Ogden Construction, founder Levi Ogden, and the company's residential construction experience in Northern California.",
+        isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+        about: [
+          getLocalBusinessReferenceJsonLd(metadataBase),
+          getLeviOgdenReferenceJsonLd(metadataBase),
+        ],
+        mainEntity: getLocalBusinessReferenceJsonLd(metadataBase),
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: buildOgImageUrl(ABOUT_OG_IMAGE, metadataBase),
+        },
       },
-      metadataBase,
-    ),
+    ],
   };
 }
 
 export function getServicesJsonLd() {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
+  const { baseUrl } = getSchemaEntityIds(metadataBase);
   const url = `${baseUrl}/services`;
+  const catalogId = `${url}#service-catalog`;
 
   return {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": `${baseUrl}/#services`,
-    name: "Ogden Construction Services",
-    url,
-    mainEntityOfPage: buildLocalBusiness({}, metadataBase),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Construction Services Offered by Ogden Construction",
-      itemListElement: [
-        {
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        name: "Ogden Construction Services",
+        url,
+        description:
+          "Deck building, home addition, remodeling, and general contracting services from Ogden Construction.",
+        isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+        about: getLocalBusinessReferenceJsonLd(metadataBase),
+        mainEntity: { "@id": catalogId },
+      },
+      {
+        "@type": "OfferCatalog",
+        "@id": catalogId,
+        name: "Construction Services Offered by Ogden Construction",
+        itemListElement: SERVICE_TYPES.map((serviceType) => ({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Deck Building",
-            description:
-              "Custom wood and composite decks built to match your home and lifestyle. Servicing Placerville, Tahoe, Folsom, and surrounding areas.",
-            areaServed: [
-              { "@type": "Place", name: "Placerville" },
-              { "@type": "Place", name: "South Lake Tahoe" },
-              { "@type": "Place", name: "El Dorado Hills" },
-              { "@type": "Place", name: "Folsom" },
-              { "@type": "Place", name: "Sacramento" },
-            ],
-            provider: {
-              "@type": "LocalBusiness",
-              name: BUSINESS_NAME,
-            },
+            name: serviceType,
+            provider: getLocalBusinessReferenceJsonLd(metadataBase),
+            areaServed: AREA_SERVED,
           },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Home Additions",
-            description:
-              "Expand your home with seamless, code-compliant additions—crafted for long-term comfort and value.",
-            areaServed: [
-              { "@type": "Place", name: "Placerville" },
-              { "@type": "Place", name: "South Lake Tahoe" },
-              { "@type": "Place", name: "El Dorado Hills" },
-              { "@type": "Place", name: "Folsom" },
-              { "@type": "Place", name: "Sacramento" },
-            ],
-            provider: {
-              "@type": "LocalBusiness",
-              name: BUSINESS_NAME,
-            },
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Remodeling Services",
-            description:
-              "Interior and exterior remodeling for kitchens, bathrooms, and entire homes with premium craftsmanship.",
-            areaServed: [
-              { "@type": "Place", name: "Placerville" },
-              { "@type": "Place", name: "South Lake Tahoe" },
-              { "@type": "Place", name: "El Dorado Hills" },
-              { "@type": "Place", name: "Folsom" },
-              { "@type": "Place", name: "Sacramento" },
-            ],
-            provider: {
-              "@type": "LocalBusiness",
-              name: BUSINESS_NAME,
-            },
-          },
-        },
-      ],
-    },
+        })),
+      },
+    ],
   };
 }
 
 export function getPortfolioJsonLd() {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
+  const { baseUrl } = getSchemaEntityIds(metadataBase);
   const url = `${baseUrl}/portfolio`;
+
+  const projects = [
+    {
+      name: "Redwood Deck Replacement",
+      description:
+        "Demolition and replacement of an aging deck with redwood boards in South Lake Tahoe, CA.",
+      location: "South Lake Tahoe, CA",
+      imagePath: "/images/portfolio/redwood-deck.webp",
+      dateCreated: "2023",
+    },
+    {
+      name: "Twin Bridges Cabin Improvements",
+      description:
+        "Deck rebuild and driveway leveling project in Twin Bridges, CA.",
+      location: "Twin Bridges, CA",
+      imagePath: "/images/portfolio/twin-bridges-cabin.webp",
+      dateCreated: "2023",
+    },
+    {
+      name: "Full Home Rebuild & Deck Construction",
+      description:
+        "Ground-up home rebuild and custom deck construction in Grizzly Flats, CA.",
+      location: "Grizzly Flats, CA",
+      imagePath: "/images/portfolio/guestHouse.webp",
+      dateCreated: "2023",
+    },
+    {
+      name: "Trex Deck & Retaining Wall Build",
+      description:
+        "Trex deck, retaining wall, and drainage construction in Rescue, CA.",
+      location: "Rescue, CA",
+      imagePath: "/images/portfolio/curtisRetainingWall.webp",
+      dateCreated: "2023",
+    },
+    {
+      name: "Fencing & 2nd Story Deck Project",
+      description:
+        "Custom fencing, gates, and a second-story deck in Placerville, CA.",
+      location: "Placerville, CA",
+      imagePath: "/images/portfolio/fence.webp",
+      dateCreated: "2023",
+    },
+  ];
 
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": `${baseUrl}/#portfolio`,
+    "@id": `${url}#webpage`,
     name: "Ogden Construction Portfolio",
     url,
-    hasPart: [
-      {
-        "@type": "Project",
-        name: "Redwood Deck Replacement",
-        description:
-          "Demolition and replacement of an aging deck with redwood boards. Completed in South Lake Tahoe, CA with excellent communication and timely execution.",
-        locationCreated: {
-          "@type": "Place",
-          name: "South Lake Tahoe, CA",
-        },
-        image: buildOgImageUrl(
-          "/images/portfolio/redwood-deck.webp",
-          metadataBase,
-        ),
-        dateCreated: "2023",
-        creator: {
-          "@type": "LocalBusiness",
-          name: BUSINESS_NAME,
-          url: baseUrl,
-        },
+    isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+    about: getLocalBusinessReferenceJsonLd(metadataBase),
+    hasPart: projects.map((project, index) => ({
+      "@type": "Project",
+      "@id": `${url}#project-${index + 1}`,
+      name: project.name,
+      description: project.description,
+      locationCreated: {
+        "@type": "Place",
+        name: project.location,
       },
-      {
-        "@type": "Project",
-        name: "Twin Bridges Cabin Improvements",
-        description:
-          "Deck rebuild and driveway leveling project for improved winter access and extended structural support in Twin Bridges, CA.",
-        locationCreated: {
-          "@type": "Place",
-          name: "Twin Bridges, CA",
-        },
-        image: buildOgImageUrl(
-          "/images/portfolio/twin-bridges-cabin.webp",
-          metadataBase,
-        ),
-        dateCreated: "2023",
-        creator: {
-          "@type": "LocalBusiness",
-          name: BUSINESS_NAME,
-          url: baseUrl,
-        },
-      },
-      {
-        "@type": "Project",
-        name: "Full Home Rebuild & Deck Construction",
-        description:
-          "Ground-up rebuild of a home lost to the Caldor Fire, including inspections, coordination, and custom deck construction in Grizzly Flats, CA.",
-        locationCreated: {
-          "@type": "Place",
-          name: "Grizzly Flats, CA",
-        },
-        image: buildOgImageUrl(
-          "/images/portfolio/guestHouse.webp",
-          metadataBase,
-        ),
-        dateCreated: "2023",
-        creator: {
-          "@type": "LocalBusiness",
-          name: BUSINESS_NAME,
-          url: baseUrl,
-        },
-      },
-      {
-        "@type": "Project",
-        name: "Trex Deck & Retaining Wall Build",
-        description:
-          "Trex deck installation and retaining wall construction with drainage system in Rescue, CA. Completed efficiently despite challenging weather.",
-        locationCreated: {
-          "@type": "Place",
-          name: "Rescue, CA",
-        },
-        image: buildOgImageUrl(
-          "/images/portfolio/curtisRetainingWall.webp",
-          metadataBase,
-        ),
-        dateCreated: "2023",
-        creator: {
-          "@type": "LocalBusiness",
-          name: BUSINESS_NAME,
-          url: baseUrl,
-        },
-      },
-      {
-        "@type": "Project",
-        name: "Fencing & 2nd Story Deck Project",
-        description:
-          "Custom fencing with gates and a second-story deck with stairs installed in Placerville, CA. Responsive team adapted seamlessly to changes during construction.",
-        locationCreated: {
-          "@type": "Place",
-          name: "Placerville, CA",
-        },
-        image: buildOgImageUrl("/images/portfolio/fence.webp", metadataBase),
-        dateCreated: "2023",
-        creator: {
-          "@type": "LocalBusiness",
-          name: BUSINESS_NAME,
-          url: baseUrl,
-        },
-      },
-    ],
-    mainEntityOfPage: buildLocalBusiness({}, metadataBase),
+      image: buildOgImageUrl(project.imagePath, metadataBase),
+      dateCreated: project.dateCreated,
+      creator: getLocalBusinessReferenceJsonLd(metadataBase),
+    })),
   };
 }
 
 export function getContactJsonLd() {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
+  const { baseUrl } = getSchemaEntityIds(metadataBase);
   const url = `${baseUrl}/contact`;
 
   return {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "@id": `${baseUrl}/#contact`,
-    name: BUSINESS_NAME,
+    "@id": `${url}#webpage`,
+    name: "Contact Ogden Construction",
     url,
-    mainEntityOfPage: buildLocalBusiness(
-      {
-        imagePath: ABOUT_OG_IMAGE,
-      },
-      metadataBase,
-    ),
-    contactOption: "TollFree",
-    areaServed: AREA_SERVED,
-    telephone: PHONE,
-    email: EMAIL,
-    openingHoursSpecification: OPENING_HOURS,
+    description:
+      "Contact Ogden Construction about a deck, addition, remodeling, or residential construction project.",
+    isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+    about: getLocalBusinessReferenceJsonLd(metadataBase),
+    mainEntity: getLocalBusinessReferenceJsonLd(metadataBase),
   };
 }
 
@@ -530,12 +548,17 @@ export function getWebPageJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": type,
-    "@id": url,
+    "@id": `${url}#webpage`,
     name: title,
     url,
     description,
-    image: buildOgImageUrl(imagePath, metadataBase),
-    mainEntityOfPage: buildLocalBusiness({}, metadataBase),
+    image: {
+      "@type": "ImageObject",
+      url: buildOgImageUrl(imagePath, metadataBase),
+    },
+    isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+    about: getLocalBusinessReferenceJsonLd(metadataBase),
+    publisher: getLocalBusinessReferenceJsonLd(metadataBase),
   };
 }
 
@@ -561,14 +584,10 @@ export function getHomePageJsonLd({
 
 export function getWebSiteJsonLd() {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
 
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${baseUrl}/#website`,
-    name: SITE_NAME,
-    url: baseUrl,
+    ...buildCanonicalWebsiteNode(metadataBase),
   };
 }
 
@@ -586,35 +605,31 @@ export function getLocationJsonLd({
   path: string;
 }) {
   const metadataBase = getMetadataBase();
-  const baseUrl = getBaseUrl(metadataBase);
-  const url = `${baseUrl}${path}`;
+  const url = buildCanonicalUrl(path, metadataBase);
 
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${url}#localbusiness`,
-    name: `Ogden Construction – ${cityName}`,
+    "@type": "Service",
+    "@id": `${url}#service-${citySlug}`,
+    name: `Ogden Construction Services in ${cityName}`,
     url,
     description:
       description ??
-      `Ogden Construction builds high-quality custom decks and home additions in ${cityName}, CA. Trusted, licensed, and experienced craftsmanship.`,
-    telephone: PHONE,
-    image: buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase),
+      `Ogden Construction provides custom deck and residential construction services in ${cityName}, California.`,
+    serviceType: SERVICE_TYPES,
+    provider: getLocalBusinessReferenceJsonLd(metadataBase),
     areaServed: {
-      "@type": "Place",
-      name: `${cityName}, CA`,
+      "@type": "City",
+      name: `${cityName}, California`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: cityName,
+        addressRegion: "CA",
+        addressCountry: "US",
+        ...(postalCode ? { postalCode } : {}),
+      },
     },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: cityName,
-      addressRegion: "CA",
-      addressCountry: "US",
-      postalCode: postalCode ?? "95667",
-    },
-    hasMap: `https://www.google.com/maps/search/${encodeURIComponent(
-      `${cityName}, CA`,
-    )}`,
-    priceRange: "$$",
-    sameAs: SAME_AS,
+    image: buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase),
+    mainEntityOfPage: { "@id": `${url}#webpage` },
   };
 }

@@ -1,0 +1,399 @@
+# Ogden Construction Universal Page Data Contract (v1)
+
+Use this contract to generate data files for pages rendered with:
+
+```txt
+src/components/ogden-page/OgdenPageTemplate.tsx
+```
+
+This contract supports these page families:
+
+```txt
+home | service | location | guide | portfolio | about | contact
+```
+
+It is the shared contract for new service pages, location pages, guides, portfolio/index pages, the About page, the Contact page, and future pages that fit one of those families.
+
+## Generator response rules
+
+Return only one complete TypeScript data file. Do not return commentary, research notes, implementation steps, React components, metadata functions, JSON-LD scripts, markdown fences, or changes to other files.
+
+Use the output path supplied in the request. If no path is supplied, use:
+
+```txt
+src/lib/page-data/{kind}/{kebab-case-slug}.data.ts
+```
+
+Use this export naming convention:
+
+```txt
+{camelCaseSlug}PageData
+```
+
+The only permitted imports are:
+
+```ts
+import type { OgdenPageData } from "@/lib/ogden-page.types";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
+```
+
+The final object must end with:
+
+```ts
+} satisfies OgdenPageData;
+```
+
+## Required TypeScript shape
+
+```ts
+import type { OgdenPageData } from "@/lib/ogden-page.types";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
+
+export const {camelCaseSlug}PageData = {
+  kind: "{page-kind}",
+  slug: "{kebab-case-slug}",
+  pageHref: "/{exact-live-route}",
+  dateModified: "YYYY-MM-DD",
+  metadata: {
+    title: "Unique SEO title",
+    description: "Unique SEO description",
+    canonicalPath: "/{exact-live-route}",
+    ogTitle: "Optional social title",
+    ogDescription: "Optional social description",
+    ogImagePath: "/images/provided-image.webp",
+    ogImageAlt: "Descriptive image alt text",
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    focusKeyword: "One primary query",
+    supportingKeywords: ["Relevant secondary query"],
+  },
+  seoIntent: {
+    primaryIntent: "The single searcher goal this page satisfies",
+    geographicFocus: ["Verified city, county, or service region"],
+    pageOwns: ["Queries and subjects this URL should rank for"],
+    pageDoesNotOwn: ["Queries assigned to other URLs"],
+  },
+  business: {
+    legalName: "Ogden Construction Inc.",
+    displayName: "Ogden Construction",
+    foundedYear: 2008,
+    licenseLabel: "California contractor license",
+    licenseNumber: "1042758",
+    phoneDisplay: "(530) 919-7408",
+    phoneHref: "tel:+15309197408",
+    email: SITE_CONTACT_EMAIL,
+    emailHref: SITE_CONTACT_EMAIL_HREF,
+    serviceAreaLabel: "El Dorado County, Lake Tahoe, and Greater Sacramento",
+    serviceAreas: [
+      "Placerville",
+      "South Lake Tahoe",
+      "El Dorado Hills",
+      "Folsom",
+      "Sacramento",
+      "Cameron Park",
+      "Pollock Pines",
+      "Camino",
+      "Auburn",
+    ],
+    hours: [
+      { days: "Monday–Friday", hours: "8:00 AM–5:00 PM" },
+      { days: "Saturday", hours: "By appointment" },
+      { days: "Sunday", hours: "Closed" },
+    ],
+  },
+  hero: {
+    eyebrow: "Short page-specific context",
+    title: "Visible H1",
+    description: "One concise paragraph stating the offer, audience, and location or topic",
+    image: {
+      src: "/provided/image-path.webp",
+      alt: "Specific description of the visible image",
+      width: 1200,
+      height: 800,
+      caption: "Short factual caption",
+    },
+    primaryCta: {
+      label: "Request a Free Consultation",
+      href: "/contact",
+    },
+    secondaryCta: {
+      label: "Page-appropriate secondary action",
+      href: "/verified-route",
+    },
+    trustItems: ["3-4 concise, verified trust statements"],
+  },
+  anchorLinks: [
+    { label: "Short navigation label", href: "#matching-section-id" },
+  ],
+  sections: [
+    {
+      id: "unique-kebab-case-anchor",
+      eyebrow: "Optional section context",
+      title: "Visible H2",
+      description: "Optional one- or two-sentence introduction",
+      surface: "{default|muted|contrast}",
+      blocks: [],
+    },
+  ],
+  faqTitle: "Optional page-specific FAQ heading",
+  faqs: [
+    {
+      question: "A real customer question?",
+      answer: "A concise, self-contained plain-text answer.",
+    },
+  ],
+  leadForm: {
+    title: "Tell Us About Your Project",
+    description: "Short page-specific invitation",
+    submitLabel: "Request a Free Consultation",
+    privacyText: "We respect your privacy. Your information will only be used to respond to your project request.",
+  },
+  finalCta: {
+    eyebrow: "Optional CTA context",
+    title: "Page-specific closing CTA heading",
+    text: "One concise next-step statement",
+    primaryCta: {
+      label: "Request a Free Consultation",
+      href: "/contact",
+    },
+    secondaryCta: {
+      label: "Optional secondary action",
+      href: "/verified-route",
+    },
+  },
+} satisfies OgdenPageData;
+```
+
+## Allowed `blocks`
+
+Use only the following block shapes. Do not invent new block types or fields.
+
+```ts
+{
+  type: "paragraph",
+  text: "Plain text only.",
+}
+
+{
+  type: "heading",
+  text: "Visible H3 subheading",
+}
+
+{
+  type: "unordered-list",
+  items: ["Plain-text list item"],
+}
+
+{
+  type: "icon-list",
+  items: [
+    {
+      title: "Short benefit or consideration",
+      text: "Supporting explanation",
+    },
+  ],
+}
+
+{
+  type: "card-grid",
+  cards: [
+    {
+      title: "Card title",
+      text: "Card description",
+      href: "/optional-verified-internal-route",
+      ctaLabel: "Optional CTA label",
+    },
+  ],
+}
+
+{
+  type: "location-grid",
+  locations: [
+    {
+      name: "Location name",
+      text: "Unique location description",
+      href: "/locations-we-serve/verified-location-slug",
+    },
+  ],
+  footerLink: {
+    label: "View All Locations We Serve",
+    href: "/locations-we-serve",
+  },
+}
+
+{
+  type: "project-grid",
+  projects: [
+    {
+      title: "Verified project title",
+      location: "Verified project location",
+      text: "Verified project description",
+      href: "/verified-internal-route",
+      ctaLabel: "View the project",
+    },
+  ],
+  footerLink: {
+    label: "Browse the Full Portfolio",
+    href: "/portfolio",
+  },
+}
+
+{
+  type: "steps",
+  steps: [
+    {
+      title: "Step title without a manually added number",
+      text: "Step explanation",
+    },
+  ],
+}
+
+{
+  type: "stats",
+  stats: [
+    {
+      value: "Verified value",
+      label: "What the value means",
+    },
+  ],
+}
+
+{
+  type: "review-grid",
+  reviews: [
+    {
+      quote: "Exact supplied review text",
+      name: "Supplied reviewer name",
+      location: "Supplied reviewer location",
+      project: "Supplied project type",
+    },
+  ],
+  links: [
+    {
+      label: "Review platform",
+      href: "https://verified-external-url",
+      external: true,
+    },
+  ],
+}
+
+{
+  type: "callout",
+  title: "Callout heading",
+  text: "Callout copy",
+  primaryCta: {
+    label: "Primary action",
+    href: "/verified-route",
+  },
+  secondaryCta: {
+    label: "Optional secondary action",
+    href: "/verified-route",
+  },
+}
+```
+
+## Page-kind requirements
+
+### `home`
+
+- Use `slug: "home"`, `pageHref: "/"`, and `metadata.canonicalPath: "/"`.
+- Own broad brand, company, and regional service intent.
+- Do not own city-specific service queries or informational guide queries that have dedicated URLs.
+- Include a useful overview of core services, materials or project types, service areas, proof or reviews, process, guides, and a consultation path when supported by supplied content.
+- Use `location-grid`, `project-grid`, and `review-grid` only with verified entries.
+
+### `service`
+
+- Use `pageHref: "/services/{service-slug}"`.
+- Own one service topic. Do not make one service page own unrelated services or every city-specific variation.
+- Explain what the service is, who it is for, relevant options or materials, planning factors, site considerations, process, and what affects scope.
+- Use `icon-list` or `card-grid` for options and materials and `steps` for the process.
+- Include related services and guides through verified internal links.
+- Include FAQs and `leadForm` unless the request explicitly excludes them.
+- Never invent price ranges, timelines, warranties, product certifications, permit outcomes, engineering requirements, or availability.
+
+### `location`
+
+- Use `pageHref: "/locations-we-serve/{location-slug}"`.
+- Focus on one supplied city or service area and assign that location's service queries to `pageOwns`.
+- Put other cities and broad regional queries in `pageDoesNotOwn` when they belong to other pages.
+- Include genuinely local content: property patterns, terrain, climate, access, common project considerations, or jurisdiction details only when supplied or verified.
+- Include services available in that location, local planning considerations, the work process, nearby service areas, and FAQs when supported.
+- Use `location-grid` for nearby locations and verified internal links.
+- Do not create doorway-page copy by swapping city names. Every location page must contain materially unique content.
+- Never claim a local office, completed project, permit expertise, response time, or city-specific experience unless supplied.
+
+### `guide`
+
+- Own one informational question and keep commercial service intent secondary.
+- Answer the core question early, then organize sections around decisions, factors, comparisons, examples, and next steps supported by the supplied research.
+- Keep informational claims qualified. Local code, permit, cost, ROI, product, and safety claims must come from supplied or verified material.
+- Use plain language. Do not turn estimates or examples into guarantees.
+- Link naturally to the relevant service, location, portfolio, or contact page using structured link fields.
+- Include FAQs when they add information rather than repeating section headings.
+- The current v1 renderer does not support inline citations, tables, or source-list blocks. If a guide requires those elements, stop and request a type/template extension instead of inventing an unsupported block.
+
+### `portfolio`
+
+- Use for a portfolio index or a supplied project collection.
+- Use `project-grid` only for real projects with supplied titles, locations, descriptions, and verified internal routes.
+- Do not invent project locations, materials, budgets, dates, scope, or client outcomes.
+- Use `stats` only for supplied and supportable portfolio totals.
+
+### `about`
+
+- Own company, founder, history, values, and trust intent.
+- Use only supplied facts about Levi Ogden, the company history, licensing, experience, and completed work.
+- Use paragraphs for the company story, `icon-list` for values or working principles, and `stats` only for verified figures.
+- Do not invent awards, credentials, memberships, team size, years of experience, or project counts.
+
+### `contact`
+
+- Keep the page focused on starting a conversation and setting accurate response expectations.
+- Include `leadForm`.
+- Use verified phone, email, hours, and service-area details from the fixed `business` object.
+- Do not promise a response time unless supplied.
+- Avoid duplicating a full service or location page on the contact route.
+
+## Universal contract rules
+
+- Supply every required field shown in the TypeScript shape through `sections` and `finalCta`.
+- `anchorLinks`, `faqs`, `faqTitle`, and `leadForm` are optional at the type level. Follow the page-kind requirements above.
+- Omit optional metadata, section, block, and CTA fields when the inputs do not support them. Do not fill optional fields with placeholder copy.
+- `sections` has no fixed count or outline. Add only sections that satisfy the page's user intent and are supported by the supplied material.
+- Every section needs a unique kebab-case `id`, a useful H2 `title`, and at least one block.
+- Every `anchorLinks[].href` must exactly match a generated section ID, `#frequently-asked-questions`, or `#contact`.
+- Keep one visible H1 in `hero.title`. Section titles act as H2s. `heading` blocks act as H3s.
+- Use `surface: "contrast"` sparingly. Use the `stats` block only inside a contrast section because the current component renders stats with light text.
+- Text fields render as plain text. Do not use HTML, JSX, Markdown, Markdown links, or escaped markup in any text, FAQ answer, heading, label, or description.
+- Use structured `href` fields for links. `card-grid`, `location-grid`, and `project-grid` hrefs must be verified internal routes.
+- Set `external: true` for external `OgdenLink` URLs. Never mark phone, email, hash, or internal links as external.
+- Use only verified internal routes and supplied image paths. Do not guess a slug or asset path.
+- Every image needs its real dimensions and descriptive alt text. Do not invent an image, reuse an unrelated image, or keyword-stuff alt text.
+- `metadata.canonicalPath` must exactly equal `pageHref`.
+- Use an accurate `dateModified` for the content being generated. Do not use a future date or a supplied research date as the page update date.
+- Make `metadata.title`, `metadata.description`, hero copy, FAQs, and section copy unique to this URL.
+- Use `seoIntent.pageOwns` and `pageDoesNotOwn` to prevent overlap with existing service, location, guide, and index pages.
+- Write for homeowners in clear, natural American English at roughly a 7th- to 9th-grade reading level.
+- Prefer direct, useful copy over generic claims such as "best-in-class," "unmatched quality," or "dream space."
+- Do not fabricate testimonials, ratings, project counts, client counts, prices, warranties, schedules, credentials, code requirements, permits, inspection outcomes, financing, or guarantees.
+- Do not describe Ogden Construction as serving a location or offering a service unless that fact is supplied by the project data or the generation request.
+- Do not include schema objects. Metadata and schema are derived from `OgdenPageData` elsewhere in the project.
+- Do not include React components, imports from page components, class names, layout instructions, or presentation decisions.
+- Before returning the file, confirm mentally that it satisfies `OgdenPageData`, uses only supported blocks, has no duplicate object keys, and contains no placeholder text.
+
+## Compatibility boundary
+
+This v1 contract is directly compatible with `OgdenPageData`, `OgdenPageTemplate`, `buildOgdenPageMetadata`, and `OgdenPageStructuredData`.
+
+The current legacy service route still consumes `ServiceData`, and several location, guide, portfolio, About, and Contact routes are still hardcoded. A file generated from this contract becomes renderable after that route is wired to `OgdenPageTemplate`; the data file alone does not migrate a route.
+
+Do not generate the legacy `ServiceData` shape when this contract is requested. The goal is to move page families toward one shared data model.
+
+If a future page needs a new page kind or a content feature not listed here—such as comparison tables, inline images, galleries, citations, source lists, maps, video, or case-study metrics—extend `OgdenPageData` and `OgdenPageTemplate` first, then publish a new contract version. Do not silently encode unsupported content into an existing field.
