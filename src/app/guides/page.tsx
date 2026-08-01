@@ -38,7 +38,6 @@ export async function generateMetadata() {
     title: `${PAGE_TITLE} | Ogden Construction`,
     description: PAGE_DESCRIPTION,
     path: PAGE_PATH,
-    imagePath: OG_IMAGE,
   });
 }
 

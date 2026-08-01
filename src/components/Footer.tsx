@@ -1,5 +1,9 @@
 // src/components/Footer.tsx
 import Image from "next/image";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
 export const Footer = () => {
   return (
     <footer className="bg-primary text-white py-10">
@@ -19,7 +23,14 @@ export const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
             <p className="mb-2">(530) 919-7408</p>
-            <p className="mb-2">info@ogden-construction.com</p>
+            <p className="mb-2">
+              <a
+                href={SITE_CONTACT_EMAIL_HREF}
+                className="underline decoration-white/35 underline-offset-4 transition hover:text-amber-300"
+              >
+                {SITE_CONTACT_EMAIL}
+              </a>
+            </p>
             <p>
               Available by call, text, or email
               <br />

@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Layout } from "@/components/Layout";
 import { ToasterProvider } from "@/components/ToasterProvider";
+import { getMetadataBase, siteMetadata } from "@/lib/metadata";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -15,6 +17,30 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
+  title: {
+    default: siteMetadata.name,
+    template: "%s | Ogden Construction",
+  },
+  applicationName: siteMetadata.name,
+  description: siteMetadata.defaultDescription,
+  openGraph: {
+    type: "website",
+    siteName: siteMetadata.name,
+    images: [
+      {
+        url: siteMetadata.defaultOgImage,
+        alt: siteMetadata.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [siteMetadata.defaultOgImage],
+  },
+};
 
 export default function RootLayout({
   children,

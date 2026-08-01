@@ -102,7 +102,7 @@ export default async function LocationPage() {
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/og-image.jpg"
+            src="/images/projects/south-lake-tahoe-trex-deck.webp"
             alt={`${cityName} deck builder – custom deck construction in ${cityName}`}
             fill
             sizes="100vw"

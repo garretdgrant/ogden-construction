@@ -7,6 +7,7 @@ type FaqSectionProps = {
   description?: string;
   ctaHref?: string;
   ctaLabel?: string;
+  showCta?: boolean;
 };
 
 export const FaqSection = ({
@@ -15,6 +16,7 @@ export const FaqSection = ({
   description,
   ctaHref = "/contact",
   ctaLabel = "Get in Touch",
+  showCta = true,
 }: FaqSectionProps) => {
   return (
     <section
@@ -81,32 +83,34 @@ export const FaqSection = ({
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col items-center gap-4 rounded-2xl bg-stone-50 border-2 border-accent/20 p-8 shadow-lg">
-            <p className="text-lg text-gray-700 font-medium">
-              Still have questions? We're here to help.
-            </p>
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300 hover:scale-[1.02] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              {ctaLabel}
-              <svg
-                className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        {showCta ? (
+          <div className="mt-16 text-center">
+            <div className="inline-flex flex-col items-center gap-4 rounded-2xl bg-stone-50 border-2 border-accent/20 p-8 shadow-lg">
+              <p className="text-lg text-gray-700 font-medium">
+                Still have questions? We're here to help.
+              </p>
+              <Link
+                href={ctaHref}
+                className="inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300 hover:scale-[1.02] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </Link>
+                {ctaLabel}
+                <svg
+                  className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </section>
   );

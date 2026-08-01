@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import type { OgdenPageData } from "@/lib/ogden-page.types";
+import { SITE_CONTACT_EMAIL } from "@/lib/site-contact";
 
 type PageMetadataInput = {
   title: string;
   description: string;
   path: string;
-  imagePath?: string;
   type?: "website" | "article";
 };
 
@@ -34,9 +35,9 @@ type LocalBusinessOverrides = {
 const PRODUCTION_URL = "https://www.ogden-construction.com";
 const SITE_NAME = "Ogden Construction";
 const BUSINESS_NAME = "Ogden Construction";
-const DEFAULT_OG_IMAGE = "/og-image.jpg";
+const DEFAULT_OG_IMAGE = "/images/ogden-construction-og.webp";
 const ABOUT_OG_IMAGE = "/images/about/ogdenTruck.jpg";
-const EMAIL = "info@ogden-construction.com";
+const EMAIL = SITE_CONTACT_EMAIL;
 const PHONE = "+1-530-919-7408";
 
 const SERVICE_TYPES = [
@@ -90,6 +91,13 @@ const SAME_AS = [
 const BASE_DESCRIPTION =
   "Ogden Construction is a licensed and insured contractor based in Placerville, CA. We specialize in custom decks, remodels, and new home construction throughout El Dorado County and the surrounding areas.";
 
+export const siteMetadata = {
+  name: SITE_NAME,
+  productionUrl: PRODUCTION_URL,
+  defaultDescription: BASE_DESCRIPTION,
+  defaultOgImage: DEFAULT_OG_IMAGE,
+} as const;
+
 export function getMetadataBase(): URL {
   const baseUrl =
     process.env.NODE_ENV === "development"
@@ -125,16 +133,17 @@ export function buildPageMetadata({
   title,
   description,
   path,
-  imagePath = DEFAULT_OG_IMAGE,
   type = "website",
 }: PageMetadataInput): Metadata {
   const metadataBase = getMetadataBase();
   const canonicalUrl = buildCanonicalUrl(path, metadataBase);
-  const ogImageUrl = buildOgImageUrl(imagePath, metadataBase);
+  const ogImageUrl = buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase);
 
   return {
     metadataBase,
-    title,
+    title: {
+      absolute: title,
+    },
     description,
     alternates: {
       canonical: canonicalUrl,
@@ -147,8 +156,8 @@ export function buildPageMetadata({
       images: [
         {
           url: ogImageUrl,
-          width: 1200,
-          height: 630,
+          width: 1100,
+          height: 578,
           alt: title,
         },
       ],
@@ -159,6 +168,58 @@ export function buildPageMetadata({
       title,
       description,
       images: [ogImageUrl],
+    },
+  };
+}
+
+export function buildOgdenPageMetadata(data: OgdenPageData): Metadata {
+  const metadataBase = getMetadataBase();
+  const canonicalUrl = buildCanonicalUrl(
+    data.metadata.canonicalPath,
+    metadataBase,
+  );
+  const imageUrl = buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase);
+  const ogTitle = data.metadata.ogTitle ?? data.metadata.title;
+  const ogDescription =
+    data.metadata.ogDescription ?? data.metadata.description;
+  const imageDimensions =
+    data.metadata.ogImageWidth && data.metadata.ogImageHeight
+      ? {
+          width: data.metadata.ogImageWidth,
+          height: data.metadata.ogImageHeight,
+        }
+      : {};
+
+  return {
+    metadataBase,
+    title: {
+      absolute: data.metadata.title,
+    },
+    description: data.metadata.description,
+    keywords: [data.metadata.focusKeyword, ...data.metadata.supportingKeywords],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      url: canonicalUrl,
+      siteName: SITE_NAME,
+      locale: "en_US",
+      type: "website",
+      images: [
+        {
+          url: imageUrl,
+          ...imageDimensions,
+          alt: data.metadata.ogImageAlt ?? ogTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: ogDescription,
+      images: [imageUrl],
     },
   };
 }

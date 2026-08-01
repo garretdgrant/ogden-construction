@@ -31,7 +31,6 @@ export async function generateMetadata() {
     description:
       "Explore our expert construction services in Placerville, El Dorado Hills, Tahoe, and beyond. We specialize in custom deck building, home remodeling, and additions.",
     path: "/services",
-    imagePath: "/images/about/ogdenTruck.jpg",
   });
 }
 

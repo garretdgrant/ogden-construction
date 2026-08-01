@@ -51,7 +51,6 @@ export async function generateMetadata() {
     description:
       "Learn about Ogden Construction, a trusted Placerville-based deck builder and general contractor. We’ve been crafting custom decks, home additions, and remodels throughout El Dorado County since 2008.",
     path: "/about",
-    imagePath: "/images/about/ogdenTruck.jpg",
   });
 }
 

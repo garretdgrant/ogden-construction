@@ -1,11 +1,10 @@
-"use client";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { useToast } from "./ui/use-toast";
-import { Phone, Mail, Hammer, MapPin, Send, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Phone, Mail, Hammer, MapPin } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
 
 // Social media icon components
 const FacebookIcon = ({ className }: { className?: string }) => (
@@ -21,47 +20,6 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 );
 
 export const Contact = () => {
-  const { toast } = useToast();
-  const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        phone: formData.get("phone"),
-        message: formData.get("message"),
-        company: formData.get("company"), // honeypot
-      }),
-    });
-
-    setIsSubmitting(false);
-
-    if (res.ok) {
-      form.reset();
-      router.push("/contact/thank-you");
-    } else {
-      const data = await res.json();
-      const errorMessage =
-        data?.error || "There was a problem sending your message.";
-
-      toast({
-        title: "Oops!",
-        description: errorMessage,
-        variant: "destructive",
-      });
-    }
-  };
-
   return (
     <section
       id="contact-section"
@@ -106,137 +64,7 @@ export const Contact = () => {
                 Send Us a Message
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-5 relative">
-                {/* Name Field */}
-                <div className="relative group">
-                  <label
-                    htmlFor="name"
-                    className={`absolute -top-2.5 left-3 px-2 bg-white text-xs font-medium transition-colors duration-200 ${
-                      focusedField === "name" ? "text-accent" : "text-stone-500"
-                    }`}
-                  >
-                    Full Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="John Smith"
-                    className="w-full h-12 border-2 border-stone-200 focus:border-accent focus:ring-accent/20 rounded-lg transition-all duration-200"
-                    required
-                    onFocus={() => setFocusedField("name")}
-                    onBlur={() => setFocusedField(null)}
-                  />
-                </div>
-
-                {/* Honeypot field (hidden from users) */}
-                <div className="hidden">
-                  <label htmlFor="company">Company</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                </div>
-
-                {/* Email & Phone Fields - Side by side on larger screens */}
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div className="relative group">
-                    <label
-                      htmlFor="email"
-                      className={`absolute -top-2.5 left-3 px-2 bg-white text-xs font-medium transition-colors duration-200 ${
-                        focusedField === "email"
-                          ? "text-accent"
-                          : "text-stone-500"
-                      }`}
-                    >
-                      Email Address
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      className="w-full h-12 border-2 border-stone-200 focus:border-accent focus:ring-accent/20 rounded-lg transition-all duration-200"
-                      required
-                      onFocus={() => setFocusedField("email")}
-                      onBlur={() => setFocusedField(null)}
-                    />
-                  </div>
-
-                  <div className="relative group">
-                    <label
-                      htmlFor="phone"
-                      className={`absolute -top-2.5 left-3 px-2 bg-white text-xs font-medium transition-colors duration-200 ${
-                        focusedField === "phone"
-                          ? "text-accent"
-                          : "text-stone-500"
-                      }`}
-                    >
-                      Phone Number
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="(530) 555-0123"
-                      className="w-full h-12 border-2 border-stone-200 focus:border-accent focus:ring-accent/20 rounded-lg transition-all duration-200"
-                      required
-                      onFocus={() => setFocusedField("phone")}
-                      onBlur={() => setFocusedField(null)}
-                    />
-                  </div>
-                </div>
-
-                {/* Message Field */}
-                <div className="relative group">
-                  <label
-                    htmlFor="message"
-                    className={`absolute -top-2.5 left-3 px-2 bg-white text-xs font-medium transition-colors duration-200 ${
-                      focusedField === "message"
-                        ? "text-accent"
-                        : "text-stone-500"
-                    }`}
-                  >
-                    Project Details
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your project... What are you looking to build or remodel?"
-                    className="w-full min-h-[160px] border-2 border-stone-200 focus:border-accent focus:ring-accent/20 rounded-lg transition-all duration-200 resize-none"
-                    required
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-14 bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      <span>Sending Message...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Start Your Free Consultation</span>
-                      <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </>
-                  )}
-                </Button>
-
-                {/* Privacy Note */}
-                <p className="text-xs text-stone-500 text-center mt-4">
-                  We respect your privacy. Your information will never be shared
-                  with third parties.
-                </p>
-              </form>
+              <ContactForm idPrefix="contact-page" className="relative" />
             </div>
           </div>
 
@@ -290,7 +118,7 @@ export const Contact = () => {
                 </a>
 
                 <a
-                  href="mailto:info@ogden-construction.com"
+                  href={SITE_CONTACT_EMAIL_HREF}
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-stone-50 transition-colors duration-200 group"
                 >
                   <div className="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-200">
@@ -299,7 +127,7 @@ export const Contact = () => {
                   <div className="flex-1 min-w-0">
                     <p className="text-xs text-stone-500 font-medium">Email</p>
                     <p className="text-sm font-semibold text-stone-700 group-hover:text-accent transition-colors duration-200 truncate">
-                      info@ogden-construction.com
+                      {SITE_CONTACT_EMAIL}
                     </p>
                   </div>
                 </a>

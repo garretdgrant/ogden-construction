@@ -6,7 +6,7 @@ import {
   Hammer,
   Image as ImageIcon,
   Users,
-  Phone,
+  Mail,
   Menu,
   MapPin,
   ChevronDown,
@@ -27,6 +27,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { ContactModalTrigger } from "@/components/ContactModalTrigger";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -56,25 +57,25 @@ export const Header = () => {
       <div className="container mx-auto px-4 py-5">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex items-center justify-between mb-4 md:mb-0">
-            <div className="flex items-center group">
-              {/* Logo with glow effect */}
-              <div className="relative">
-                <div className="absolute inset-0 bg-accent/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Link
+              href="/"
+              aria-label="Ogden Construction home"
+              className="group flex items-center gap-2"
+            >
+              <span className="relative h-12 w-12 shrink-0 overflow-hidden">
                 <Image
-                  src="/images/ogden-logo.png"
-                  alt="Ogden Construction logo"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 mr-3 relative z-10 group-hover:scale-110 transition-transform duration-300"
+                  src="/images/ogden-construction-nav-logo.webp"
+                  alt=""
+                  width={1536}
+                  height={1024}
+                  priority
+                  className="absolute left-1/2 top-1/2 h-auto w-[118px] max-w-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 group-hover:scale-105"
                 />
-              </div>
-              <Link
-                href="/"
-                className="text-2xl font-playfair font-bold text-primary tracking-tight hover:text-accent transition-colors duration-300"
-              >
+              </span>
+              <span className="text-xl font-playfair font-bold tracking-tight text-primary transition-colors duration-300 group-hover:text-accent sm:text-2xl">
                 Ogden Construction
-              </Link>
-            </div>
+              </span>
+            </Link>
             <div className="md:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
@@ -150,15 +151,22 @@ export const Header = () => {
                     </div>
 
                     {/* Contact CTA - highlighted */}
-                    <SheetClose asChild>
-                      <Link
-                        href="/contact"
-                        className={`group flex items-center justify-center space-x-3 p-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent/90 transition-all duration-300 hover:shadow-lg mt-6 ${isActive("/contact")}`}
-                      >
-                        <Phone className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                    {pathname === "/" ? (
+                      <ContactModalTrigger className="group mt-6 flex w-full items-center justify-center space-x-3 rounded-lg bg-accent p-4 font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg">
+                        <Mail className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                         <span className="text-lg">Contact Us</span>
-                      </Link>
-                    </SheetClose>
+                      </ContactModalTrigger>
+                    ) : (
+                      <SheetClose asChild>
+                        <Link
+                          href="/contact"
+                          className={`group flex items-center justify-center space-x-3 p-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent/90 transition-all duration-300 hover:shadow-lg mt-6 ${isActive("/contact")}`}
+                        >
+                          <Mail className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-lg">Contact Us</span>
+                        </Link>
+                      </SheetClose>
+                    )}
                   </nav>
                 </SheetContent>
               </Sheet>
@@ -226,13 +234,20 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link
-              href="/contact"
-              className={`group flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent/90 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${isActive("/contact")}`}
-            >
-              <Phone className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
-              <span>Contact</span>
-            </Link>
+            {pathname === "/" ? (
+              <ContactModalTrigger className="group flex items-center space-x-2 rounded-lg bg-accent px-6 py-2.5 font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-lg">
+                <Mail className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+                <span>Contact</span>
+              </ContactModalTrigger>
+            ) : (
+              <Link
+                href="/contact"
+                className={`group flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent/90 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${isActive("/contact")}`}
+              >
+                <Mail className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                <span>Contact</span>
+              </Link>
+            )}
           </nav>
         </div>
       </div>

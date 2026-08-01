@@ -5,7 +5,7 @@ import Link from "next/link";
 // TODO: Update to real projects
 const projects = [
   {
-    image: "/images/projects/trexTahoeSquoosh.jpg",
+    image: "/images/projects/south-lake-tahoe-trex-deck.webp",
     title: "Custom Trex Deck - Black Handrails",
     location: "Tahoe, CA",
   },

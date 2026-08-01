@@ -9,7 +9,7 @@ export const Hero = () => {
       {/* Optimized background image with parallax effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/projects/trexTahoeSquoosh.jpg"
+          src="/images/projects/south-lake-tahoe-trex-deck.webp"
           alt="Custom Trex deck construction in South Lake Tahoe"
           width={1920}
           height={1080}

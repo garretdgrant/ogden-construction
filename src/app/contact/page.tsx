@@ -9,7 +9,6 @@ export async function generateMetadata() {
     description:
       "Reach out to Ogden Construction for expert deck building, home additions, and remodeling services in Placerville and nearby towns. Call or request a quote today.",
     path: "/contact",
-    imagePath: "/images/about/ogdenTruck.jpg",
   });
 }
 

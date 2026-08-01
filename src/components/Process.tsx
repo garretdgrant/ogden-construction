@@ -1,4 +1,6 @@
-const steps = [
+import type { ProcessStep } from "@/app/services/data/services";
+
+const defaultSteps: ProcessStep[] = [
   {
     title: "Consultation",
     description:
@@ -21,7 +23,13 @@ const steps = [
   },
 ];
 
-export const Process = () => {
+type ProcessProps = {
+  steps?: ProcessStep[];
+};
+
+export const Process = ({ steps }: ProcessProps) => {
+  const processSteps = steps?.length ? steps : defaultSteps;
+
   return (
     <section
       id="process"
@@ -61,7 +69,7 @@ export const Process = () => {
           <div className="hidden lg:block absolute top-[4.5rem] left-0 right-0 h-0.5 bg-gradient-to-r from-accent/20 via-accent to-accent/20"></div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
+            {processSteps.map((step, index) => (
               <div
                 key={step.title}
                 className={`relative opacity-0 animate-fade-up stagger-${index + 1}`}
@@ -91,7 +99,7 @@ export const Process = () => {
                 </div>
 
                 {/* Arrow connector for mobile/tablet */}
-                {index < steps.length - 1 && (
+                {index < processSteps.length - 1 && (
                   <div className="lg:hidden flex justify-center my-4">
                     <svg
                       className="w-6 h-6 text-accent/40"
