@@ -1,4 +1,5 @@
 import type { OgdenPageData } from "@/lib/ogden-page.types";
+import type { ServiceDetailPageData } from "@/lib/page-data/service/deck-building.data";
 import {
   buildCanonicalLocalBusinessNode,
   buildCanonicalWebsiteNode,
@@ -144,7 +145,127 @@ function buildServicePageEntity(
   };
 }
 
-export function buildOgdenPageSchema(data: OgdenPageData) {
+type SupportedPageData = OgdenPageData | ServiceDetailPageData;
+
+function isServiceDetailPageData(
+  data: SupportedPageData,
+): data is ServiceDetailPageData {
+  return "template" in data && data.template === "service-detail";
+}
+
+function buildServiceDetailPageSchema(data: ServiceDetailPageData) {
+  const metadataBase = getMetadataBase();
+  const { websiteId } = getSchemaEntityIds(metadataBase);
+  const pageUrl = buildCanonicalUrl(data.pageHref, metadataBase);
+  const webpageId = `${pageUrl}#webpage`;
+  const serviceId = `${pageUrl}#service`;
+  const faqId = `${pageUrl}#faq`;
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+  const primaryImageId = `${pageUrl}#primaryimage`;
+  const heroImageUrl = buildOgImageUrl(data.hero.image.src, metadataBase);
+  const includesFaq = Boolean(
+    data.structuredData.includeFaqSchema && data.faqs?.length,
+  );
+  const includesBreadcrumb = data.structuredData.includeBreadcrumbSchema;
+
+  const primaryImage = {
+    "@type": "ImageObject",
+    "@id": primaryImageId,
+    url: heroImageUrl,
+    contentUrl: heroImageUrl,
+    width: data.hero.image.width,
+    height: data.hero.image.height,
+    ...(data.hero.image.caption ? { caption: data.hero.image.caption } : {}),
+    description: data.hero.image.alt,
+    representativeOfPage: true,
+  };
+
+  const service = {
+    "@type": data.structuredData.schemaType,
+    "@id": serviceId,
+    name: data.structuredData.serviceName,
+    serviceType: data.structuredData.serviceType,
+    description: data.hero.description,
+    url: pageUrl,
+    provider: {
+      ...buildServicePageBusiness(metadataBase),
+      name: data.structuredData.providerName,
+    },
+    areaServed: data.structuredData.areaServed.map((name) => ({
+      "@type": "Place",
+      name,
+    })),
+    image: { "@id": primaryImageId },
+    mainEntityOfPage: { "@id": webpageId },
+  };
+
+  const faq = includesFaq
+    ? {
+        "@type": "FAQPage",
+        "@id": faqId,
+        url: `${pageUrl}#frequently-asked-questions`,
+        isPartOf: { "@id": websiteId },
+        mainEntityOfPage: { "@id": webpageId },
+        mainEntity: data.faqs!.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : undefined;
+
+  const breadcrumb = includesBreadcrumb
+    ? {
+        "@type": "BreadcrumbList",
+        "@id": breadcrumbId,
+        itemListElement: data.breadcrumbs.map((crumb, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: crumb.label,
+          item: buildCanonicalUrl(crumb.href, metadataBase),
+        })),
+      }
+    : undefined;
+
+  const webpage = {
+    "@type": "WebPage",
+    "@id": webpageId,
+    url: pageUrl,
+    name: data.metadata.title,
+    description: data.metadata.description,
+    inLanguage: "en-US",
+    dateModified: `${data.dateModified}T00:00:00Z`,
+    isPartOf: getWebsiteReferenceJsonLd(metadataBase),
+    about: getLocalBusinessReferenceJsonLd(metadataBase),
+    publisher: getLocalBusinessReferenceJsonLd(metadataBase),
+    primaryImageOfPage: { "@id": primaryImageId },
+    mainEntity: [
+      { "@id": serviceId },
+      ...(includesFaq ? [{ "@id": faqId }] : []),
+    ],
+    ...(includesBreadcrumb ? { breadcrumb: { "@id": breadcrumbId } } : {}),
+  };
+
+  return {
+    "@context": schemaContext,
+    "@graph": [
+      webpage,
+      primaryImage,
+      service,
+      ...(faq ? [faq] : []),
+      ...(breadcrumb ? [breadcrumb] : []),
+    ],
+  };
+}
+
+export function buildOgdenPageSchema(data: SupportedPageData) {
+  if (isServiceDetailPageData(data)) {
+    return buildServiceDetailPageSchema(data);
+  }
+
   const metadataBase = getMetadataBase();
   const { websiteId } = getSchemaEntityIds(metadataBase);
   const pageUrl = buildCanonicalUrl(data.pageHref, metadataBase);

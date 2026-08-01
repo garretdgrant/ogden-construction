@@ -58,43 +58,36 @@ export const generatedSitemapEntries: GeneratedSitemapEntry[] = [
   },
   {
     "path": "/locations-we-serve/auburn-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/el-dorado-hills-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/folsom-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/napa-valley-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/placerville-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/sacramento-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
@@ -111,44 +104,42 @@ export const generatedSitemapEntries: GeneratedSitemapEntry[] = [
     "priority": 0.7
   },
   {
+    "path": "/services/deck-building",
+    "changeFrequency": "monthly",
+    "priority": 0.7
+  },
+  {
     "path": "/services/deck-construction",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/deck-replacement",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/general-contracting",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/home-additions",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/redwood-decks",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/remodeling",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   },
   {
     "path": "/services/trex-composite-decks",
-    "lastModified": "2026-08-01",
     "changeFrequency": "monthly",
     "priority": 0.8
   }

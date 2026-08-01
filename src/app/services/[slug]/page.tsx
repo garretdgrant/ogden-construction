@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Contact } from "@/components/Contact";
-import { FaqSection } from "@/components/FaqSection";
+import { OgdenFaqSection } from "@/components/ogden-page/OgdenFaqSection";
 import { Process } from "@/components/Process";
 import { AnchorNav } from "@/components/services/AnchorNav";
 import { ContentSection } from "@/components/services/ContentSection";
@@ -133,11 +133,10 @@ export default async function ServicePage({ params }: PageProps) {
       <ServiceGallery images={service.gallery} />
       <Process steps={service.process} />
       {faqItems.length ? (
-        <FaqSection
+        <OgdenFaqSection
           items={faqItems}
-          heading="Frequently Asked Questions"
+          title="Frequently Asked Questions"
           description="Answers to the most common planning, pricing, and process questions for this service."
-          showCta={false}
         />
       ) : isDevelopment ? (
         <section className="bg-stone-50 py-20">

@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { OgdenLeadForm } from "@/components/ogden-page/OgdenLeadForm";
+import { OgdenFaqSection } from "@/components/ogden-page/OgdenFaqSection";
 import type {
   OgdenContentBlock,
   OgdenLink,
@@ -539,44 +540,10 @@ export function OgdenPageTemplate({ data }: OgdenPageTemplateProps) {
       ))}
 
       {data.faqs?.length ? (
-        <section
-          id="frequently-asked-questions"
-          className="scroll-mt-28 bg-stone-100 py-20 md:py-28"
-        >
-          <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-4xl">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
-                Common questions
-              </p>
-              <h2 className="mt-4 text-4xl font-bold text-stone-900 md:text-5xl">
-                {data.faqTitle ?? "Frequently Asked Questions"}
-              </h2>
-              <div className="mt-10 divide-y divide-stone-200 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-                {data.faqs.map((faq, faqIndex) => (
-                  <article
-                    key={`${faq.question}-${faqIndex}`}
-                    className="grid gap-4 p-6 md:grid-cols-[3rem_1fr] md:p-7"
-                  >
-                    <span
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-50 text-sm font-bold text-accent"
-                      aria-hidden="true"
-                    >
-                      {String(faqIndex + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-bold leading-7 text-stone-900">
-                        {faq.question}
-                      </h3>
-                      <p className="mt-3 max-w-3xl leading-7 text-stone-600">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <OgdenFaqSection
+          items={data.faqs}
+          title={data.faqTitle ?? "Frequently Asked Questions"}
+        />
       ) : null}
 
       {data.leadForm ? (

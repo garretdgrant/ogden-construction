@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { FaqSection } from "@/components/FaqSection";
+import { OgdenFaqSection } from "@/components/ogden-page/OgdenFaqSection";
 import { TestimonialCards } from "@/components/TestimonialCards";
 import { locationTestimonials } from "@/lib/testimonials";
 import {
@@ -641,9 +641,9 @@ export default async function LocationPage() {
         </div>
       </section>
 
-      <FaqSection
+      <OgdenFaqSection
         items={faqItems}
-        heading={`${cityName} Deck & Construction FAQ`}
+        title={`${cityName} Deck & Construction FAQ`}
         description={`Answers to common questions about deck building and outdoor construction in ${cityName}.`}
       />
 

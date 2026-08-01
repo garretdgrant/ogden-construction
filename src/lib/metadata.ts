@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { OgdenPageData } from "@/lib/ogden-page.types";
+import type { OgdenMetadata } from "@/lib/ogden-page.types";
 import { SITE_CONTACT_EMAIL } from "@/lib/site-contact";
 
 type PageMetadataInput = {
@@ -170,13 +170,18 @@ export function buildPageMetadata({
   };
 }
 
-export function buildOgdenPageMetadata(data: OgdenPageData): Metadata {
+export function buildOgdenPageMetadata(data: {
+  metadata: OgdenMetadata;
+}): Metadata {
   const metadataBase = getMetadataBase();
   const canonicalUrl = buildCanonicalUrl(
     data.metadata.canonicalPath,
     metadataBase,
   );
-  const imageUrl = buildOgImageUrl(DEFAULT_OG_IMAGE, metadataBase);
+  const imageUrl = buildOgImageUrl(
+    data.metadata.ogImagePath ?? DEFAULT_OG_IMAGE,
+    metadataBase,
+  );
   const ogTitle = data.metadata.ogTitle ?? data.metadata.title;
   const ogDescription =
     data.metadata.ogDescription ?? data.metadata.description;

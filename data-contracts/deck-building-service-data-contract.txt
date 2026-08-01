@@ -1,0 +1,237 @@
+# Ogden Construction Deck-Building Data File Contract
+
+Return only one complete TypeScript file for:
+
+```txt
+src/lib/page-data/service/deck-building.data.ts
+```
+
+Do not include commentary, research notes, implementation steps, React components, metadata functions, schema, imports beyond those shown below, or markdown fences.
+
+```ts
+import type { OgdenPageData } from "@/lib/ogden-page.types";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
+
+export const deckBuildingPageData = {
+  kind: "service",
+  slug: "deck-building",
+  pageHref: "/services/deck-building",
+  dateModified: "YYYY-MM-DD",
+  metadata: {
+    title: "Unique SEO title",
+    description: "Unique SEO description",
+    canonicalPath: "/services/deck-building",
+    ogTitle: "Optional social title",
+    ogDescription: "Optional social description",
+    ogImagePath: "/images/ogden-construction-og.webp",
+    ogImageAlt: "Descriptive social image alt text",
+    ogImageWidth: 1100,
+    ogImageHeight: 578,
+    focusKeyword: "Primary deck-building query",
+    supportingKeywords: ["Relevant supporting query"],
+  },
+  seoIntent: {
+    primaryIntent: "The single commercial searcher goal this page satisfies",
+    geographicFocus: [
+      "El Dorado County",
+      "Lake Tahoe",
+      "Greater Sacramento",
+    ],
+    pageOwns: ["Deck-building queries this URL should rank for"],
+    pageDoesNotOwn: ["Queries assigned to another verified URL"],
+  },
+  business: {
+    legalName: "Ogden Construction Inc.",
+    displayName: "Ogden Construction",
+    foundedYear: 2008,
+    licenseLabel: "California contractor license",
+    licenseNumber: "1042758",
+    phoneDisplay: "(530) 919-7408",
+    phoneHref: "tel:+15309197408",
+    email: SITE_CONTACT_EMAIL,
+    emailHref: SITE_CONTACT_EMAIL_HREF,
+    serviceAreaLabel: "El Dorado County, Lake Tahoe, and Greater Sacramento",
+    serviceAreas: [
+      "Placerville",
+      "South Lake Tahoe",
+      "El Dorado Hills",
+      "Folsom",
+      "Sacramento",
+      "Cameron Park",
+      "Pollock Pines",
+      "Camino",
+      "Auburn",
+    ],
+    hours: [
+      { days: "Monday–Friday", hours: "8:00 AM–5:00 PM" },
+      { days: "Saturday", hours: "By appointment" },
+      { days: "Sunday", hours: "Closed" },
+    ],
+  },
+  hero: {
+    eyebrow: "Short deck-building context",
+    title: "Visible H1",
+    description: "One- or two-sentence service summary",
+    image: {
+      src: "/images/services/deck-construction-hero.webp",
+      alt: "Descriptive alt text for the visible deck collage",
+      width: 1200,
+      height: 800,
+      caption: "Short factual caption",
+    },
+    primaryCta: {
+      label: "Request a Free Consultation",
+      href: "/contact",
+    },
+    secondaryCta: {
+      label: "View Recent Projects",
+      href: "/portfolio",
+    },
+    trustItems: ["Three or four concise, verified trust statements"],
+  },
+  anchorLinks: [
+    { label: "Short navigation label", href: "#matching-section-id" },
+  ],
+  sections: [
+    {
+      id: "unique-kebab-case-anchor",
+      eyebrow: "Optional section context",
+      title: "Section heading",
+      description: "Optional section introduction",
+      surface: "default",
+      blocks: [],
+    },
+    // Add as many useful, SEO-supported sections as the service page benefits from.
+  ],
+  faqTitle: "Optional deck-building FAQ heading",
+  faqs: [
+    {
+      question: "Useful deck-building question?",
+      answer: "Concise, self-contained plain-text answer.",
+    },
+  ],
+  leadForm: {
+    title: "Tell Us About Your Deck Project",
+    description: "Short service-specific invitation",
+    submitLabel: "Request a Free Consultation",
+    privacyText:
+      "We respect your privacy. Your information will only be used to respond to your project request.",
+  },
+  finalCta: {
+    eyebrow: "Optional closing context",
+    title: "Deck-building CTA heading",
+    text: "Concise next-step copy",
+    primaryCta: {
+      label: "Request a Free Consultation",
+      href: "/contact",
+    },
+    secondaryCta: {
+      label: "Browse the Portfolio",
+      href: "/portfolio",
+    },
+  },
+} satisfies OgdenPageData;
+```
+
+Use only these `blocks`:
+
+```ts
+{ type: "paragraph", text: "Plain text only." }
+{ type: "heading", text: "H3 subheading" }
+{ type: "unordered-list", items: ["List item"] }
+{ type: "icon-list", items: [{ title: "Label", text: "Explanation" }] }
+{
+  type: "card-grid",
+  cards: [
+    {
+      title: "Card title",
+      text: "Card description",
+      href: "/optional-verified-route",
+      ctaLabel: "Optional CTA label",
+    },
+  ],
+}
+{
+  type: "location-grid",
+  locations: [
+    {
+      name: "Verified location",
+      text: "Unique location description",
+      href: "/locations-we-serve/verified-location-slug",
+    },
+  ],
+  footerLink: {
+    label: "View All Locations We Serve",
+    href: "/locations-we-serve",
+  },
+}
+{
+  type: "project-grid",
+  projects: [
+    {
+      title: "Verified project title",
+      location: "Verified project location",
+      text: "Verified project description",
+      href: "/verified-internal-route",
+      ctaLabel: "View the Project",
+    },
+  ],
+  footerLink: {
+    label: "Browse the Full Portfolio",
+    href: "/portfolio",
+  },
+}
+{ type: "steps", steps: [{ title: "Step title", text: "Step explanation" }] }
+{ type: "stats", stats: [{ value: "Verified value", label: "Meaning" }] }
+{
+  type: "review-grid",
+  reviews: [
+    {
+      quote: "Exact supplied review",
+      name: "Reviewer name",
+      location: "Reviewer location",
+      project: "Project type",
+    },
+  ],
+  links: [
+    {
+      label: "Review platform",
+      href: "https://verified-external-url",
+      external: true,
+    },
+  ],
+}
+{
+  type: "callout",
+  title: "Callout heading",
+  text: "Callout copy",
+  primaryCta: { label: "Primary action", href: "/verified-route" },
+  secondaryCta: { label: "Optional action", href: "/verified-route" },
+}
+```
+
+Contract rules:
+
+- Supply every required field shown above through `sections` and `finalCta`; omit optional fields rather than inventing values.
+- `sections` has no fixed outline, count, or word limit. Add, remove, title, order, split, and combine sections freely based on useful SEO coverage and the supplied research.
+- Every section needs a unique kebab-case `id`, a useful H2 `title`, and at least one supported block.
+- Add anchor navigation when useful. Every anchor `href` must exactly match a section ID, `#frequently-asked-questions`, or `#contact`.
+- Focus the page on new custom deck building, deck construction, planning, materials, options, site considerations, process, and scope factors supported by the research.
+- Keep city-specific commercial intent on the matching location pages in `src/lib/locations-data.ts`.
+- Keep deck cost research on `/how-much-does-it-cost-to-build-a-deck` and repair-versus-replacement research on `/deck-repair-vs-replacement`.
+- Link naturally to verified service, location, portfolio, guide, and contact routes when useful.
+- Use `icon-list` or `card-grid` for options and materials, `steps` for process content, and `location-grid` only for verified location routes.
+- Use `stats` only in a `contrast` section and only with verified figures.
+- Use `project-grid` and `review-grid` only with supplied, verifiable project and review details.
+- Include useful FAQs and a lead form when they improve the completed page; there is no fixed FAQ count.
+- Use only verified internal routes and supplied image paths. Confirm each image's real dimensions.
+- Text fields render as plain text. Do not use HTML, JSX, Markdown formatting, or inline Markdown links.
+- Write natural American English at roughly a 7th- to 9th-grade reading level.
+- Avoid filler, repeated keyword variations, doorway-page copy, and sections added only to increase length.
+- Do not invent prices, timelines, warranties, financing, product certifications, permit outcomes, engineering requirements, code conclusions, availability, response times, testimonials, ratings, project counts, or completed-project locations.
+- Keep climate, terrain, drainage, snow, heat, and access statements practical and qualified rather than presenting them as engineering advice.
+- Do not include schema objects. Metadata and schema are derived from this data elsewhere in the project.
+- Before returning the file, confirm that it satisfies `OgdenPageData`, uses only supported blocks, contains no duplicate keys, and can replace the thin scaffold without any component changes.

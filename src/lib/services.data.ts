@@ -137,8 +137,8 @@ export const servicesPageData = {
             {
               title: "Custom Deck Construction",
               text: "Plan a new deck around the way you use your home. Ogden Construction builds wood, composite, Trex, elevated, hillside, and second-story decks with stairs, railings, and outdoor living details suited to the property.",
-              href: "/portfolio",
-              ctaLabel: "View Deck Projects",
+              href: "/services/deck-building",
+              ctaLabel: "Explore Deck Building",
             },
             {
               title: "Deck Repair and Replacement",
@@ -377,7 +377,8 @@ export const servicesPageData = {
             },
             {
               value: "3",
-              label: "Core regions served: El Dorado County, Lake Tahoe, and Greater Sacramento",
+              label:
+                "Core regions served: El Dorado County, Lake Tahoe, and Greater Sacramento",
             },
           ],
         },
@@ -452,7 +453,8 @@ export const servicesPageData = {
   faqTitle: "Questions About Ogden Construction Services",
   faqs: [
     {
-      question: "What types of construction projects does Ogden Construction take on?",
+      question:
+        "What types of construction projects does Ogden Construction take on?",
       answer:
         "Ogden Construction works on custom decks, deck repair and replacement, room additions, ADUs and guest houses, residential remodeling, custom homes, and larger rebuilds. The best way to confirm fit is to share your location, project type, and goals during a consultation.",
     },
@@ -487,7 +489,8 @@ export const servicesPageData = {
         "Share your project type, location, goals, and any useful details or photos. Ogden Construction can then discuss the site, the likely planning steps, and whether an on-site review is the right next move.",
     },
     {
-      question: "Does Ogden Construction take on remodeling and new construction as well as decks?",
+      question:
+        "Does Ogden Construction take on remodeling and new construction as well as decks?",
       answer:
         "Yes. Decks are a leading service, but the company also works on additions, ADUs, guest houses, residential remodeling, custom homes, and major rebuilds.",
     },

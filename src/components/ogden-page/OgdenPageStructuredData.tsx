@@ -1,8 +1,9 @@
 import { buildOgdenPageSchema } from "@/lib/ogden-page-schema";
 import type { OgdenPageData } from "@/lib/ogden-page.types";
+import type { ServiceDetailPageData } from "@/lib/page-data/service/deck-building.data";
 
 type OgdenPageStructuredDataProps = {
-  data: OgdenPageData;
+  data: OgdenPageData | ServiceDetailPageData;
 };
 
 export function OgdenPageStructuredData({
