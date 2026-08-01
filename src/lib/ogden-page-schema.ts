@@ -71,16 +71,91 @@ function buildHomepageWebsite(metadataBase: URL) {
   };
 }
 
+function buildServicePageBusiness(metadataBase: URL) {
+  const business = buildCanonicalLocalBusinessNode(metadataBase);
+
+  return {
+    "@type": business["@type"],
+    "@id": business["@id"],
+    name: business.name,
+    legalName: business.legalName,
+    url: business.url,
+    description: business.description,
+    foundingDate: business.foundingDate,
+    email: business.email,
+    telephone: business.telephone,
+    priceRange: business.priceRange,
+    address: business.address,
+    areaServed: business.areaServed,
+    openingHoursSpecification: business.openingHoursSpecification,
+    contactPoint: business.contactPoint,
+    founder: buildHomepagePerson(metadataBase),
+    identifier: business.identifier,
+    sameAs: business.sameAs,
+    logo: business.logo,
+    image: business.image,
+  };
+}
+
+function buildServicePageEntity(
+  data: OgdenPageData,
+  metadataBase: URL,
+  pageUrl: string,
+) {
+  const serviceCards =
+    data.sections
+      .find((section) => section.id === "residential-services")
+      ?.blocks.flatMap((block) =>
+        block.type === "card-grid" ? block.cards : [],
+      ) ?? [];
+
+  return {
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: data.hero.title,
+    description: data.hero.description,
+    url: pageUrl,
+    serviceType: serviceCards.length
+      ? serviceCards.map((card) => card.title)
+      : data.hero.title,
+    provider: buildServicePageBusiness(metadataBase),
+    areaServed: data.business.serviceAreas.map((name) => ({
+      "@type": "Place",
+      name,
+    })),
+    ...(serviceCards.length
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            "@id": `${pageUrl}#service-catalog`,
+            name: `${data.business.displayName} Residential Construction Services`,
+            numberOfItems: serviceCards.length,
+            itemListElement: serviceCards.map((card) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: card.title,
+                description: card.text,
+              },
+            })),
+          },
+        }
+      : {}),
+  };
+}
+
 export function buildOgdenPageSchema(data: OgdenPageData) {
   const metadataBase = getMetadataBase();
   const { websiteId } = getSchemaEntityIds(metadataBase);
   const pageUrl = buildCanonicalUrl(data.pageHref, metadataBase);
   const webpageId = `${pageUrl}#webpage`;
   const faqId = `${pageUrl}#faq`;
+  const serviceId = `${pageUrl}#service`;
   const primaryImageId = `${pageUrl}#primaryimage`;
   const heroImageUrl = buildOgImageUrl(data.hero.image.src, metadataBase);
   const emitsCanonicalEntities = data.kind === "about";
   const mainEntityReferences = [
+    ...(data.kind === "service" ? [{ "@id": serviceId }] : []),
     ...(data.faqs?.length ? [{ "@id": faqId }] : []),
   ];
 
@@ -157,6 +232,34 @@ export function buildOgdenPageSchema(data: OgdenPageData) {
       mainEntity: [
         buildHomepageBusiness(metadataBase),
         ...(homepageFaq ? [homepageFaq] : []),
+      ],
+    };
+  }
+
+  if (data.kind === "service") {
+    const servicePageFaq = faq
+      ? {
+          "@type": faq["@type"],
+          "@id": faq["@id"],
+          url: faq.url,
+          mainEntity: faq.mainEntity,
+        }
+      : undefined;
+
+    return {
+      "@context": schemaContext,
+      "@type": webPageTypes[data.kind],
+      "@id": webpageId,
+      url: pageUrl,
+      name: data.metadata.title,
+      description: data.metadata.description,
+      inLanguage: "en-US",
+      dateModified: `${data.dateModified}T00:00:00Z`,
+      isPartOf: buildHomepageWebsite(metadataBase),
+      primaryImageOfPage: primaryImage,
+      mainEntity: [
+        buildServicePageEntity(data, metadataBase, pageUrl),
+        ...(servicePageFaq ? [servicePageFaq] : []),
       ],
     };
   }
