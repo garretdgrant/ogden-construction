@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 type ContactFormProps = {
   className?: string;
+  compactOnShortScreens?: boolean;
   idPrefix?: string;
   privacyText?: string;
   submitLabel?: string;
@@ -21,6 +22,7 @@ const fieldClassName =
 
 export function ContactForm({
   className,
+  compactOnShortScreens = false,
   idPrefix,
   privacyText = "We respect your privacy. Your information will only be used to respond to your project request.",
   submitLabel = "Start Your Free Consultation",
@@ -77,7 +79,14 @@ export function ContactForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className={cn("space-y-5", className)}>
+    <form
+      onSubmit={handleSubmit}
+      className={cn(
+        "space-y-5",
+        compactOnShortScreens && "[@media(max-height:700px)]:space-y-2.5",
+        className,
+      )}
+    >
       <div aria-hidden="true" className="hidden">
         <label htmlFor={`${prefix}-company`}>Company</label>
         <input
@@ -92,7 +101,11 @@ export function ContactForm({
       <div>
         <label
           htmlFor={`${prefix}-name`}
-          className="text-sm font-semibold text-stone-800"
+          className={cn(
+            "text-sm font-semibold text-stone-800",
+            compactOnShortScreens &&
+              "[@media(max-height:700px)]:text-xs [@media(max-height:700px)]:leading-4",
+          )}
         >
           Full Name
         </label>
@@ -101,16 +114,29 @@ export function ContactForm({
           name="name"
           autoComplete="name"
           placeholder="John Smith"
-          className={fieldClassName}
+          className={cn(
+            fieldClassName,
+            compactOnShortScreens &&
+              "[@media(max-height:700px)]:mt-1 [@media(max-height:700px)]:min-h-10 [@media(max-height:700px)]:px-3",
+          )}
           required
         />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div
+        className={cn(
+          "grid gap-5 sm:grid-cols-2",
+          compactOnShortScreens && "[@media(max-height:700px)]:gap-2.5",
+        )}
+      >
         <div>
           <label
             htmlFor={`${prefix}-email`}
-            className="text-sm font-semibold text-stone-800"
+            className={cn(
+              "text-sm font-semibold text-stone-800",
+              compactOnShortScreens &&
+                "[@media(max-height:700px)]:text-xs [@media(max-height:700px)]:leading-4",
+            )}
           >
             Email Address
           </label>
@@ -121,7 +147,11 @@ export function ContactForm({
             autoComplete="email"
             inputMode="email"
             placeholder="john@example.com"
-            className={fieldClassName}
+            className={cn(
+              fieldClassName,
+              compactOnShortScreens &&
+                "[@media(max-height:700px)]:mt-1 [@media(max-height:700px)]:min-h-10 [@media(max-height:700px)]:px-3",
+            )}
             required
           />
         </div>
@@ -129,7 +159,11 @@ export function ContactForm({
         <div>
           <label
             htmlFor={`${prefix}-phone`}
-            className="text-sm font-semibold text-stone-800"
+            className={cn(
+              "text-sm font-semibold text-stone-800",
+              compactOnShortScreens &&
+                "[@media(max-height:700px)]:text-xs [@media(max-height:700px)]:leading-4",
+            )}
           >
             Phone Number
           </label>
@@ -140,7 +174,11 @@ export function ContactForm({
             autoComplete="tel"
             inputMode="tel"
             placeholder="(530) 555-0123"
-            className={fieldClassName}
+            className={cn(
+              fieldClassName,
+              compactOnShortScreens &&
+                "[@media(max-height:700px)]:mt-1 [@media(max-height:700px)]:min-h-10 [@media(max-height:700px)]:px-3",
+            )}
             required
           />
         </div>
@@ -149,7 +187,11 @@ export function ContactForm({
       <div>
         <label
           htmlFor={`${prefix}-message`}
-          className="text-sm font-semibold text-stone-800"
+          className={cn(
+            "text-sm font-semibold text-stone-800",
+            compactOnShortScreens &&
+              "[@media(max-height:700px)]:text-xs [@media(max-height:700px)]:leading-4",
+          )}
         >
           Project Details
         </label>
@@ -157,7 +199,12 @@ export function ContactForm({
           id={`${prefix}-message`}
           name="message"
           placeholder="Tell us about your project, location, and ideal timeline."
-          className={`${fieldClassName} min-h-36 resize-y py-3`}
+          className={cn(
+            fieldClassName,
+            "min-h-36 resize-y py-3",
+            compactOnShortScreens &&
+              "[@media(max-height:700px)]:mt-1 [@media(max-height:700px)]:min-h-16 [@media(max-height:700px)]:px-3 [@media(max-height:700px)]:py-2",
+          )}
           required
         />
       </div>
@@ -165,7 +212,11 @@ export function ContactForm({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="flex min-h-14 w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 font-bold text-white shadow-lg shadow-accent/15 transition hover:-translate-y-0.5 hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-70"
+        className={cn(
+          "flex min-h-14 w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 font-bold text-white shadow-lg shadow-accent/15 transition hover:-translate-y-0.5 hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-70",
+          compactOnShortScreens &&
+            "[@media(max-height:700px)]:min-h-11 [@media(max-height:700px)]:text-sm",
+        )}
       >
         {isSubmitting ? (
           <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
@@ -175,7 +226,12 @@ export function ContactForm({
         {isSubmitting ? "Sending message..." : submitLabel}
       </Button>
 
-      <p className="text-center text-xs leading-5 text-stone-500">
+      <p
+        className={cn(
+          "text-center text-xs leading-5 text-stone-500",
+          compactOnShortScreens && "[@media(max-height:700px)]:leading-4",
+        )}
+      >
         {privacyText}
       </p>
     </form>
