@@ -15,20 +15,25 @@ import {
 type ContactModalTriggerProps = {
   children: ReactNode;
   className?: string;
+  "aria-label"?: string;
 };
 
 export function ContactModalTrigger({
   children,
   className,
+  "aria-label": ariaLabel,
 }: ContactModalTriggerProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button type="button" className={className}>
+        <button type="button" className={className} aria-label={ariaLabel}>
           {children}
         </button>
       </DialogTrigger>
-      <DialogContent className="max-h-[calc(100vh-2rem)] max-w-2xl overflow-y-auto border-stone-200 bg-[#f7f2e9] p-0 shadow-2xl sm:rounded-2xl">
+      <DialogContent
+        className="max-h-[calc(100vh-2rem)] max-w-2xl overflow-y-auto border-stone-200 bg-[#f7f2e9] p-0 shadow-2xl sm:rounded-2xl"
+        closeButtonClassName="text-white opacity-100 hover:bg-white/10 focus:ring-white focus:ring-offset-stone-900 data-[state=open]:bg-transparent data-[state=open]:text-white"
+      >
         <div className="border-b border-stone-200 bg-stone-900 px-6 py-7 text-white sm:px-8">
           <DialogHeader>
             <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-amber-300 text-stone-900">

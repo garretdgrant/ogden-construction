@@ -9,126 +9,147 @@ export type GeneratedSitemapEntry = {
 
 export const generatedSitemapEntries: GeneratedSitemapEntry[] = [
   {
-    path: "/",
-    lastModified: "2026-08-01",
-    changeFrequency: "monthly",
-    priority: 1,
+    "path": "/",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 1
   },
   {
-    path: "/about",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/about",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/contact",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/contact",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/deck-repair-vs-replacement",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/deck-repair-vs-replacement",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/guides",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/guides",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/how-much-does-a-deck-add-to-home-value",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/how-much-does-a-deck-add-to-home-value",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/how-much-does-it-cost-to-build-a-deck",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/how-much-does-it-cost-to-build-a-deck",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/locations-we-serve",
-    lastModified: "2026-01-15",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/locations-we-serve",
+    "lastModified": "2026-01-15",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/locations-we-serve/auburn-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/auburn-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/el-dorado-hills-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/el-dorado-hills-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/folsom-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/folsom-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/napa-valley-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/napa-valley-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/placerville-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/placerville-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/sacramento-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/sacramento-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/locations-we-serve/south-lake-tahoe-deck-builder-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/portfolio",
-    lastModified: "2026-01-15",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/portfolio",
+    "lastModified": "2026-01-15",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/services",
-    changeFrequency: "monthly",
-    priority: 0.7,
+    "path": "/services",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.7
   },
   {
-    path: "/services/deck-construction",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/deck-construction",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/deck-replacement",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/deck-replacement",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/general-contracting",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/general-contracting",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/home-additions",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/home-additions",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/redwood-decks",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/redwood-decks",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/remodeling",
-    changeFrequency: "monthly",
-    priority: 0.8,
+    "path": "/services/remodeling",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
   },
   {
-    path: "/services/trex-composite-decks",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
+    "path": "/services/trex-composite-decks",
+    "lastModified": "2026-08-01",
+    "changeFrequency": "monthly",
+    "priority": 0.8
+  }
 ];

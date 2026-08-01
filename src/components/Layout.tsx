@@ -1,6 +1,7 @@
 // src/components/Layout.tsx
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { StickyConsultButton } from "./StickyConsultButton";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,6 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <main className="flex-grow">{children}</main>
       <Footer />
+      <StickyConsultButton />
     </div>
   );
 };
