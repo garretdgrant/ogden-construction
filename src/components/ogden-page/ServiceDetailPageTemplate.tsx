@@ -22,7 +22,7 @@ import { OgdenFaqSection } from "@/components/ogden-page/OgdenFaqSection";
 import type {
   ServiceDetailCustomSection,
   ServiceDetailPageData,
-} from "@/lib/page-data/service/deck-building.data";
+} from "@/lib/service-detail-page.types";
 
 type ServiceDetailPageTemplateProps = {
   data: ServiceDetailPageData;

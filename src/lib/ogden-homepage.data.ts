@@ -205,7 +205,7 @@ export const ogdenHomepageData = {
             {
               title: "New Deck Construction",
               text: "Build a custom ground-level, raised, hillside, or multi-level deck that fits your home and outdoor space.",
-              href: "/services",
+              href: "/services/deck-building",
               ctaLabel: "Explore deck construction",
             },
             {

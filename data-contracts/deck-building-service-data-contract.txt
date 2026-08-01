@@ -1,36 +1,65 @@
-# Ogden Construction Deck-Building Data File Contract
+# Ogden Construction Service Detail Data File Contract
 
 Return only one complete TypeScript file for:
 
 ```txt
-src/lib/page-data/service/deck-building.data.ts
+src/lib/page-data/service/{kebab-case-slug}.data.ts
 ```
 
-Do not include commentary, research notes, implementation steps, React components, metadata functions, schema, imports beyond those shown below, or markdown fences.
+Do not include commentary, research notes, implementation steps, React components, metadata functions, raw JSON-LD, schema scripts, supplier cards, changes to other files, or markdown fences.
+
+Use this naming convention:
+
+```txt
+{camelCaseSlug}PageData
+```
+
+Use only these imports:
 
 ```ts
-import type { OgdenPageData } from "@/lib/ogden-page.types";
+import type {
+  ServiceDetailCustomSection,
+  ServiceDetailPageData,
+} from "@/lib/service-detail-page.types";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_CONTACT_EMAIL_HREF,
+} from "@/lib/site-contact";
+```
+
+The complete output should follow this shape:
+
+```ts
+import type {
+  ServiceDetailCustomSection,
+  ServiceDetailPageData,
+} from "@/lib/service-detail-page.types";
 import {
   SITE_CONTACT_EMAIL,
   SITE_CONTACT_EMAIL_HREF,
 } from "@/lib/site-contact";
 
-export const deckBuildingPageData = {
+const {camelCaseSlug}CustomSections: ServiceDetailCustomSection[] = [
+  // Add supported custom sections when the named sections do not fit the content.
+];
+
+export const {camelCaseSlug}PageData = {
   kind: "service",
-  slug: "deck-building",
-  pageHref: "/services/deck-building",
+  template: "service-detail",
+  slug: "{kebab-case-slug}",
+  pageHref: "/services/{kebab-case-slug}",
   dateModified: "YYYY-MM-DD",
   metadata: {
-    title: "Unique SEO title",
-    description: "Unique SEO description",
-    canonicalPath: "/services/deck-building",
-    ogTitle: "Optional social title",
-    ogDescription: "Optional social description",
-    ogImagePath: "/images/ogden-construction-og.webp",
+    title: "Unique service-specific SEO title",
+    description: "Unique service-specific SEO description",
+    canonicalPath: "/services/{kebab-case-slug}",
+    ogTitle: "Unique social title",
+    ogDescription: "Unique social description",
+    ogImagePath: "/verified/image-path.webp",
     ogImageAlt: "Descriptive social image alt text",
-    ogImageWidth: 1100,
-    ogImageHeight: 578,
-    focusKeyword: "Primary deck-building query",
+    ogImageWidth: 1200,
+    ogImageHeight: 800,
+    focusKeyword: "One primary commercial service query",
     supportingKeywords: ["Relevant supporting query"],
   },
   seoIntent: {
@@ -39,9 +68,24 @@ export const deckBuildingPageData = {
       "El Dorado County",
       "Lake Tahoe",
       "Greater Sacramento",
+      "Northern California",
     ],
-    pageOwns: ["Deck-building queries this URL should rank for"],
+    pageOwns: ["Queries and subjects this service URL should rank for"],
     pageDoesNotOwn: ["Queries assigned to another verified URL"],
+    supportingTopics: ["Topics that support this service intent"],
+  },
+  structuredData: {
+    schemaType: "Service",
+    serviceName: "Plain-language service name",
+    serviceType: "Specific service category",
+    providerName: "Ogden Construction Inc.",
+    areaServed: [
+      "El Dorado County",
+      "Lake Tahoe",
+      "Greater Sacramento",
+    ],
+    includeBreadcrumbSchema: true,
+    includeFaqSchema: true,
   },
   business: {
     legalName: "Ogden Construction Inc.",
@@ -54,33 +98,25 @@ export const deckBuildingPageData = {
     email: SITE_CONTACT_EMAIL,
     emailHref: SITE_CONTACT_EMAIL_HREF,
     serviceAreaLabel: "El Dorado County, Lake Tahoe, and Greater Sacramento",
-    serviceAreas: [
-      "Placerville",
-      "South Lake Tahoe",
-      "El Dorado Hills",
-      "Folsom",
-      "Sacramento",
-      "Cameron Park",
-      "Pollock Pines",
-      "Camino",
-      "Auburn",
-    ],
-    hours: [
-      { days: "Monday–Friday", hours: "8:00 AM–5:00 PM" },
-      { days: "Saturday", hours: "By appointment" },
-      { days: "Sunday", hours: "Closed" },
-    ],
   },
+  breadcrumbs: [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    {
+      label: "Visible service label",
+      href: "/services/{kebab-case-slug}",
+    },
+  ],
   hero: {
-    eyebrow: "Short deck-building context",
+    eyebrow: "Short service category",
     title: "Visible H1",
     description: "One- or two-sentence service summary",
     image: {
-      src: "/images/services/deck-construction-hero.webp",
-      alt: "Descriptive alt text for the visible deck collage",
+      src: "/verified/image-path.webp",
+      alt: "Specific description of the visible image",
       width: 1200,
       height: 800,
-      caption: "Short factual caption",
+      caption: "Optional factual caption",
     },
     primaryCta: {
       label: "Request a Free Consultation",
@@ -95,54 +131,238 @@ export const deckBuildingPageData = {
   anchorLinks: [
     { label: "Short navigation label", href: "#matching-section-id" },
   ],
-  sections: [
-    {
-      id: "unique-kebab-case-anchor",
-      eyebrow: "Optional section context",
-      title: "Section heading",
-      description: "Optional section introduction",
-      surface: "default",
-      blocks: [],
+  customSections: {camelCaseSlug}CustomSections,
+
+  // Every named content section below is optional. Include only sections that
+  // improve this service page and are supported by the supplied research.
+
+  overview: {
+    id: "service-overview",
+    eyebrow: "Short context",
+    title: "Overview heading",
+    paragraphs: ["One or more useful plain-text paragraphs."],
+    highlights: [
+      {
+        title: "Highlight title",
+        text: "Highlight explanation",
+      },
+    ],
+  },
+  serviceTypes: {
+    id: "service-types",
+    eyebrow: "Options or project types",
+    title: "Service types heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Service or project type",
+        summary: "Concise explanation",
+        details: ["Useful supporting detail"],
+      },
+    ],
+  },
+  choices: {
+    id: "service-choices",
+    eyebrow: "Materials or choices",
+    title: "Comparison heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Choice title",
+        summary: "Choice summary",
+        considerations: ["Supported consideration or tradeoff"],
+        bestFor: "Optional best-fit explanation",
+      },
+    ],
+    callout: {
+      title: "Optional callout heading",
+      text: "Optional callout text",
+      cta: {
+        label: "Request a Consultation",
+        href: "/contact",
+      },
     },
-    // Add as many useful, SEO-supported sections as the service page benefits from.
-  ],
-  faqTitle: "Optional deck-building FAQ heading",
+  },
+  capabilities: {
+    id: "service-capabilities",
+    eyebrow: "Capabilities",
+    title: "Capabilities heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Capability title",
+        text: "Capability explanation",
+      },
+    ],
+  },
+  planningFactors: {
+    id: "service-planning",
+    eyebrow: "Planning considerations",
+    title: "Planning heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Planning factor",
+        text: "Qualified, supported explanation",
+      },
+    ],
+  },
+  process: {
+    id: "service-process",
+    eyebrow: "What to expect",
+    title: "Process heading",
+    description: "Section introduction",
+    steps: [
+      {
+        title: "Step title without a manually added number",
+        text: "Step explanation",
+      },
+    ],
+  },
+  scopeFactors: {
+    id: "project-scope",
+    eyebrow: "Project scope",
+    title: "Scope factors heading",
+    description: "Section introduction",
+    items: ["Supported factor that can affect the project scope"],
+    resourceLink: {
+      label: "Related planning resource",
+      href: "/verified-internal-route",
+    },
+  },
+  projects: {
+    id: "service-projects",
+    eyebrow: "Real work",
+    title: "Verified project heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Verified project title",
+        location: "Verified project location",
+        summary: "Verified project description",
+        highlights: ["Verified material, feature, or scope detail"],
+        href: "/verified-project-or-portfolio-route",
+        ctaLabel: "View the Project",
+      },
+    ],
+    footerLink: {
+      label: "Browse the Full Portfolio",
+      href: "/portfolio",
+    },
+  },
+  serviceAreas: {
+    id: "service-areas",
+    eyebrow: "Where we work",
+    title: "Service-area heading",
+    description: "Section introduction",
+    items: [
+      {
+        name: "Verified location name",
+        text: "Unique, service-relevant location description",
+        href: "/locations-we-serve/verified-location-slug",
+      },
+    ],
+    footerLink: {
+      label: "View All Locations We Serve",
+      href: "/locations-we-serve",
+    },
+  },
+  relatedResources: {
+    id: "related-resources",
+    eyebrow: "Related resources",
+    title: "Related services and guides heading",
+    description: "Section introduction",
+    items: [
+      {
+        title: "Verified related resource",
+        text: "Why this resource is useful",
+        href: "/verified-internal-route",
+        ctaLabel: "Read or explore the resource",
+      },
+    ],
+  },
+  faqTitle: "Service-specific FAQ heading",
   faqs: [
     {
-      question: "Useful deck-building question?",
+      question: "Useful service-specific question?",
       answer: "Concise, self-contained plain-text answer.",
     },
   ],
   leadForm: {
-    title: "Tell Us About Your Deck Project",
+    title: "Tell Us About Your Project",
     description: "Short service-specific invitation",
+    projectTypeLabel: "What type of project are you planning?",
+    projectTypeOptions: ["Service-specific option", "Not sure yet"],
+    requestedFields: [
+      "name",
+      "email",
+      "phone",
+      "location",
+      "timeline",
+      "budget",
+      "details",
+      "photos",
+    ],
     submitLabel: "Request a Free Consultation",
     privacyText:
       "We respect your privacy. Your information will only be used to respond to your project request.",
   },
   finalCta: {
-    eyebrow: "Optional closing context",
-    title: "Deck-building CTA heading",
-    text: "Concise next-step copy",
+    eyebrow: "Short closing context",
+    title: "Service-specific closing CTA",
+    text: "Concise next-step statement",
     primaryCta: {
       label: "Request a Free Consultation",
       href: "/contact",
     },
     secondaryCta: {
-      label: "Browse the Portfolio",
+      label: "View Recent Projects",
       href: "/portfolio",
     },
   },
-} satisfies OgdenPageData;
+} satisfies ServiceDetailPageData;
 ```
 
-Use only these `blocks`:
+## Custom section shape
+
+Use `customSections` when useful content does not fit a named section. Custom sections may be added, removed, ordered, and titled freely.
+
+```ts
+const {camelCaseSlug}CustomSections: ServiceDetailCustomSection[] = [
+  {
+    id: "unique-kebab-case-anchor",
+    eyebrow: "Optional section context",
+    title: "Visible H2",
+    description: "Optional section introduction",
+    surface: "default",
+    placement: "before-faqs",
+    blocks: [],
+  },
+];
+```
+
+Allowed surfaces:
+
+```txt
+default | muted | contrast
+```
+
+Allowed placements:
+
+```txt
+after-overview | before-faqs | before-contact
+```
+
+Use only these custom-section blocks:
 
 ```ts
 { type: "paragraph", text: "Plain text only." }
-{ type: "heading", text: "H3 subheading" }
-{ type: "unordered-list", items: ["List item"] }
-{ type: "icon-list", items: [{ title: "Label", text: "Explanation" }] }
+{ type: "heading", text: "Visible H3" }
+{ type: "unordered-list", items: ["Plain-text item"] }
+{
+  type: "icon-list",
+  items: [{ title: "Item title", text: "Item explanation" }],
+}
 {
   type: "card-grid",
   cards: [
@@ -155,83 +375,41 @@ Use only these `blocks`:
   ],
 }
 {
-  type: "location-grid",
-  locations: [
-    {
-      name: "Verified location",
-      text: "Unique location description",
-      href: "/locations-we-serve/verified-location-slug",
-    },
-  ],
-  footerLink: {
-    label: "View All Locations We Serve",
-    href: "/locations-we-serve",
-  },
-}
-{
-  type: "project-grid",
-  projects: [
-    {
-      title: "Verified project title",
-      location: "Verified project location",
-      text: "Verified project description",
-      href: "/verified-internal-route",
-      ctaLabel: "View the Project",
-    },
-  ],
-  footerLink: {
-    label: "Browse the Full Portfolio",
-    href: "/portfolio",
-  },
-}
-{ type: "steps", steps: [{ title: "Step title", text: "Step explanation" }] }
-{ type: "stats", stats: [{ value: "Verified value", label: "Meaning" }] }
-{
-  type: "review-grid",
-  reviews: [
-    {
-      quote: "Exact supplied review",
-      name: "Reviewer name",
-      location: "Reviewer location",
-      project: "Project type",
-    },
-  ],
-  links: [
-    {
-      label: "Review platform",
-      href: "https://verified-external-url",
-      external: true,
-    },
-  ],
-}
-{
   type: "callout",
-  title: "Callout heading",
+  title: "Callout title",
   text: "Callout copy",
-  primaryCta: { label: "Primary action", href: "/verified-route" },
-  secondaryCta: { label: "Optional action", href: "/verified-route" },
+  cta: {
+    label: "Optional CTA label",
+    href: "/verified-route",
+  },
 }
 ```
 
-Contract rules:
+## Contract rules
 
-- Supply every required field shown above through `sections` and `finalCta`; omit optional fields rather than inventing values.
-- `sections` has no fixed outline, count, or word limit. Add, remove, title, order, split, and combine sections freely based on useful SEO coverage and the supplied research.
-- Every section needs a unique kebab-case `id`, a useful H2 `title`, and at least one supported block.
-- Add anchor navigation when useful. Every anchor `href` must exactly match a section ID, `#frequently-asked-questions`, or `#contact`.
-- Focus the page on new custom deck building, deck construction, planning, materials, options, site considerations, process, and scope factors supported by the research.
-- Keep city-specific commercial intent on the matching location pages in `src/lib/locations-data.ts`.
-- Keep deck cost research on `/how-much-does-it-cost-to-build-a-deck` and repair-versus-replacement research on `/deck-repair-vs-replacement`.
-- Link naturally to verified service, location, portfolio, guide, and contact routes when useful.
-- Use `icon-list` or `card-grid` for options and materials, `steps` for process content, and `location-grid` only for verified location routes.
-- Use `stats` only in a `contrast` section and only with verified figures.
-- Use `project-grid` and `review-grid` only with supplied, verifiable project and review details.
-- Include useful FAQs and a lead form when they improve the completed page; there is no fixed FAQ count.
-- Use only verified internal routes and supplied image paths. Confirm each image's real dimensions.
-- Text fields render as plain text. Do not use HTML, JSX, Markdown formatting, or inline Markdown links.
-- Write natural American English at roughly a 7th- to 9th-grade reading level.
-- Avoid filler, repeated keyword variations, doorway-page copy, and sections added only to increase length.
-- Do not invent prices, timelines, warranties, financing, product certifications, permit outcomes, engineering requirements, code conclusions, availability, response times, testimonials, ratings, project counts, or completed-project locations.
-- Keep climate, terrain, drainage, snow, heat, and access statements practical and qualified rather than presenting them as engineering advice.
-- Do not include schema objects. Metadata and schema are derived from this data elsewhere in the project.
-- Before returning the file, confirm that it satisfies `OgdenPageData`, uses only supported blocks, contains no duplicate keys, and can replace the thin scaffold without any component changes.
+- Use `kind: "service"`, `template: "service-detail"`, and a route under `/services/{slug}`.
+- `slug`, `pageHref`, `metadata.canonicalPath`, breadcrumbs, export name, and output filename must describe the same service and route.
+- Set `dateModified` to the real date the generated file is produced. Do not use a future date or a research publication date.
+- `hero.title` is the page's only H1. Named-section and custom-section titles render as H2s. Custom `heading` blocks render as H3s.
+- The named content sections are optional. Omit an entire named property when it does not improve the page or the supplied research does not support it.
+- There is no fixed section count, custom-section count, word count, FAQ count, or required outline. Add only sections that improve search intent, topical completeness, readability, or conversion.
+- Use custom sections for genuinely distinct content. Do not repeat material already covered by overview, service types, choices, capabilities, planning factors, process, scope, projects, locations, resources, or FAQs.
+- Every rendered section needs a unique kebab-case `id`. Every custom section needs at least one supported block.
+- Add anchor navigation when useful. Every anchor `href` must exactly match a named section ID, custom section ID, `#frequently-asked-questions`, or `#contact`.
+- Keep anchor links in the same order the sections render on the page.
+- Choose section surfaces for page rhythm and readability. Use `contrast` sparingly and avoid placing several sections with visually similar surfaces together when another supported surface improves the flow.
+- Use the supplied service research to define `pageOwns`, `pageDoesNotOwn`, and supporting topics. Do not make one service page own unrelated services, informational guides, or every city-specific variation.
+- Keep city-specific commercial intent on the corresponding location pages unless the supplied SEO plan explicitly says otherwise.
+- Link naturally to verified service, location, portfolio, guide, and contact routes. Do not guess internal slugs.
+- Use only verified image paths and real image dimensions. Do not reuse an unrelated image or claim an image shows an Ogden Construction project unless verified.
+- Use projects only when the title, location, scope, materials, and link are supplied or verifiable in project files.
+- The shared `OgdenFaqSection` renders FAQs with visible HTML content. Add FAQs only when they answer useful service-specific questions rather than repeating section headings.
+- Set `structuredData.schemaType` to `Service`. The existing JSON-LD builder derives Service, WebPage, ImageObject, BreadcrumbList, and optional FAQPage schema from this data. Do not embed raw schema in the data file.
+- Set `includeFaqSchema` to `true` only when the file contains useful FAQs. Set `includeBreadcrumbSchema` to `true` when valid breadcrumbs are supplied.
+- The current lead-form renderer preserves the standard name, email, phone, and project-details form behavior. The additional lead-form planning fields are reserved data and do not create extra form inputs.
+- Text fields render as plain text. Do not use HTML, JSX, Markdown formatting, Markdown links, or escaped markup.
+- Write in natural American English at roughly a 7th- to 9th-grade reading level.
+- Avoid filler, doorway-page copy, repetitive keyword variations, generic sales claims, and sections added only to increase page length.
+- Do not invent prices, timelines, warranties, guarantees, financing, product certifications, manufacturer status, permit outcomes, engineering requirements, code conclusions, availability, response times, testimonials, ratings, awards, project counts, customer counts, or completed-project locations.
+- Keep climate, terrain, drainage, snow, heat, access, plans, permits, engineering, and inspection statements practical and qualified rather than presenting them as universal requirements or professional engineering advice.
+- Before returning the file, confirm that it satisfies `ServiceDetailPageData`, uses only supported custom blocks, contains no duplicate object keys, has valid anchors and routes, and can render without component changes.
