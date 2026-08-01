@@ -226,9 +226,7 @@ function getBaseUrl(metadataBase = getMetadataBase()): string {
   return metadataBase.toString().replace(/\/$/, "");
 }
 
-export function getSchemaEntityIds(
-  metadataBase = getMetadataBase(),
-) {
+export function getSchemaEntityIds(metadataBase = getMetadataBase()) {
   const baseUrl = getBaseUrl(metadataBase);
 
   return {
@@ -246,15 +244,11 @@ export function getLocalBusinessReferenceJsonLd(
   return { "@id": getSchemaEntityIds(metadataBase).businessId };
 }
 
-export function getWebsiteReferenceJsonLd(
-  metadataBase = getMetadataBase(),
-) {
+export function getWebsiteReferenceJsonLd(metadataBase = getMetadataBase()) {
   return { "@id": getSchemaEntityIds(metadataBase).websiteId };
 }
 
-export function getLeviOgdenReferenceJsonLd(
-  metadataBase = getMetadataBase(),
-) {
+export function getLeviOgdenReferenceJsonLd(metadataBase = getMetadataBase()) {
   return { "@id": getSchemaEntityIds(metadataBase).personId };
 }
 
