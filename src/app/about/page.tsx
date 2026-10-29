@@ -13,6 +13,7 @@ import Script from "next/script";
 import { buildPageMetadata, getAboutJsonLd } from "@/lib/metadata";
 import { Reviews } from "@/components/Reviews";
 import { Contact } from "@/components/Contact";
+import { ContractorsRankedBadge } from "@/components/ContractorsRankedBadge";
 
 const aboutStats = [
   { icon: Building, count: "250+", label: "Projects Completed" },
@@ -314,10 +315,14 @@ export default function AboutPage() {
                     <p className="text-gray-600 leading-relaxed text-base">
                       {value.description}
                     </p>
-                    <div className="mt-4 flex items-center text-accent text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span>Learn more</span>
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </div>
+                    {value.title === "Licensed & Insured" ? (
+                      <ContractorsRankedBadge />
+                    ) : (
+                      <div className="mt-4 flex items-center text-accent text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Learn more</span>
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}

@@ -268,10 +268,10 @@ export default async function LocationPage() {
       <section className="py-24 bg-white texture-deck-boards relative overflow-hidden">
         {/* Decorative quote marks */}
         <div className="absolute top-12 left-12 text-9xl font-playfair text-accent/5 leading-none">
-          "
+          &quot;
         </div>
         <div className="absolute bottom-12 right-12 text-9xl font-playfair text-accent/5 leading-none rotate-180">
-          "
+          &quot;
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -762,7 +762,7 @@ export default async function LocationPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-6xl font-playfair font-bold mb-6 text-primary tracking-tight">
-              Let's Build Something Great in {cityName}
+              Let&apos;s Build Something Great in {cityName}
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
 

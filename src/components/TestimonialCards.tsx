@@ -31,7 +31,7 @@ export const TestimonialCards = ({
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent/40 via-accent to-accent/40"></div>
             <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-accent/20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0"></div>
             <div className="absolute top-16 left-6 text-6xl font-playfair text-accent/5 leading-none pointer-events-none">
-              "
+              &quot;
             </div>
 
             <CardContent className="flex h-full flex-col text-left relative z-10 p-8">
@@ -49,7 +49,7 @@ export const TestimonialCards = ({
               </div>
 
               <p className="flex-1 text-gray-700 leading-relaxed text-lg mb-6 relative pl-2">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </p>
 
               <div className="border-t-2 border-stone-100 pt-6">

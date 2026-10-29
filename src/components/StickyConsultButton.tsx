@@ -24,8 +24,10 @@ export function StickyConsultButton() {
     const footer = document.querySelector<HTMLElement>("footer");
 
     if (!hero || !footer) {
-      setVisibility({ pathname, isVisible: false });
-      return;
+      const frame = window.requestAnimationFrame(() => {
+        setVisibility({ pathname, isVisible: false });
+      });
+      return () => window.cancelAnimationFrame(frame);
     }
 
     let animationFrame = 0;
@@ -58,7 +60,7 @@ export function StickyConsultButton() {
       animationFrame = window.requestAnimationFrame(updateVisibility);
     };
 
-    updateVisibility();
+    requestVisibilityUpdate();
     window.addEventListener("scroll", requestVisibilityUpdate, {
       passive: true,
     });

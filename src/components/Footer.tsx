@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
 import Image from "next/image";
+import { ContractorsRankedBadge } from "@/components/ContractorsRankedBadge";
 import {
   SITE_CONTACT_EMAIL,
   SITE_CONTACT_EMAIL_HREF,
@@ -19,6 +20,7 @@ export const Footer = () => {
             </p>
             <p className="mb-2">License #: CA-1042758</p>
             <p>Fully insured and bonded</p>
+            <ContractorsRankedBadge />
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>

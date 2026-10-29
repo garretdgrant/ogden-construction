@@ -32,10 +32,10 @@ export const Reviews = () => {
     >
       {/* Decorative quote marks */}
       <div className="absolute top-12 left-12 text-9xl font-playfair text-accent/5 leading-none">
-        "
+        &quot;
       </div>
       <div className="absolute bottom-12 right-12 text-9xl font-playfair text-accent/5 leading-none rotate-180">
-        "
+        &quot;
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
